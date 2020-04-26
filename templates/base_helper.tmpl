@@ -3,19 +3,7 @@
 
 {% macro html_headstart() %}
 <!DOCTYPE html>
-<html \
-    prefix='
-        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
-        {% if comment_system == 'facebook' %}
-            fb: http://ogp.me/ns/fb#
-        {% endif %}
-    ' \
-    vocab="http://ogp.me/ns" \
-{% if is_rtl %}
-    dir="rtl"
-{% endif %}
-
-lang="{{ lang }}">
+<html lang="{{ lang }}">
 <head>
     <meta charset="utf-8">
     {% if description %}
@@ -40,10 +28,6 @@ lang="{{ lang }}">
         {% for name, file, size in favicons %}
             <link rel="{{ name }}" href="{{ file }}" sizes="{{ size }}"/>
         {% endfor %}
-    {% endif %}
-
-    {% if comment_system == 'facebook' %}
-        <meta property="fb:app_id" content="{{ comment_system_id }}">
     {% endif %}
 
     {% if prevlink %}
