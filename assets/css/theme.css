@@ -37,6 +37,7 @@ body {
 #container {
 	margin: 1em auto;
 	max-width: 770px;
+	word-break: break-word;
 }
 #menu ul,
 #menu ul li,
