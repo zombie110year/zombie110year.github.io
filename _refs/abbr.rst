@@ -1,0 +1,1 @@
+.. |a_seo| replace:: SEO（搜索引擎优化）
