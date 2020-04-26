@@ -153,7 +153,7 @@ NAVIGATION_ALT_LINKS = {
 }
 
 # Name of the theme to use.
-THEME = "bootblog4"
+THEME = "zomhub"
 
 # Primary color of your theme. This will be used to customize your theme.
 # Must be a HEX value.
@@ -922,7 +922,7 @@ FEED_LINKS_APPEND_QUERY = False
 
 # A HTML fragment describing the license, for the sidebar.
 # (translatable)
-LICENSE = ""
+LICENSE = "CC BY-NC-SA 4.0"
 # I recommend using the Creative Commons' wizard:
 # https://creativecommons.org/choose/
 # LICENSE = """
@@ -933,7 +933,7 @@ LICENSE = ""
 
 # A small copyright notice for the page footer (in HTML).
 # (translatable)
-CONTENT_FOOTER = 'Contents &copy; {date}         <a href="mailto:{email}">{author}</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         {license}'
+CONTENT_FOOTER = 'Contents &copy; {date} <a href="mailto:{email}">{author}</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> {license}'
 
 # Things that will be passed to CONTENT_FOOTER.format().  This is done
 # for translatability, as dicts are not formattable.  Nikola will
@@ -1051,19 +1051,19 @@ PRETTY_URLS = True
 
 # Want to use KaTeX instead of MathJax? While KaTeX may not support every
 # feature yet, it's faster and the output looks better.
-# USE_KATEX = False
+USE_KATEX = True
 
 # KaTeX auto-render settings. If you want support for the $.$ syntax (which may
 # conflict with running text!), just use this config:
-# KATEX_AUTO_RENDER = """
-# delimiters: [
-#     {left: "$$", right: "$$", display: true},
-#     {left: "\\\\[", right: "\\\\]", display: true},
-#     {left: "\\\\begin{equation*}", right: "\\\\end{equation*}", display: true},
-#     {left: "$", right: "$", display: false},
-#     {left: "\\\\(", right: "\\\\)", display: false}
-# ]
-# """
+KATEX_AUTO_RENDER = """
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\\\[", right: "\\\\]", display: true},
+    {left: "\\\\begin{equation*}", right: "\\\\end{equation*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\\\(", right: "\\\\)", display: false}
+]
+"""
 
 # Do you want to customize the nbconversion of your IPython notebook?
 # IPYNB_CONFIG = {}
