@@ -15,6 +15,8 @@ type: text
 
 介绍了 PowerShell 的控制语句、函数定义和管道操作中常用的方法。
 
+.. contents::
+
 .. TEASER_END
 
 #####################
