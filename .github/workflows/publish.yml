@@ -1,0 +1,34 @@
+name: Publish To zombie110year.github.io
+on:
+  push:
+    branches:
+      - release
+jobs:
+  publish:
+    name: publish to github pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout source
+        uses: actions/checkout@v2
+        with:
+          ref: release
+          lfs: true
+          fetch-depth: 1
+      - name: install python
+        uses: actions/setup-python@v1
+        with:
+            python-version: 3.8
+      - name: install dep
+        run: pip install -r requirements.txt
+      - name: gen site
+        run: nikola build
+      - name: upload to github pages
+        run: |
+          cd output
+          echo "blog.zombie110year.top" >> CNAME
+          git init
+          git config user.name zombie110year
+          git config user.email zombie110year
+          git add -A
+          git commit -m "upload"
+          git push --force --quiet https://${{ secrets.UPLOAD_TOKEN }}@${{ secrets.UPLOAD_URL }} master
