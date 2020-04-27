@@ -745,7 +745,7 @@ GITHUB_COMMIT_SOURCE = True
 # THUMBNAIL_SIZE = 180
 # MAX_IMAGE_SIZE = 1280
 # USE_FILENAME_AS_TITLE = True
-# EXTRA_IMAGE_EXTENSIONS = []
+EXTRA_IMAGE_EXTENSIONS = [".webp"]
 #
 # If set to False, it will sort by filename instead. Defaults to True
 # GALLERY_SORT_BY_DATE = True
