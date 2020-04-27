@@ -411,3 +411,8 @@ pre.code, code {
 		padding: 0;
 	}
 }
+
+.figure {
+	display: block;
+	text-align: center;
+}
