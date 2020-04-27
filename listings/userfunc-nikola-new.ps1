@@ -27,7 +27,7 @@ function Nikola-New {
         "type: text",
         "---",
         "",
-        "文章内容",
+        ".. contents::",
         "",
         ".. TEASER_END");
     $content = [string]::Join("`n", $content);
@@ -40,4 +40,5 @@ function Nikola-New {
     }
     $filename = "posts/$ym/$basename.rst";
     Out-File -Encoding utf8 -FilePath $filename -Append -InputObject $content;
+    Write-Host $filename -ForegroundColor Green;
 }
