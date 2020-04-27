@@ -309,6 +309,20 @@ Where-Object
         1..10 | Where-Object -FilterScript { $_ % 2 -eq 1 }
 
 使用管道时必须要小心，它消耗的资源特别大。
+不过根据 [#fn-anonymous-block]_ 的说法，使用匿名脚本块代替 ForEach-Object 可以提高 200 倍的速度::
+
+    1..10 | & { process { $_ * $_ } }
+
+代码块里的 `process` 是 PowerShell 高级方法的内容，参考 [#fn-advanced-methods]_。
+
+##################
+调用 .Net 静态方法
+##################
+
+一些模块已经封装在 PowerShell 中了，可以通过 `[模块名]` 来访问。
+例如::
+
+    [Math]::Pow(2, 8) -eq
 
 ########
 必知必会
@@ -374,9 +388,7 @@ Read-Host 的输出格式是 string，常用的参数有
 
 -Prompt             提示符
 -AsSecureString     是否以安全模式读取，如果设置，则回显将被替换为星号，且
-                    输出类型为 SecureString[#fn-secure-string]。
-
-.. [#fn-secure-string] SecureString 的加密是单向的，无法还原。
+                    输出类型为 SecureString [#fn-secure-string]_ 。
 
 Out-File
 ========
@@ -412,3 +424,29 @@ Get-Content 的输出是按行分隔的 `string[]`，常用的参数有
 ==========================================
 
 .. listing:: userfunc-nikola-new.ps1 powershell
+
+用 PowerShell 起一个 HTTP 服务器
+================================
+
+########
+推荐链接
+########
+
+学习 PowerShell 的几个好网站：
+
+PowerShell 中文博客
+    https://www.pstips.net/
+
+    人数挺多，挺活跃的。
+叹为观止
+    https://blog.vichamp.com/
+
+    一个更新非常活跃的个人博客，大部分内容是 PowerShell 技巧。
+
+########
+参考链接
+########
+
+.. [#fn-secure-string] SecureString 的加密是单向的，无法还原。
+.. [#fn-anonymous-block] https://blog.vichamp.com/2019/07/15/increasing-pipeline-speed/
+.. [#fn-advanced-methods] https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_methods?view=powershell-7
