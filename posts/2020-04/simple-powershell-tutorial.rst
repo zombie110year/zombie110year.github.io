@@ -361,3 +361,54 @@ Start-Job
     }
 
 任务创建后即开始运行。可以通过 Get-Job 查看状态。其他相关的指令自行用 `Get-Command *-Job` 查询。
+
+Read-Host
+=========
+
+Read-Host 从 stdin 读取输入，返回给一个变量。
+注意，可能会有人用 `$input = Read-Host` 来接受输入，
+但是 `$INPUT` 是一个自动变量，有特殊含义，不能被赋值。
+因此最好采用其他变量名。
+
+Read-Host 的输出格式是 string，常用的参数有
+
+-Prompt             提示符
+-AsSecureString     是否以安全模式读取，如果设置，则回显将被替换为星号，且
+                    输出类型为 SecureString[#fn-secure-string]。
+
+.. [#fn-secure-string] SecureString 的加密是单向的，无法还原。
+
+Out-File
+========
+
+Out-File 用于将内容输出到文件，常用的参数有
+
+-FilePath           被写文件的路径
+-Encoding           设置字符编码，为了通用性，最好都显式设置为 utf-8
+-InputObject        内容，应当为字符串类型，否则会被转换为字符串
+-Append             switch 类型的参数，是否以追加模式写入，默认是截断模式
+
+Get-Content
+===========
+
+Get-Content 用来获取文件的内容，Set-Content 用来向文件写入内容。
+
+Get-Content 的输出是按行分隔的 `string[]`，常用的参数有
+
+-Delimiter          分隔符，默认是换行符
+-Encoding           字符编码
+-Exclude            排除一些文件，支持通配符；筛选的最后一步
+-Filter             只接受一些文件，支持通配符；在获取对象时就被应用
+-Path               文件路径，支持通配符
+-Raw                switch 类型，不分行，以原始模式读取
+-ReadCount          限制读取行数
+-Tail               读取文件末尾的行
+
+####
+例子
+####
+
+用 PowerShell 代替 Nikola 的 new_post 指令
+==========================================
+
+.. listing:: userfunc-nikola-new.ps1 powershell
