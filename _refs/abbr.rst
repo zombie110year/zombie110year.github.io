@@ -1,1 +1,1 @@
-.. |a_seo| replace:: SEO（搜索引擎优化）
+.. |a_seo| replace:: :abbr:`SEO` （搜索引擎优化）

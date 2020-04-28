@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import time
+from typing import *
 
 # !! This is the configuration of Nikola. !! #
 # !!  You should edit it to your liking.  !! #
-
+SITE_ABBR = {
+    "HTML": "Hypter Text Markup Language",
+    "SEO": "Search Engine Optimiziation",
+    "WSL": "Windows Subsystem for Linux",
+}
 
 # ! Some settings can be different in different languages.
 # ! A comment stating (translatable) is used to denote those.
@@ -463,7 +468,7 @@ CATEGORY_OUTPUT_FLAT_HIERARCHY = False
 # If you do not want to display a category publicly, you can mark it as hidden.
 # The category will not be displayed on the category list page.
 # Category pages will still be generated.
-HIDDEN_CATEGORIES = []
+HIDDEN_CATEGORIES: List[str] = []
 
 # A list of dictionaries specifying categories which translate to each other.
 # Format: a list of dicts {language: translation, language2: translation2, …}
@@ -618,7 +623,7 @@ ATOM_FILENAME_BASE = "feed"
 # relative URL.
 #
 # If you don't need any of these, just set to []
-REDIRECTIONS = []
+REDIRECTIONS: List[str] = []
 
 # Presets of commands to execute to deploy. Can be anything, for
 # example, you may use rsync:
@@ -1343,9 +1348,9 @@ WARN_ABOUT_TAG_METADATA = False
 
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
-GLOBAL_CONTEXT = {}
+GLOBAL_CONTEXT: Dict[str, str] = {}
 
 # Add functions here and they will be called with template
 # GLOBAL_CONTEXT as parameter when the template is about to be
 # rendered
-GLOBAL_CONTEXT_FILLER = []
+GLOBAL_CONTEXT_FILLER: List[Any] = []
