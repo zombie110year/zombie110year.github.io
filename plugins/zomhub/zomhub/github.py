@@ -4,12 +4,12 @@
 import re
 from dataclasses import dataclass
 from functools import lru_cache
+from typing import *
 
 import requests as r
 from docutils import nodes
-from docutils.parsers.rst import Directive, directives, roles
+from docutils.parsers.rst import Directive
 from docutils.parsers.rst.states import Inliner
-from typing import *
 
 __all__ = ("GitHubGist", "github_repository")
 

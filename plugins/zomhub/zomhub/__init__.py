@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
-"""github role for reStructuredText."""
+"""便捷地引用外部链接的方式，提供角色 ``extlink`` 和指令 ``extlink``::
 
-from nikola.plugin_categories import RestExtension
+    .. extlink:: {{ url }}
+        :title: 自定义标题
+
+    :extlink:`{{ url }}`
+"""
+
 from typing import *
 
-from extlink import *
+from docutils.parsers.rst import directives, roles
+from nikola.plugin_categories import RestExtension
+
+from .github import GitHubGist, github_repository
+
 
 class Plugin(RestExtension):
     """Plugins for zombie110year's blog"""
