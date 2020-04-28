@@ -30,19 +30,32 @@ gm 的命令行接口通常是::
 
 子命令一览：
 
-batch           以交互式或批处理模式处理多条命令
-benchmark       测试其他命令的性能
-compare         对比两张图片
-composite       合成图片
-conjure         执行 Magick Script 语言（MSL）的 XML 脚本
-convert         转换一张或一组图片的格式
-help            显示其他命令的帮助信息
-identify        描述一张或一组图片
-mogrify         变换一张或一组图片
-montage         蒙太奇，由一组图片创建一个合成图片（在一个网格中）
-time            测试其他命令的运行时间
-version         显示发行版本
-register        register this application as the source of messages
+batch
+    以交互式或批处理模式处理多条命令
+benchmark
+    测试其他命令的性能
+compare
+    对比两张图片
+composite
+    合成图片
+conjure
+    执行 Magick Script 语言（MSL）的 XML 脚本
+convert
+    转换一张或一组图片的格式
+help
+    显示其他命令的帮助信息
+identify
+    描述一张或一组图片
+mogrify
+    变换一张或一组图片
+montage
+    蒙太奇，由一组图片创建一个合成图片（在一个网格中）
+time
+    测试其他命令的运行时间
+version
+    显示发行版本
+register
+    register this application as the source of messages
 
 你可以在 `version` 中查看 Graphics Magick 支持的特性。
 
