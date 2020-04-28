@@ -16,6 +16,10 @@ Graphics Magick 是一个 ImageMagick 的分支版本，但它提供了更易懂
 
 它提供了 `gm` 可执行文件用于调用 [#fn-cli-usage]_ ，也可以当作库提供给其他编程语言使用 [#fn-programming-usage]_ 。
 
+.. warning:: 不建议在 Windows 上使用 GraphicsMagick
+
+    环境依赖问题太难搞了！如果有在 Windows 上使用的需要，建议使用 WSL [#fn-wsl]_ 。
+
 .. contents::
 
 .. TEASER_END
@@ -259,6 +263,19 @@ PDF 转透明图片
 
 最好使用矢量图或者支持透明通道的图像格式。
 转换 PDF 需要安装 GhostScript [#fn-gs-site]_ 。
+在 Windows 系统中，GraphicsMagick 在寻找 GhostScript 的动态库时，会查找
+`\HKEY_*\SOFTWARE\GPL Ghostscript\#.##\GS_DLL` 串的值所值的
+路径（`#.##` 表示 GhostScript 的当前版本），而在安装 GhostScript 时，
+不一定会修改注册表，因此可能需要手动添加，为了这个键可以记录在任何一个作用域中，
+为了环境的独立性，可以安装到 `HKEY_CURRENT_USER` ，我安装的 GS 是 9.52 版：
+
+.. code:: registry
+
+    [HKEY_CURRENT_USER\SOFTWARE\GPL Ghostscript\9.52]
+    "GS_DALL"="%USERPROFILE%\scoop\apps\ghostscript\current\bin\gsdll64.dll"
+
+特别说明的是，在 GraphicsMagick 读写 SVG 依赖 libxml2 和 FreeType，
+这两者在 Windows 上的安装非常地麻烦，建议避开它们。
 
 .. code:: tex
 
@@ -297,10 +314,19 @@ PDF 转透明图片
     )   \mathrm{d}x \mathrm{d}y =
     \oint_{r} P\mathrm{d}x + Q\mathrm{d}y + R\mathrm{d}z
 
+::
+
+    gm convert sample.pdf -trim sample.webp
+
+.. figure:: /images/gm-pdf-webp-shown.webp
+
+    展示 PDF 转 WebP 的效果
+
 ########
 参考链接
 ########
 
+.. [#fn-wsl] https://docs.microsoft.com/en-us/windows/wsl/install-win10
 .. [#fn-cli-usage] http://www.graphicsmagick.org/utilities.html
 .. [#fn-programming-usage] http://www.graphicsmagick.org/programming.html
 .. [#fn-zhihu-composite-blurs] https://zhuanlan.zhihu.com/p/125744132
