@@ -1,0 +1,13 @@
+[Core]
+name = zomhub
+module = zomhub
+
+[Nikola]
+compiler = rest
+PluginCategory = CompilerExtension
+
+[Documentation]
+author = Zombie110year
+version = 0.1
+website = https://github.com/zombie110year/nikola-plugin-zomhub/
+description = provide some functions for https://blog.zombie110year.top
