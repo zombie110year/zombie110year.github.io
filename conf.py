@@ -9,6 +9,7 @@ SITE_ABBR = {
     "HTML": "Hypter Text Markup Language",
     "SEO": "Search Engine Optimiziation",
     "WSL": "Windows Subsystem for Linux",
+    "REPL": "Read Eval Print Loop",
 }
 
 # ! Some settings can be different in different languages.
