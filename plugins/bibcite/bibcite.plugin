@@ -1,0 +1,13 @@
+[Core]
+name = bibcite
+module = bibcite
+
+[Nikola]
+compiler = rest
+PluginCategory = CompilerExtension
+
+[Documentation]
+author = zombie110year
+version = 0.1
+website = https://github.com/zombie110year/nikola-plugin-bibcite
+description = add bibliography directive and bibcite role.
