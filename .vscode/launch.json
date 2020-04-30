@@ -10,7 +10,8 @@
             "request": "launch",
             "program": "${workspaceFolder}/debug.py",
             "console": "integratedTerminal",
-            "pythonPath": "~/.local/pipx/venvs/Nikola/Scripts/python.exe"
+            "pythonPath": "C:/Users/zombi/.local/pipx/venvs/Nikola/Scripts/python.exe",
+            "justMyCode": false,
         }
     ]
 }
