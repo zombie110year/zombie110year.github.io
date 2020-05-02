@@ -37,17 +37,21 @@ class DefineAbbr(Directive):
 
     will be rendered as :code:`<ruby><rb>abbr/rb><rt>description</rt></ruby>` by :meth:`parse_abbr`.
     """
-    # 缩写 展开
-    required_arguments = 2
-    has_content = False
+    # 缩写
+    required_arguments = 1
+    # 缩写的解释
+    has_content = True
     options_arguments = 0
     option_spec: Dict[str, Any] = {}
 
     def run(self):
         args: List[str] = self.arguments
-        if len(args) < 2:
+        if len(args) < 1:
+            raise ValueError("没有定义缩写")
+        abbr = args[0]
+        if len(self.content) < 1:
             raise ValueError("没有定义缩写的展开")
-        abbr, desc = args[:2]
+        desc = self.content[0]
         local_abbr().update({abbr: desc})
         return [nodes.raw("", "")]
 
