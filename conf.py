@@ -10,6 +10,7 @@ SITE_ABBR = {
     "SEO": "Search Engine Optimiziation",
     "WSL": "Windows Subsystem for Linux",
     "REPL": "Read Eval Print Loop",
+    "UB": "Undefined Behavior"
 }
 
 # ! Some settings can be different in different languages.
