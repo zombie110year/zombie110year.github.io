@@ -412,7 +412,11 @@ pre.code, code {
 	}
 }
 
+/* Custom */
 .figure {
 	display: block;
 	text-align: center;
+}
+code.docutils.literal {
+	color: #e94f69;
 }
