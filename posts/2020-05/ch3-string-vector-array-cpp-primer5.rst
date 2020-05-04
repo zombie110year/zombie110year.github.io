@@ -189,21 +189,21 @@ end
 
 常用操作：
 
-*iter
+`*iter`
     解引用
-iter->member
+`iter->member`
     访问成员
-++iter
+`++iter`
     指向下一个元素
---iter
+`--iter`
     指向上一个元素
-iter += n
+`iter += n`
     指向下 n 位
-iter -= n
+`iter -= n`
     指向上 n 位
-it1 - it2
+`it1 - it2`
     两个迭代器之间的距离，向后为正。
->, <, >=, <=
+`>, <, >=, <=`
     两个迭代器之间的位置关系，靠后更大。
 
 迭代器不能随容器的更新而更新，因此在迭代器使用完毕之前不要修改容器。
@@ -254,7 +254,7 @@ it1 - it2
 
 标准库提供了 begin 和 end 函数，可以获取首元素地址和尾后地址。
 
-.. listing:: cpp/ch3/pointer-begin-end.cc cpp
+.. listing:: cpp5/ch3/pointer-begin-end.cc cpp
 
 ######
 C 接口
