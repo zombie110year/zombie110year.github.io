@@ -162,3 +162,4 @@ GM_setClipboard
 .. [#tmdoc-headers] https://www.tampermonkey.net/documentation.php
 .. [#tmdoc-functions] https://www.tampermonkey.net/documentation.php
 .. [#semver] https://semver.org/lang/zh-CN/
+.. [#katexdoc-install] https://katex.org/docs/browser.html
