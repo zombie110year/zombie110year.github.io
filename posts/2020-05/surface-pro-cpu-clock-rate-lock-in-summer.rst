@@ -40,6 +40,15 @@ OpenHardwareMonitor 可以通过 CPU 的 ring0 获取温度数据，相对比较
 Surface Pro CPU 降频的可能原因
 ##############################
 
+首先怀疑是过热导致的降频
+========================
+
+经过一段时间的使用（在 B 站看了辉夜第4集），成功观察到 CPU 频率降低到 400 MHz 左右。截图上为 600 MHz 是因为当时太卡了，截图工具过了 4~5 秒才打开。
+
+.. figure:: /images/cpu-clock-rate-low.webp
+
+    CPU 时钟频率降低
+
 .. abbr:: SAM
 
     Surface System Aggregator
