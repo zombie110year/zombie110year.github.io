@@ -192,8 +192,8 @@ body {
 .archivenav .pager .disabled,
 .archivenav .pager .disabled a,
 .archivenav .pager .disabled:link {
-    color: #888;
-    cursor: not-allowed;
+	color: #888;
+	cursor: not-allowed;
 }
 
 .metadata p,
@@ -419,4 +419,18 @@ pre.code, code {
 }
 code.docutils.literal {
 	color: #e94f69;
+}
+.tagindex .postlist {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	list-style-type: none;
+}
+.tagindex .postlist li {
+	margin: .3em;
+	padding: 0 .3em;
+}
+.post-text .code {
+	padding: 1em;;
 }
