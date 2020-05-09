@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "*.tmpl": "jinja-html"
-    },
-    "recommandations": [
-        "samuelcolvin.jinjahtml"
-    ]
-}
