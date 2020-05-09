@@ -132,7 +132,7 @@ const 形参
 
 引用返回左值：
 
-.. listing:: cpp5/ch6/ret-reference-1.cc
+.. listing:: cpp5/ch6/ret-reference-1.cc cpp
 
 C++ 提供了标注返回类型的新方法：
 
@@ -157,7 +157,7 @@ C++ 编译器用来确定函数的因素除了函数名之外，还有各个参�
 对于同名的函数，如果声明了不同类型的形式参数，那么将编译生成不同的函数，
 这种行为叫「函数重载」：
 
-.. listing:: cpp5/ch6/function-overload.cc
+.. listing:: cpp5/ch6/function-overload.cc cpp
 
 形参的名字与重载无关
     重载只与形参的类型有关，如果类型相同，只有名字相同，那么将报错「重复定义」。
@@ -271,4 +271,4 @@ C++ 编译器用来确定函数的因素除了函数名之外，还有各个参�
         // ...
     }
 
-.. listing:: cpp5/ch6/must-ret-tof.cc
+.. listing:: cpp5/ch6/must-ret-tof.cc cpp
