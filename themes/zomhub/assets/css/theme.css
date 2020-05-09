@@ -160,7 +160,7 @@ body {
 }
 
 .postindex article {
-  border-bottom: 1px solid #4f5151;
+  margin-bottom: 1em;
   padding-bottom: 1em;
 }
 
@@ -374,6 +374,9 @@ img {
 #content {
   max-width: 900px;
   margin: auto;
+}
+
+article {
   padding: 30px;
   background: white;
   box-shadow: 1px 1px 3px 3px var(--grey1);
