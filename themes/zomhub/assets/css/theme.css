@@ -524,7 +524,8 @@ code {
   padding: 1px;
   margin: 5px;
 }
-code.docutils.literal {
+.post-text code,
+.post-text code.docutils.literal {
   color: #e94f69;
 }
 .post-text .code {
