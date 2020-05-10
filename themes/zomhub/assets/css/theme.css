@@ -533,7 +533,9 @@ table thead tr th {
 table tbody tr:nth-child(2n+2) {
   background: var(--grey0);
 }
-
+.gist table {
+  width: initial;
+}
 /* Animations */
 .admonition-title,
 .sidebar-title {
