@@ -96,10 +96,18 @@ body {
   text-decoration: none;
   color: var(--grey8);
 }
-#menu ul li a:hover,
-.postpromonav .tags li a:hover,
-.pager li a:hover,
-#toptranslations ul li a:hover {
+
+#menu ul li.active,
+.postpromonav .tags li.active,
+.pager li.active,
+#toptranslations ul li.active {
+  background: var(--grey1);
+}
+
+#menu ul li:hover,
+.postpromonav .tags li:hover,
+.pager li:hover,
+#toptranslations ul li:hover {
   background: var(--grey1);
 }
 
