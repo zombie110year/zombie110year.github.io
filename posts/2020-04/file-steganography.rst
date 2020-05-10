@@ -5,7 +5,8 @@ date: 2020-04-27 11:44:30 UTC+08:00
 tags:
 - powershell
 - steganography
-category: security
+- security
+category: tutorial
 description: |
     利用文件读写特性和 NTFS 系统的交换数据流来隐藏数据。
 type: text

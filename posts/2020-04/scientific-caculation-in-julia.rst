@@ -4,9 +4,9 @@ slug: 'scientific-caculation-in-julia'
 date: 2020-04-28 22:12:37 UTC+08:00
 tags:
 - julia
-- 科学计算
-- 数值计算
-category: 科学计算
+- scientific
+- numeric
+category: tutorial
 description:
 type: text
 status: draft

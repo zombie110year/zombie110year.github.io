@@ -3,7 +3,10 @@ title: 'TamperMonkey 脚本开发教程'
 slug: 'tampermonkey-development-tutorial'
 date: 2020-05-03 09:08:32 UTC+08:00
 tags:
-category:
+-   tampermonkey
+-   javascript
+-   browser
+category: tutorial
 description:
 type: text
 ---

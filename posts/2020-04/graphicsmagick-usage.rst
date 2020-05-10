@@ -4,7 +4,8 @@ slug: 'graphicsmagick-usage'
 date: 2020-04-27 16:13:13 UTC+08:00
 tags:
 - graphicsmagick
-category: cli
+- cli
+category: tutorial
 description:
 type: text
 ---

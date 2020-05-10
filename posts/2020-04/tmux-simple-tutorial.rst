@@ -5,7 +5,7 @@ date: 2020-04-28 13:30:24 UTC+08:00
 tags:
 - tmux
 - linux
-category: linux
+category: tutorial
 description: |
     Tmux 工具的基本使用方法、配置方法。
 type: text

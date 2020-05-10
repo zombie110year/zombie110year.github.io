@@ -4,7 +4,7 @@ slug: simple-powershell-tutorial
 date: 2020-04-25 20:04:38 UTC+08:00
 tags:
 - powershell
-category: powershell
+category: tutorial
 link:
 description: |
     基于日常使用的 PowerShell 教程。
