@@ -184,10 +184,24 @@ body {
 .postpromonav .tags li:before {
   content: "🏷️";
 }
-
-.metadata p:before {
-  content: "⚛️️";
+.metadata {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
 }
+.metadata .author::before {
+  content: "作者";
+  margin-right: .2em;
+  color: var(--grey4);
+  font-size: 80%;
+}
+.metadata .dateline::before {
+  content: "发布";
+  margin-right: .2em;
+  color: var(--grey4);
+  font-size: 80%;
+}
+
 .postlist .listdate:after,
 .translationslist p:before {
   content: "：";
