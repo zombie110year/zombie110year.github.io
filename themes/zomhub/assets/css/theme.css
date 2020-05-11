@@ -406,7 +406,7 @@ article {
 
 pre.code,
 code {
-  white-space: pre;
+  white-space: pre-wrap;
   word-wrap: normal;
   overflow: auto;
 }
