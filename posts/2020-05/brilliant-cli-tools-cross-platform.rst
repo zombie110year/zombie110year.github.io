@@ -1,6 +1,6 @@
 ---
-title: '尝试使用跨平台命令行 Shell'
-slug: 'trying-new-shells-cross-platform'
+title: '优秀的跨平台命令行工具'
+slug: 'brilliant-cli-tools-cross-platform'
 date: 2020-05-14 17:17:43 UTC+08:00
 tags:
 -   cli
@@ -201,8 +201,74 @@ NuShell 创建的环境变量都会保存在 ``$nu.env`` 对象的对应命令�
 见官方文档 https://www.nushell.sh/book/en/working_with_tables.html
 
 ########
+starship
+########
+
+StarShip [#site-starship]_ 是一个命令提示符增强工具，其着眼于
+
+兼容
+    支持 Unix、Windows、macOS 上的 Bash、Fish、Zsh、PowerShell 以及 Ion 等 OS 和 Shell 程序。
+速度
+    使用 Rust 编写，确保速度与内存安全。
+扩展
+    拥有极强的可扩展性。
+
+由于 StarShip 使用 Powerline 字体进行美化，请在安装前确保设备上已经安装 Powerline 字体 [#site-powerline-font]_ 并在终端程序中启用。
+
+在 Windows 上，通过 scoop 安装：
+
+    scoop install starship
+
+在 PowerShell 的配置文件中写入：
+
+.. code:: powershell
+
+    Invoke-Expression (&starship init powershell)
+
+个人配置
+========
+
+详细的配置手册可以阅读其文档，有中文版本 [#doc-starship]_ 。
+个人的 starship 配置文件位于 ``~/.config/starship.toml``。
+
+.. code:: toml
+
+    prompt_order = [
+        "python",
+        "rust",
+        "username",
+        "hostname",
+        "directory",
+        "git_branch",
+        "git_commit",
+        "git_state",
+        "git_status",
+        "jobs",
+        "time",
+        "cmd_duration",
+        "line_break",
+        "character"
+    ]
+
+    [character]
+    use_symbol_for_status = true
+
+    [directory]
+    prefix = ":"
+
+    [git_branch]
+    symbol = "|"
+
+    [time]
+    disabled = false
+
+
+########
 参考链接
 ########
 
 .. [#site-nushell] https://github.com/nushell/nushell
 .. [#issue-nushell-1784] https://github.com/nushell/nushell/issues/1784
+.. [#site-starship] https://starship.rs/zh-CN/
+.. [#site-powerline-font] https://github.com/powerline/fonts
+.. [#doc-starship] https://starship.rs/zh-CN/config/
