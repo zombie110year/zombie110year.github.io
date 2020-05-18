@@ -4,7 +4,7 @@ slug: 'ch2-variable-type-cpp-primer5'
 date: 2020-04-30 11:35:02 UTC+08:00
 tags:
 - c++
-category: note
+category: code
 description:
 type: text
 ---

@@ -4,7 +4,7 @@ slug: 'ch1-start-cpp-primer5'
 date: 2020-04-29 21:38:59 UTC+08:00
 tags:
 - c++
-category: note
+category: code
 description: |
     《C++ Primer 第五版》 第一章节读书笔记
 type: text

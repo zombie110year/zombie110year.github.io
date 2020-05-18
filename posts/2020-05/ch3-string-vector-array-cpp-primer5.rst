@@ -4,7 +4,7 @@ slug: 'ch3-string-vector-array-cpp-primer5'
 date: 2020-05-04 10:57:40 UTC+08:00
 tags:
 - c++
-category: note
+category: code
 description:
 type: text
 ---

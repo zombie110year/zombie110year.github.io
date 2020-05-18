@@ -4,7 +4,7 @@ slug: 'ch5-statements-cpp-primer5'
 date: 2020-05-08 19:20:35 UTC+08:00
 tags:
 - c++
-category: note
+category: code
 type: text
 ---
 

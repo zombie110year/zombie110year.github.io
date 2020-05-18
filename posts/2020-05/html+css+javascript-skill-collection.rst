@@ -6,7 +6,7 @@ tags:
 - html
 - css
 - javascript
-category: collection
+category: code
 type: text
 ---
 

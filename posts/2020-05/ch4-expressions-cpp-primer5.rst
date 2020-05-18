@@ -4,7 +4,7 @@ slug: 'ch4-expressions-cpp-primer5'
 date: 2020-05-08 15:31:52 UTC+08:00
 tags:
 -   c++
-category: note
+category: code
 description:
 type: text
 ---

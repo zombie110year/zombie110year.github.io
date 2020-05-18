@@ -4,7 +4,7 @@ slug: 'ch6-functions-cpp-primer5'
 date: 2020-05-09 16:05:07 UTC+08:00
 tags:
 - c++
-category: note
+category: code
 description:
 type: text
 ---

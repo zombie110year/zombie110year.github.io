@@ -4,7 +4,7 @@ slug: 'vim-simple-tutorial-as-notepad'
 date: 2020-05-02 16:56:36 UTC+08:00
 tags:
 - vim
-category: note
+category: tutorial
 description:
 type: text
 ---
@@ -459,4 +459,3 @@ Vim 可以将一系列操作录制到一个寄存器中，然后调用。
 =================
 
 .. gist:: zombie110year/0e52018a219c1316a3b3f087ba4c0684
-
