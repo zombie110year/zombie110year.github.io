@@ -8,7 +8,6 @@ tags:
 category: tutorial
 description: 将一个静态站点完整地扒拉下来。
 type: text
-status: draft
 ---
 
 玩玩爬虫。
@@ -48,4 +47,32 @@ status: draft
 开发环境的准备
 ##############
 
-打算直接上 aiohttp 模块。
+打算直接上 aiohttp 模块、使用 lxml 解析 HTML。
+
+########
+程序设计
+########
+
+当我们完成 `一个全站爬虫的要素`_ 章节中所确定的任务时，需要这些角色：
+
+发送网络请求（RequestSender）
+    从 URL 池中读取一个链接，发送请求，获取响应。
+响应解析任务分配（ResponseManager）
+    从 RequestSender 获取一个响应，根据 MIMEType 决定下一步的策略。
+解析 HTML （HTMLSolver）
+    从 ResponseManager 获取一个 HTML 响应，解析出该网页引用的资源链接；
+    然后放入 URL 池调度系统。而此 HTML 响应的完整内容，也放入文件调度系统进行保存作业。
+保存静态资源（StaticFileSolver）
+    从 ResponseManager 获取一个 非 HTML 响应。直接转交给文件调度系统。
+文件调度系统（DiskManager）
+    从各 Solver 获取响应，然后将其按照一定规则保存到本地文件系统。
+URL 调度系统（URLManager）
+    管理 URL 池。分 to_visit 和 visited 两个池，前者用一个队列，后者用一个集合。
+    如果一个 URL 已经存在于 visited，那么就不会将其放入 to_visit。
+
+以上各角色的关系如下图：
+
+.. figure:: /images/static-site-full-reconstraction-by-python-uml.drawio.svg
+    :height: 400px
+
+    UML 图
