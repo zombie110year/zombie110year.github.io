@@ -1,1 +1,4 @@
 /* 自定义样式 */
+pre.literal-block {
+    overflow: auto;
+}
