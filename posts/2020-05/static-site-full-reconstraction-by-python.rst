@@ -8,6 +8,7 @@ tags:
 category: tutorial
 description: 将一个静态站点完整地扒拉下来。
 type: text
+status: draft
 ---
 
 玩玩爬虫。
@@ -48,6 +49,29 @@ type: text
 ##############
 
 打算直接上 aiohttp 模块、使用 lxml 解析 HTML。
+
+lxml 库的基本用法
+=================
+
+.. code:: python
+
+    from lxml.etree import HTML, HTMLParser
+
+    et = HTML("<span>Hello</span", base_url=url)
+
+- 一般通过 xpath 来选择元素
+- base_url 用来解析内部的相对链接。
+
+partially initialized module
+============================
+
+在运行时，由于划分了几个文件，而且为了提供类型标注而产生了循环导入，
+为此，使用参考自 StackOverflow 的方法 [#so-1]_：
+
+1. 在 ``if typing.TYPE_CHECKING`` 块下导入起类型标注作用的模块
+2. ``from __future__ import annotations`` 以添加向前类型引用的支持（Python 3.7 以上可用，Python 3.9 正式支持）
+
+.. [#so-1] https://stackoverflow.com/questions/39740632/python-type-hinting-without-cyclic-imports
 
 ########
 程序设计
