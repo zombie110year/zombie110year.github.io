@@ -10,7 +10,6 @@ category: tutorial
 description: |
     利用文件读写特性和 NTFS 系统的交换数据流来隐藏数据。
 type: text
-status: draft
 ---
 
 谁不想在自己的电脑上藏一些东西呢？
@@ -49,17 +48,77 @@ status: draft
 
     # Linux
     cat a.png b.txt > c.png
+    # cmd.exe
+    type a.png b.txt > c.png
     # PowerShell
     # 不建议用 PowerShell，读取字节时卡爆了
 
-除了文本文件，还可以加 ZIP
 
-.. todo
+除了文本文件，还可以加 ZIP 压缩包等。
+
+其他图片隐写需要一定的专业知识， 这篇文章 [#zh-pic-ste]_ 进行了简单的介绍。
+
+###############
+NTFS 交换数据流
+###############
+
+.. abbr:: ADS
+
+    Alternate Data Stream
+
+对于 Windows 使用的 NTFS 文件系统，它提供了名为 :abbr:`ADS` 的特性，可以让我们将一些数据附加（也称「寄生」）在一个文件上。
+为了接下来表达上不出现歧义，我们将一个能通过文件系统直接访问的对象称为「文件入口」、
+将一个文件在磁盘上的实际数据称为「文件内容」。
+
+ADS 所寄生的数据拥有实际的文件内容，但没有文件入口，除非创建一个符号链接。
+
+创建 ADS
+========
+
+cmd.exe 可以通过管道重定向的方式创建 ADS::
+
+    # 创建宿主文件
+    echo Hello > a.txt
+    # 将内容写入 ADS
+    echo World > a.txt:b.txt
+
+如上，便创建了一个名为 b.txt 的寄生在 a.txt 上的 ADS。
+这个 ADS 不会在图形界面上显示，也不会在 a.txt 的尺寸上统计、甚至不会统计到文件夹的尺寸大小上。
+
+可以用 more 读取文本内容的 ADS::
+
+    more < a.txt:b.txt
+
+一些二进制编辑器，例如 HxD [#site-hxd]_ 也可以通过命令行参数读取 ADS::
+
+    hxd a.txt:b.txt
+
+交换流的发现::
+
+    # 可以通过 dir /r 来查看交换流
+    dir /r
+
+创建符号链接以便访问（需要管理员权限）::
+
+    mklink b.txt a.txt:b.txt
+
+通过二进制读写，将交换流的文件内容复制到另一个文件::
+
+    more <a.txt:b.txt >bb.txt
+
+交换流的删除::
+
+    # 删除宿主，则 ADS 也被删除
+    del a.txt
+
+复制宿主也会复制 ADS::
+
+    copy a.txt aa.txt
+    dir /r
 
 ########
 参考链接
 ########
 
-https://zhuanlan.zhihu.com/p/62895080
-https://zhuanlan.zhihu.com/p/30539398
-https://3gstudent.github.io/3gstudent.github.io/%E9%9A%90%E5%86%99%E6%8A%80%E5%B7%A7-%E5%88%A9%E7%94%A8JPEG%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E9%9A%90%E8%97%8Fpayload/
+.. [#zh-pic-ste] https://zhuanlan.zhihu.com/p/62895080
+.. [#site-hxd] https://mh-nexus.de/en/hxd/
