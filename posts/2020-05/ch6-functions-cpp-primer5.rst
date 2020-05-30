@@ -7,6 +7,7 @@ tags:
 category: code
 description:
 type: text
+status: private
 ---
 
 .. contents::

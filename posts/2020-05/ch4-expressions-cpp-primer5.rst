@@ -7,6 +7,7 @@ tags:
 category: code
 description:
 type: text
+status: private
 ---
 
 这一章内容比较简单，大多数编程语言在此拥有一致的性质，触类旁通。

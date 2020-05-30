@@ -6,6 +6,7 @@ tags:
 - c++
 category: code
 type: text
+status: private
 ---
 
 只记录 switch/goto 的一些细节和 try catch 语句。
