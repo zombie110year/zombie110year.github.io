@@ -54,7 +54,7 @@ status: draft
 
 除了文本文件，还可以加 ZIP
 
-.. TODO
+.. todo
 
 ########
 参考链接
