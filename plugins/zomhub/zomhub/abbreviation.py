@@ -70,8 +70,7 @@ def parse_abbr(
     if desc is None:
         return [], [nodes.error(rawtext, nodes.paragraph(rawtext, f"没有定义的缩写 {abbr!r}"))]
     else:
-
         return [
-            nodes.raw(rawtext, f"<ruby><rb>{abbr}</rb><rt>{desc}</rt></ruby>", format="html")
+            nodes.abbreviation(rawtext, f"{abbr}（{desc}）")
             # nodes.abbreviation(rawtext, abbr, title=desc)
         ], []
