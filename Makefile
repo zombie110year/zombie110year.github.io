@@ -1,4 +1,5 @@
 sync:
+	git push coding src
 	git push origin src
 pub:
 	git push origin src:release

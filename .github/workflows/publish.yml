@@ -25,10 +25,10 @@ jobs:
       - name: upload to github pages
         run: |
           cd output
-          echo "blog.zombie110year.top" >> CNAME
           git init
           git config user.name zombie110year
           git config user.email zombie110year
           git add -A
           git commit -m "upload"
           git push --force --quiet https://${{ secrets.UPLOAD_TOKEN }}@${{ secrets.UPLOAD_URL }} master
+          git push --force --quiet https://${{ secrets.CODING_USER}}:${{ secrets.CODING_PASSWD }}@${{ secrets.CODING_URL }} master
