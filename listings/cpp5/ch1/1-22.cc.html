@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="1-22.cc">
+<meta name="viewport" content="width=device-width">
+<title>1-22.cc | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/listings/cpp5/ch1/1-22.cc.html">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><nav class="breadcrumbs"><ul class="breadcrumb">
+<li><a href="../../">listings</a></li>
+                <li><a href="../">cpp5</a></li>
+                <li><a href=".">ch1</a></li>
+                <li>1-22.cc</li>
+</ul></nav><h1>1-22.cc
+            <small><a href="1-22.cc">(源文件)</a></small>
+        </h1>
+    <table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#listingscpp5ch11-22cc-1"> 1</a>
+<a href="#listingscpp5ch11-22cc-2"> 2</a>
+<a href="#listingscpp5ch11-22cc-3"> 3</a>
+<a href="#listingscpp5ch11-22cc-4"> 4</a>
+<a href="#listingscpp5ch11-22cc-5"> 5</a>
+<a href="#listingscpp5ch11-22cc-6"> 6</a>
+<a href="#listingscpp5ch11-22cc-7"> 7</a>
+<a href="#listingscpp5ch11-22cc-8"> 8</a>
+<a href="#listingscpp5ch11-22cc-9"> 9</a>
+<a href="#listingscpp5ch11-22cc-10">10</a>
+<a href="#listingscpp5ch11-22cc-11">11</a>
+<a href="#listingscpp5ch11-22cc-12">12</a>
+<a href="#listingscpp5ch11-22cc-13">13</a>
+<a href="#listingscpp5ch11-22cc-14">14</a>
+<a href="#listingscpp5ch11-22cc-15">15</a>
+<a href="#listingscpp5ch11-22cc-16">16</a>
+<a href="#listingscpp5ch11-22cc-17">17</a>
+<a href="#listingscpp5ch11-22cc-18">18</a></pre></div></td>
+<td class="code"><pre class="code literal-block"><a name="listingscpp5ch11-22cc-1"></a><span class="cp">#include</span> <span class="cpf">"SalesItem.h"</span><span class="cp"></span>
+<a name="listingscpp5ch11-22cc-2"></a>
+<a name="listingscpp5ch11-22cc-3"></a><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<a name="listingscpp5ch11-22cc-4"></a>  <span class="n">SalesItem</span> <span class="n">sum</span><span class="p">;</span>
+<a name="listingscpp5ch11-22cc-5"></a>  <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">sum</span><span class="p">;</span>
+<a name="listingscpp5ch11-22cc-6"></a>  <span class="n">SalesItem</span> <span class="n">cur</span><span class="p">;</span>
+<a name="listingscpp5ch11-22cc-7"></a>  <span class="k">while</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingscpp5ch11-22cc-8"></a>    <span class="k">if</span> <span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">==</span> <span class="n">sum</span><span class="p">.</span><span class="n">isbn</span><span class="p">())</span> <span class="p">{</span>
+<a name="listingscpp5ch11-22cc-9"></a>      <span class="n">sum</span> <span class="o">+=</span> <span class="n">cur</span><span class="p">;</span>
+<a name="listingscpp5ch11-22cc-10"></a>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<a name="listingscpp5ch11-22cc-11"></a>      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"期望相同的 ISBN："</span> <span class="o">&lt;&lt;</span> <span class="n">cur</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">" != "</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span>
+<a name="listingscpp5ch11-22cc-12"></a>                <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<a name="listingscpp5ch11-22cc-13"></a>      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a name="listingscpp5ch11-22cc-14"></a>    <span class="p">}</span>
+<a name="listingscpp5ch11-22cc-15"></a>  <span class="p">}</span>
+<a name="listingscpp5ch11-22cc-16"></a>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<a name="listingscpp5ch11-22cc-17"></a>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="listingscpp5ch11-22cc-18"></a><span class="p">}</span>
+</pre></td>
+</tr></table></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

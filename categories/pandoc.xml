@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZomHub (关于文章 pandoc)</title><link>https://blog.zombie110year.top/</link><description></description><atom:link href="https://blog.zombie110year.top/categories/pandoc.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2020 &lt;a href="mailto:zombie110year@outlook.com"&gt;Zombie110year&lt;/a&gt; CC BY-NC-SA 4.0</copyright><lastBuildDate>Thu, 04 Jun 2020 16:05:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>使用 Pandoc 进行文档编辑</title><link>https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/</link><dc:creator>Zombie110year</dc:creator><description>&lt;div&gt;&lt;p&gt;Pandoc 是一个标记语言转换工具，它支持非常多的语言之间的相互转换，并且，支持一种功能非常强大的 Markdown 解析功能，
+也提出了对应的标准： Pandoc Markdown &lt;a class="footnote-reference brackets" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#doc-pandoc-markdown" id="id1"&gt;1&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;并且，Pandoc 提出 filter 协议，可以用 JSON 的方式与其他可执行文件交流数据，为标记语言的扩展解析功能提供了接口。
+本文介绍利用 Pandoc 进行大型文档写作的方法。&lt;/p&gt;
+&lt;div class="contents topic" id="id2"&gt;
+&lt;p class="topic-title"&gt;目录&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#id3" id="id13"&gt;利其器&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#id4" id="id14"&gt;工作区布置&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#pandoc-yaml" id="id15"&gt;pandoc.yaml&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#main-md" id="id16"&gt;main.md&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#makefile" id="id17"&gt;Makefile 调用&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#markdown-preview-enhanced" id="id18"&gt;Markdown Preview Enhanced&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#pandoc" id="id19"&gt;Pandoc 的重要扩展语法&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#id5" id="id20"&gt;隐式标题引用&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#id6" id="id21"&gt;定义列表&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#id7" id="id22"&gt;交叉引用与引文引用&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#id10" id="id23"&gt;属性标注&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#id11" id="id24"&gt;通用原始属性&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#data-dir" id="id25"&gt;data dir 机制&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#pandoc-template" id="id26"&gt;Pandoc Template&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/#id12" id="id27"&gt;参考文献&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/"&gt;阅读更多…&lt;/a&gt; (剩余阅读时间 2 分钟)&lt;/p&gt;&lt;/div&gt;</description><category>markdown</category><category>pandoc</category><guid>https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/</guid><pubDate>Thu, 04 Jun 2020 12:13:33 GMT</pubDate></item></channel></rss>

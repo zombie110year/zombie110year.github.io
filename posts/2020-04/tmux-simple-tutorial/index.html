@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Tmux 工具的基本使用方法、配置方法。
+">
+<meta name="viewport" content="width=device-width">
+<title>Tmux 简明教程 | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/posts/2020-04/tmux-simple-tutorial/">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+<meta name="author" content="Zombie110year">
+<link rel="prev" href="../graphicsmagick-usage/" title="Graphics Magick 命令行使用方法" type="text/html">
+<link rel="next" href="../../2020-05/vim-simple-tutorial-as-notepad/" title="Vim 基础教程：当作 NotePad 使用" type="text/html">
+<meta property="og:site_name" content="ZomHub">
+<meta property="og:title" content="Tmux 简明教程">
+<meta property="og:url" content="https://blog.zombie110year.top/posts/2020-04/tmux-simple-tutorial/">
+<meta property="og:description" content="Tmux 工具的基本使用方法、配置方法。
+">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-04-28T13:30:24+08:00">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="tmux">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Tmux 简明教程</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Zombie110year
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-04-28T13:30:24+08:00" itemprop="datePublished" title="2020-04-28 13:30">2020-04-28 13:30</time></a>
+            </p>
+                    <p class="sourceline"><a href="index.rst" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>Tmux 是一个可在 Linux, MacOS 中运行的终端复用工具.
+最直观的效果就是将终端一个屏幕划分成多个屏幕使用.</p>
+<p>Tmux 的划分涉及到四个层次: Server, Session, Window, Pane.</p>
+<p>其中, 一个 Linux 主机只能运行一个 Server, 其他的则是按照层次有着 一对多
+的关系:</p>
+<ol class="arabic simple">
+<li><p>一个 Server 上可运行多个 Session</p></li>
+<li><p>一个 Session 可包含多个 Window</p></li>
+<li><p>一个 Window 可被划分为多个 Pane</p></li>
+</ol>
+<p>看看下面这个示意图:</p>
+<div class="figure">
+<img alt="Tmux 示意图" src="../../../images/tmux-intro.webp" style="width: 600px;"><p class="caption">Tmux 示意图</p>
+</div>
+<p>tmux 的配置文件为 <code class="docutils literal"><span class="pre">~/.tmux.conf</span></code></p>
+<div class="contents topic" id="id1">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#tmux" id="id6">tmux 一般配置</a></p></li>
+<li><p><a class="reference internal" href="#pane" id="id7">pane 相关的操作</a></p></li>
+<li><p><a class="reference internal" href="#window" id="id8">Window</a></p></li>
+<li><p><a class="reference internal" href="#session" id="id9">Session</a></p></li>
+<li><p><a class="reference internal" href="#screen" id="id10">Screen</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id11">tmux 子命令</a></p></li>
+<li><p><a class="reference internal" href="#tmux-256" id="id12">tmux 256 色</a></p></li>
+<li><p><a class="reference internal" href="#id3" id="id13">插件</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id14">参考链接</a></p></li>
+<li><p><a class="reference internal" href="#id5" id="id15">速查表</a></p></li>
+</ul>
+</div>
+<!-- TEASER_END -->
+<div class="section" id="tmux">
+<h2><a class="toc-backref" href="#id6">tmux 一般配置</a></h2>
+<pre class="code text"><a name="rest_code_ba9f3ceb542247d3a967fc97067e16f9-1"></a># 重设 prefix 键
+<a name="rest_code_ba9f3ceb542247d3a967fc97067e16f9-2"></a>set -g prefix C-x
+<a name="rest_code_ba9f3ceb542247d3a967fc97067e16f9-3"></a>unbind C-b
+<a name="rest_code_ba9f3ceb542247d3a967fc97067e16f9-4"></a>
+<a name="rest_code_ba9f3ceb542247d3a967fc97067e16f9-5"></a># 模仿 Vim 键位
+<a name="rest_code_ba9f3ceb542247d3a967fc97067e16f9-6"></a>set -g mode-keys vi
+</pre>
+<!--  -->
+<blockquote>
+<p><code class="docutils literal">&lt;prefix&gt;</code> 是 tmux 的快捷键前缀, 大多数功能键都是以它开始, 默认为
+Ctrl+b, 在上面的配置文件中被修改为 Ctrl+x (用过 Emacs 的都懂) <code class="docutils literal">C-</code>
+表示 Ctrl 键, <code class="docutils literal">M-</code> 表示 Alt 键, <code class="docutils literal">S-</code> 表示 Shift 键, <code class="docutils literal">SPC</code>
+表示空格键, <code class="docutils literal">RET</code> 表示回车键</p>
+</blockquote>
+</div>
+<div class="section" id="pane">
+<h2><a class="toc-backref" href="#id7">pane 相关的操作</a></h2>
+<table>
+<colgroup>
+<col style="width: 42%">
+<col style="width: 42%">
+<col style="width: 15%">
+</colgroup>
+<thead><tr>
+<th class="head"><p>操作</p></th>
+<th class="head"><p>指令</p></th>
+<th class="head"><p>记忆方法</p></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><p>水平分割，创建新 pane</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; %</code></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p>竖直分割，创建新 pane</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; "</code></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p>在 pane 间切换</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; o，或</code>
+<code class="docutils literal">&lt;prefix&gt; 方向键</code></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p>删除 pane</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; x</code> 或者在
+shell 里执行 exit 命令</p></td>
+<td><p>exit</p></td>
+</tr>
+<tr>
+<td><p>切换 pane 的全屏/非全屏</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; z</code></p></td>
+<td><p>zoom</p></td>
+</tr>
+<tr>
+<td><p>调整 pane 的大小</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; <span class="pre">C-方向键</span></code></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p>调整 pane 的大小(一次 5
+个单位)</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; <span class="pre">M-方向键</span></code></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p>显示 pane 编号,
+并在之后输入编号跳转</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; q &lt;num&gt;</code></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p>交换 pane 的位置</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; {</code> 或者
+<code class="docutils literal">&lt;prefix&gt; }</code></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="window">
+<h2><a class="toc-backref" href="#id8">Window</a></h2>
+<p>Window 是 session 之下的一个层级. 一个屏幕一次只能显示一个 Window, 在
+Window 中又可以划分多个 pane. 有点类似 “标签页” 的概念.</p>
+<table>
+<colgroup>
+<col style="width: 27%">
+<col style="width: 51%">
+<col style="width: 22%">
+</colgroup>
+<thead><tr>
+<th class="head"><p>操作</p></th>
+<th class="head"><p>指令</p></th>
+<th class="head"><p>记忆方法</p></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><p>创建新的 Window</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; c</code></p></td>
+<td><p>create</p></td>
+</tr>
+<tr>
+<td><p>列出所有 Window</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; w</code></p></td>
+<td><p>window</p></td>
+</tr>
+<tr>
+<td><p>切换 Window</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; n</code> 或 <code class="docutils literal">&lt;prefix&gt; p</code></p></td>
+<td><p>next, previous</p></td>
+</tr>
+<tr>
+<td><p>重命名当前 Window</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; ,</code></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p>删除当前 Window</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; &amp;</code></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="session">
+<h2><a class="toc-backref" href="#id9">Session</a></h2>
+<table>
+<colgroup>
+<col style="width: 57%">
+<col style="width: 27%">
+<col style="width: 16%">
+</colgroup>
+<thead><tr>
+<th class="head"><p>操作</p></th>
+<th class="head"><p>指令</p></th>
+<th class="head"><p>记忆方法</p></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><p>将当前 session 转移到后台运行</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; d</code></p></td>
+<td><p>daemon</p></td>
+</tr>
+<tr>
+<td><p>列出所有 session</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; s</code></p></td>
+<td><p>session</p></td>
+</tr>
+<tr>
+<td><p>重命名当前 session</p></td>
+<td><p><code class="docutils literal">&lt;prefix&gt; $</code></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>由于 session 是连接 tmux 与普通 shell 的第一层概念, 因此,
+也有许多操作可以通过命令行参数来进行.</p>
+<p>重新进入后台 session:</p>
+<pre class="code sh"><a name="rest_code_7333780194ae438092130176d7fedd10-1"></a>tmux a  <span class="c1"># 进入上一个 session</span>
+<a name="rest_code_7333780194ae438092130176d7fedd10-2"></a>tmux attach-session -t &lt;session-id&gt; <span class="c1"># 进入指定的 session</span>
+<a name="rest_code_7333780194ae438092130176d7fedd10-3"></a>tmux at -t &lt;session-id&gt; <span class="c1"># at 是 attach-session 的简写</span>
+</pre>
+<p>给 session 重命名</p>
+<pre class="code sh"><a name="rest_code_d300c621b63f45a09754ee445b0494d4-1"></a>tmux rename-session -t &lt;session-di&gt; new-id
+</pre>
+<p>列出已有 session</p>
+<pre class="code sh"><a name="rest_code_ce260f6c1f224c4c98bdafd5ab64cb6c-1"></a>tmux list-sessions
+</pre>
+</div>
+<div class="section" id="screen">
+<h2><a class="toc-backref" href="#id10">Screen</a></h2>
+<p>一个 Screen 表示你在一个 Pane 中打开的 Shell
+用的那个不知道怎么具体称呼的东西. 你输入的, 程序输出的信息都存储在里面.</p>
+<p>在 Tmux 中, 无法使用鼠标滚轮等操作滚动当前 Screen 以查看历史输出的信息.
+但是可以在 <strong>Copy Mode</strong> 中查看历史输出, 并且可选择并复制其中的内容:</p>
+<table>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 79%">
+</colgroup>
+<thead><tr>
+<th class="head"><p>操作</p></th>
+<th class="head"><p>行为</p></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><p><code class="docutils literal">&lt;prefix&gt; [</code></p></td>
+<td><p>进入 copy 模式</p></td>
+</tr>
+<tr>
+<td><p><code class="docutils literal">q</code></p></td>
+<td><p>在 copy 模式中按下此键以退出</p></td>
+</tr>
+<tr>
+<td><p><code class="docutils literal">&lt;space&gt;</code></p></td>
+<td><p>进入选择模式</p></td>
+</tr>
+<tr>
+<td><p><code class="docutils literal">&lt;enter&gt;</code></p></td>
+<td><p>复制并退出选择模式, 同时会将复制内容存储在剪贴板历史中</p></td>
+</tr>
+<tr>
+<td><p><code class="docutils literal">&lt;prefix&gt; ]</code></p></td>
+<td><p>粘贴复制的内容</p></td>
+</tr>
+<tr>
+<td><p><code class="docutils literal">&lt;prefix&gt; =</code></p></td>
+<td><p>在剪贴板历史中选择内容进行粘贴</p></td>
+</tr>
+</tbody>
+</table>
+<p>如果想要删除剪贴板历史中的某条记录, 可以选中目标记录并使用命令
+<code class="docutils literal"><span class="pre">delete-buffer</span></code> 将其删除; 如果要修改目标记录, 则使用命令
+<code class="docutils literal"><span class="pre">set-buffer</span></code> 将当前记录重写为输入的参数:</p>
+<pre class="literal-block">: set-buffer "新的内容"</pre>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id11">tmux 子命令</a></h2>
+<p>tmux 子命令可以在 Shell 中使用:</p>
+<pre class="code sh"><a name="rest_code_96187e6386bd46488e8f94787e50165c-1"></a>tmux &lt;subcmd&gt; &lt;args&gt; ...
+</pre>
+<p>也可以在 tmux session 中, 通过内置命令行使用:</p>
+<pre class="code sh"><a name="rest_code_06fac6a1131b4e30a90ec0c501641bfd-1"></a><span class="c1"># 按下 &lt;prefix&gt; : 进入内置命令行, 就像 Vim 一样</span>
+<a name="rest_code_06fac6a1131b4e30a90ec0c501641bfd-2"></a>&lt;subcmd&gt; &lt;args&gt; ...
+</pre>
+<p>可用的子命令可参考文档 (<code class="docutils literal">man tmux</code>) . 快捷键都是对这些命令的封装.
+这些功能不一定会用, 因此用到了再查.</p>
+<p>Tmux 中有一系列 <code class="docutils literal">new-</code> <code class="docutils literal">kill-</code> <code class="docutils literal">list-</code> 开头的命令, 用于操作
+Session, Window, pane.</p>
+</div>
+<div class="section" id="tmux-256">
+<h2><a class="toc-backref" href="#id12">tmux 256 色</a></h2>
+<ul class="simple">
+<li><p>首先, 需要设置环境变量 <code class="docutils literal">export <span class="pre">TERM=screen-256color</span></code></p></li>
+<li><p>然后, 启动 tmux 时附加 <code class="docutils literal"><span class="pre">-2</span></code> 参数: <code class="docutils literal">tmux <span class="pre">-2</span> new ...</code>,
+可以将此设为一个别名: <code class="docutils literal">alias <span class="pre">tmux='tmux</span> <span class="pre">-2'</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id13">插件</a></h2>
+<p>Tmux 也可以使用插件, 并且官方提供了插件管理器 <a class="reference external" href="https://github.com/tmux-plugins/tpm">GitHub - tmux-plugins/tpm</a>，
+使用 git 安装:</p>
+<pre class="code sh"><a name="rest_code_aad029deab5d4bef8fa255d983bb9f8f-1"></a>git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+</pre>
+<p>然后, 编辑配置文件 <code class="docutils literal">.tmux.conf</code>:</p>
+<pre class="code text"><a name="rest_code_2f0fd82809ca4a659544c47fad52511e-1"></a># 插件声明中的 url 项是 github 中的 username/reponame
+<a name="rest_code_2f0fd82809ca4a659544c47fad52511e-2"></a>set -g @plugin 'tmux-plugins/tpm' # 声明 tpm 插件
+<a name="rest_code_2f0fd82809ca4a659544c47fad52511e-3"></a>set -g @plugin 'tmux-plugins/tmux-resurrect'  # 声明 resurrect 插件, 这个插件用于保存与加载 session
+<a name="rest_code_2f0fd82809ca4a659544c47fad52511e-4"></a>
+<a name="rest_code_2f0fd82809ca4a659544c47fad52511e-5"></a># ... 配置文件底部
+<a name="rest_code_2f0fd82809ca4a659544c47fad52511e-6"></a>run -b '~/.tmux/plugins/tpm/tpm'
+</pre>
+<p>在配置文件中声明的插件可以通过 tpm 自动管理, 需要
+<code class="docutils literal">tmux source <span class="pre">~/.tmux.conf</span></code> 重新加载配置文件.
+然后通过三组快捷键进行插件的安装,更新与卸载:</p>
+<pre class="literal-block">&lt;prefix&gt; S-i      # 安装声明的插件
+&lt;prefix&gt; S-u      # 更新声明的插件
+&lt;prefix&gt; M-u      # 卸载已安装但又未被声明的插件</pre>
+<p>各插件的使用方法直接去 github.com/tmux-plugins 下的仓库 README 里找吧.</p>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id14">参考链接</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://man.openbsd.org/OpenBSD-current/man1/tmux.1">http://man.openbsd.org/OpenBSD-current/man1/tmux.1</a></p></li>
+<li><p><a class="reference external" href="https://gist.github.com/MohamedAlaa/2961058">https://gist.github.com/MohamedAlaa/2961058</a></p></li>
+<li><p><a class="reference external" href="http://mingxinglai.com/cn/2012/09/tmux/">http://mingxinglai.com/cn/2012/09/tmux/</a></p></li>
+<li><p><a class="reference external" href="https://suixinblog.cn/2018/12/tmux.html">https://suixinblog.cn/2018/12/tmux.html</a></p></li>
+<li><p><a class="reference external" href="http://louiszhai.github.io/2017/09/30/tmux/">http://louiszhai.github.io/2017/09/30/tmux/</a></p></li>
+<li><p><a class="reference external" href="http://www.wutianqi.com/blog/3681.html">http://www.wutianqi.com/blog/3681.html</a></p></li>
+<li><p><a class="reference external" href="https://liam.page/2016/09/10/tmux-plugin-resurrect/">https://liam.page/2016/09/10/tmux-plugin-resurrect/</a></p></li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id15">速查表</a></h2>
+<script src="https://gist.github.com/zombie110year/1f02c500eae2006f2d0fd958a242aece.js"></script>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../../categories/linux/" rel="tag">linux</a></li>
+            <li><a class="tag p-category" href="../../../categories/tmux/" rel="tag">tmux</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../graphicsmagick-usage/" rel="prev" title="Graphics Magick 命令行使用方法">上一篇文章</a>
+            </li>
+            <li class="next">
+                <a href="../../2020-05/vim-simple-tutorial-as-notepad/" rel="next" title="Vim 基础教程：当作 NotePad 使用">下一篇文章</a>
+            </li>
+        </ul></nav></aside><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="autoRenderKatex();"></script><script>
+        function autoRenderKatex() {
+            renderMathInElement(document.body,
+                {
+                    
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                }
+            );
+        }
+        </script></article></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

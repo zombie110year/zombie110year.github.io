@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="基于日常使用的 PowerShell 教程。
+">
+<meta name="viewport" content="width=device-width">
+<title>简单的 PowerShell 教程 | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/posts/2020-04/simple-powershell-tutorial/">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+<meta name="author" content="Zombie110year">
+<link rel="next" href="../migrate-from-hexo-to-nikola/" title="关于博客从 Hexo 迁移到 Nikola 这件事" type="text/html">
+<meta property="og:site_name" content="ZomHub">
+<meta property="og:title" content="简单的 PowerShell 教程">
+<meta property="og:url" content="https://blog.zombie110year.top/posts/2020-04/simple-powershell-tutorial/">
+<meta property="og:description" content="基于日常使用的 PowerShell 教程。
+">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-04-25T20:04:38+08:00">
+<meta property="article:tag" content="powershell">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">简单的 PowerShell 教程</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Zombie110year
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-04-25T20:04:38+08:00" itemprop="datePublished" title="2020-04-25 20:04">2020-04-25 20:04</time></a>
+            </p>
+                    <p class="sourceline"><a href="index.rst" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>介绍了 PowerShell 的控制语句、函数定义和管道操作中常用的方法。</p>
+<div class="contents topic" id="id1">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#powershell" id="id15">PowerShell 字符串操作</a></p></li>
+<li>
+<p><a class="reference internal" href="#id2" id="id16">PowerShell 中的控制语句</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id3" id="id17">条件分支</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id18">循环迭代</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id5" id="id19">PowerShell 容器类型</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id20">PowerShell 函数</a></p></li>
+<li><p><a class="reference internal" href="#id7" id="id21">基于管道的 PowerShell 工作流</a></p></li>
+<li><p><a class="reference internal" href="#net" id="id22">调用 .Net 静态方法</a></p></li>
+<li>
+<p><a class="reference internal" href="#id10" id="id23">必知必会</a></p>
+<ul>
+<li><p><a class="reference internal" href="#get-command" id="id24">Get-Command</a></p></li>
+<li><p><a class="reference internal" href="#start-process" id="id25">Start-Process</a></p></li>
+<li><p><a class="reference internal" href="#get-process-stop-process" id="id26">Get-Process 与 Stop-Process</a></p></li>
+<li><p><a class="reference internal" href="#start-job" id="id27">Start-Job</a></p></li>
+<li><p><a class="reference internal" href="#read-host" id="id28">Read-Host</a></p></li>
+<li><p><a class="reference internal" href="#out-file" id="id29">Out-File</a></p></li>
+<li><p><a class="reference internal" href="#get-content" id="id30">Get-Content</a></p></li>
+</ul>
+</li>
+<li>
+<p><a class="reference internal" href="#id12" id="id31">例子</a></p>
+<ul>
+<li><p><a class="reference internal" href="#powershell-nikola-new-post" id="id32">用 PowerShell 代替 Nikola 的 new_post 指令</a></p></li>
+<li><p><a class="reference internal" href="#powershell-http" id="id33">用 PowerShell 起一个 HTTP 服务器</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id13" id="id34">推荐链接</a></p></li>
+<li><p><a class="reference internal" href="#id14" id="id35">参考链接</a></p></li>
+</ul>
+</div>
+<!-- TEASER_END -->
+<div class="section" id="powershell">
+<h2><a class="toc-backref" href="#id15">PowerShell 字符串操作</a></h2>
+<p>在任何 Shell 中字符串操作都是最常用的，在处理 stdio 内容、拼接命令行参数等情形下都需要操作字符串。
+PowerShell 提供了字符串的以下功能：</p>
+<dl>
+<dt>拼接</dt>
+<dd>
+<p>使用运算符 <code>+</code> 即可:</p>
+<pre class="literal-block">("hello" + " " + "world") -eq ("hello world")</pre>
+</dd>
+<dt>重复</dt>
+<dd>
+<p>使用运算符 <code>*</code> 即可:</p>
+<pre class="literal-block">("abc" * 3) -eq ("abcabcabc")</pre>
+</dd>
+<dt>模板字符串</dt>
+<dd>
+<p>在用 <code>"</code> 双引号包裹的字符串中，可以插入变量或表达式的值:</p>
+<pre class="literal-block">$name = "Zombie110year"
+"hello $name"
+
+"1 + 3 = $( 1 + 3 )"</pre>
+<p>表达式内的空白不是必须的，出于美观和个人喜好而加上。</p>
+<p>对于一些变量，我们希望在字符串中插入它的某个属性，例如一个文件的大小:</p>
+<pre class="literal-block">$file = (ls conf.py)</pre>
+<p>但如果按照下面的方式 『使用点运算符』 的话，实际上只是将 <code>$file</code> 插入到目标位置:</p>
+<pre class="literal-block">"file is $file.Length bytes."
+# file is C:\Users\*\.local\blog\conf.py.Length bytes.</pre>
+<p>要取出某个属性，需要按照嵌入表达式的值的方法:</p>
+<pre class="literal-block">"file is $( $file.Length ) bytes."</pre>
+<p>而对于单引号包裹的字符串，则不会应用为模板字符串，可以把它当作纯字面量:</p>
+<pre class="literal-block">'1 + 3 = $( 1 + 3 )'</pre>
+</dd>
+</dl>
+<p>PowerShell 中的字符串可以换行，直到遇见下一个分界符 <code>"</code> 或 <code>'</code> 为止，
+在 PowerShell 中，由于 <code>\\</code> 符号被用作路径分隔符，因此使用反引号来作为转义符号。</p>
+<dl>
+<dt>搜索替换</dt>
+<dd>
+<p>可以使用 <code>-contains</code> 运算符来检测一个容器中是否包含某个元素，对于字符串，可以用:</p>
+<pre class="literal-block">"abc" -contains "a"</pre>
+<p>来检测字符串中是否包含某个子串。
+如果要得到子串在字符串中的索引值，需要调用 String 类型的方法 <code>IndexOf</code>:</p>
+<pre class="literal-block">"abc".IndexOf("b") -eq 1</pre>
+<p>要替换字符串中的某个模式，可以使用 <code>-replace</code> 运算符，它接受一个二元组作为参数，前者表示模式，后者表示替换内容:</p>
+<pre class="literal-block">("C:\Users\hello\Desktop" -replace "\\","/") -eq "C:/Users/hello/Desktop"</pre>
+<p>值得注意的是，模式其实是正则表达式，而不是一个简单字符串。在正则表达式中，反斜杠代表转义。</p>
+</dd>
+<dt>正则表达式</dt>
+<dd>
+<p>对字符串进行正则表达式操作，可以使用 <code>-match</code> 或 <code>-replace</code> 运算符，前者检查一个正则是否匹配，后者则是搜索替换。
+注意，正则匹配的捕获组将会存储在一个名为 <code>$Matches</code> 的变量中，而 <code>-match</code> 表达式的返回值是一个布尔值:</p>
+<pre class="literal-block">("ann 18 student" -match "(\S+) (\d+) (\S+)") -eq $true
+($Matches[0]) -eq "ann 18 student"
+($Matches[1]) -eq "ann"
+# ...</pre>
+</dd>
+</dl>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id16">PowerShell 中的控制语句</a></h2>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id17">条件分支</a></h3>
+<p>PowerShell 提供了 if-else 语句与 switch 语句:</p>
+<pre class="literal-block">if ($cond) {
+    # true
+} else {
+    # false
+}</pre>
+<p>PowerShell 的 Switch 非常 Powerful，它的基本使用形式是:</p>
+<pre class="literal-block">switch [-option] ($var) {
+    {&lt;# 条件表达式 #&gt;} { &lt;# 执行体 #&gt;}
+}</pre>
+<p>对于一般的用法，可以用来匹配离散值，所有剩余情况可以将转到 <code>Default</code> 分支执行:</p>
+<pre class="literal-block">switch ($var) {
+    1 { echo "H" }
+    2 { echo "e" }
+    3 { echo "y" }
+    Default { echo "EOF" }
+}</pre>
+<p>还可以用来匹配一个区间，在条件表达式里可以用 <code>$_</code> 来表示传入的数值（这个值在管道中也表示相同含义）:</p>
+<pre class="literal-block">switch ($var) {
+    { $_ -lt 0 } { echo "$_ &lt; 0" }
+    { $_ -lt 100 } { echo "$_ &lt; 100" }
+    Default { echo "?" }
+}</pre>
+<p>值得一提的是，每条匹配的分支都会执行一次（Default 除外），如果希望只处理第一条匹配的分支，那么可以在每条分支后加 <code>Break</code> 关键字:</p>
+<pre class="literal-block">switch ($var) {
+    { $_ -lt 0 } {
+        echo "$_ &lt; 0"
+        Break
+    }
+    { $_ -lt 100 } {
+        echo "$_ &lt; 100"
+        Break
+    }
+    Default { echo "?" }
+}</pre>
+<p>在匹配字符串上， Switch 也提供了易用的功能:</p>
+<pre class="literal-block"># 默认的匹配是大小写不敏感的
+switch ("abc") {
+    "ABC" { "OK" }
+    "abc" { "ok" }
+}
+
+# 加上 -case 选项，使大小写敏感
+switch -case ("abc") {
+    "ABC" { "OK" }
+    "abc" { "ok" }
+}
+
+# 加上 -wildcard 或 -regex 以支持通配符/正则表达式
+switch -wildcard ("readme.txt") {
+    "*.md" { echo "Markdown" }
+    "*.txt" { echo "Plain Text" }
+}
+switch -regex ("readme.txt") {
+    "\S+.md$" { "Markdown" }
+    "\S+.txt$" { "Plain Text" }
+}</pre>
+<p>Switch 还可以同时处理多个值，例如，下面这段代码将打印出各数位和等于 9 的三位数:</p>
+<pre class="literal-block">switch(100..999) {
+    {
+        $a0 = [Math]::Truncate($_ / 100);
+        $a1 = [Math]::Truncate($_ % 100 / 10);
+        $a2 = [Math]::Truncate($_ % 10);
+        ($a0 + $a1 + $a2) -eq 9
+    } { echo "$_" }
+}</pre>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id18">循环迭代</a></h3>
+<p>还提供了 while 循环:</p>
+<pre class="literal-block">while($cond) {
+    # ...
+}</pre>
+<p>还提供了 C 风格的 for 循环:</p>
+<pre class="literal-block"># 1 + 2 + ... + 100
+$sum = 0;
+for($i = 0; $i -le 100; $i++) {
+    $sum += $i;
+}
+$sum -eq 5050</pre>
+<p>以及 foreach-in 循环:</p>
+<pre class="literal-block">foreach($i in (ls)) {
+    echo "$($i.Length) Bytes file: $($i.Name);
+}</pre>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id19">PowerShell 容器类型</a></h2>
+<p>PowerShell 提供数组与表:</p>
+<pre class="literal-block"># 字面量用 , 分隔，没有空格
+$arr = 1,2,3,4
+# 对于连续数字，可以用区间表示法，这是闭区间
+$arr = 1..4
+# 也可以加上界定符 @()
+$arr = @('a', 2, 'three')
+# 表用 @{} 界定符
+$tab = @{
+    Name = "小明";
+    Age = 24;
+    Job = "待业";
+}</pre>
+<p>都通过 <code>[index]</code> 进行 访问:</p>
+<pre class="literal-block"># 数组索引从 0 开始
+$arr[0]
+# 如果为负数，则逆序访问，类似 Python
+$arr[-1]
+# 用一个范围做切片
+$arr[1..3]
+# 逆序切片
+$arr[3..1]
+# 表可以通过点运算符访问，如果键的命名满足标识符格式的话
+$tab["Name"] -eq $tab.Name</pre>
+<p>数组的大小是固定的，因此不能插入或删除值，要做到这点，必须创建新的数组:</p>
+<pre class="literal-block">$arr += "abc"
+
+$arr = $arr[0..($arr.Count - 1)]</pre>
+<p>默认的数组是弱类型的，但是在声明数组时使用类型标注可以让其生成强类型数组:</p>
+<pre class="literal-block">[int[]] $arr = 1,2,3,4,5
+$arr += "string"
+
+无法将值“string”转换为类型“System.Int32”。错误:“输入字符串的格式不正确。”
+所在位置 行:1 字符: 5
++     $arr += "string"
++     ~~~~~~~~~~~~~~~~
+    + CategoryInfo          : MetadataError: (:) [], ArgumentTransformationMetadataException
+    + FullyQualifiedErrorId : RuntimeException</pre>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id20">PowerShell 函数</a></h2>
+<p>PowerShell 中的函数通过 <code>function</code> 关键字来定义:</p>
+<pre class="literal-block">function func {
+    echo Hello
+}</pre>
+<p>当调用时，通过 <code>函数名 参数0 参数1 ...</code> 的方式调用。
+函数可以用 <code>$args</code> 访问所有传入的参数，不过由于这些参数需要手动解析，很不易用。
+因此，通常在一个 <code>param</code> 块中定义函数的参数，例如，为开启 aria2c 的 RPC 服务而定义一个函数:</p>
+<pre class="literal-block">function aria2c-rpc {
+    param([switch] $hidden)
+    if ($hidden) {
+        Start-Process -FilePath aria2c.exe -WindowStyle Hidden
+    } else {
+        aria2c.exe
+    }
+}</pre>
+<p>在 <code>param</code> 块中定义的参数可以设定类型，也可以设定默认值；参数之间用逗号分隔:</p>
+<pre class="literal-block">function gitignoreapi {
+    param(
+        [string] $language = "python",
+        [string] $output   = ".gitignore"
+    )
+    curl.exe -o $output "https://gitignore.io/api/$language"
+}</pre>
+<p>这样定义的函数，可以通过 <code>-参数名 参数值</code> 的方式传递参数。
+特别的是 <code>[switch]</code> 类型的参数，它不接受值，当参数中存在此选项时，其值为 <code>$true</code> 否则为 <code>$false</code>。</p>
+<p>函数的最后一个表达式的值就是它的返回值，也可以用 return 指定。</p>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id21">基于管道的 PowerShell 工作流</a></h2>
+<p>在管道传递中，无法使用 if-else foreach 等控制语句，PowerShell 提供了 <code>ForEach-Object</code> 和 <code>Where-Object</code> 来完成它们的任务。</p>
+<dl>
+<dt>ForEach-Object</dt>
+<dd>
+<p>对每一个对象执行一定的命令，命令通过 <code>-Process</code> 参数传入，例如:</p>
+<pre class="literal-block">1..10 | ForEach-Object -Process { echo $($_ * 2) }</pre>
+<p>将会输出传入数字的两倍。</p>
+</dd>
+<dt>Where-Object</dt>
+<dd>
+<p>过滤对象，只有判断条件为 <code>$true</code> 的对象才会进入管道的下一级，条件表达式通过 <code>-FileterScript</code> 传入:</p>
+<pre class="literal-block">1..10 | Where-Object -FilterScript { $_ % 2 -eq 1 }</pre>
+</dd>
+</dl>
+<p>使用管道时必须要小心，它消耗的资源特别大。
+不过根据 <a class="footnote-reference brackets" href="#fn-anonymous-block" id="id8">2</a> 的说法，使用匿名脚本块代替 ForEach-Object 可以提高 200 倍的速度:</p>
+<pre class="literal-block">1..10 | &amp; { process { $_ * $_ } }</pre>
+<p>代码块里的 <code>process</code> 是 PowerShell 高级方法的内容，参考 <a class="footnote-reference brackets" href="#fn-advanced-methods" id="id9">3</a>。</p>
+</div>
+<div class="section" id="net">
+<h2><a class="toc-backref" href="#id22">调用 .Net 静态方法</a></h2>
+<p>一些模块已经封装在 PowerShell 中了，可以通过 <code>[模块名]</code> 来访问。
+例如:</p>
+<pre class="literal-block">[Math]::Pow(2, 8) -eq</pre>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id23">必知必会</a></h2>
+<div class="section" id="get-command">
+<h3><a class="toc-backref" href="#id24">Get-Command</a></h3>
+<p>一个帮助使用 PowerShell 的指令，可以接受一个通配符，查询所有相关的可用命令:</p>
+<pre class="literal-block">Get-Command *-Process</pre>
+<pre class="literal-block">CommandType Name          Version Source
+----------- ----          ------- ------
+Cmdlet      Debug-Process 3.1.0.0 Microsoft.PowerShell.Management
+Cmdlet      Get-Process   3.1.0.0 Microsoft.PowerShell.Management
+Cmdlet      Start-Process 3.1.0.0 Microsoft.PowerShell.Management
+Cmdlet      Stop-Process  3.1.0.0 Microsoft.PowerShell.Management
+Cmdlet      Wait-Process  3.1.0.0 Microsoft.PowerShell.Management</pre>
+</div>
+<div class="section" id="start-process">
+<h3><a class="toc-backref" href="#id25">Start-Process</a></h3>
+<p>Start-Process 用来启动一个进程，重要的参数有三个：</p>
+<dl class="option-list">
+<dt><kbd><span class="option">-F<var>ilePath</var></span></kbd></dt>
+<dd>
+<p>可执行文件的路径，如果在 $env:Path 下，则只需要文件名</p>
+</dd>
+<dt><kbd><span class="option">-A<var>rgumentList</var></span></kbd></dt>
+<dd>
+<p>可执行文件接受的命令行参数，用字符串形式传递，
+各参数用逗号分隔（PowerShell 的字符串数组）</p>
+</dd>
+<dt><kbd><span class="option">-W<var>indowStyle</var></span></kbd></dt>
+<dd>
+<p>窗口模式，如果设置为 Hidden 则没有窗口，否则弹出 cmd 窗口。</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="get-process-stop-process">
+<h3><a class="toc-backref" href="#id26">Get-Process 与 Stop-Process</a></h3>
+<p>用来查找进程与终止进程的。
+一般对前者用 <code>-Name</code> 参数查找一组匹配通配符的进程，获取其 PID，
+然后调用后者 <code>-Id</code> 参数精确终止进程:</p>
+<pre class="literal-block">Get-Process -Name *brook*
+Stop-Process -Id 8123</pre>
+</div>
+<div class="section" id="start-job">
+<h3><a class="toc-backref" href="#id27">Start-Job</a></h3>
+<p>启动一个后台任务，任务需要执行的命令通过 <code>-ScriptBlock</code> 传入:</p>
+<pre class="literal-block">Start-Job -ScriptBlock {
+    # ...
+}</pre>
+<p>任务创建后即开始运行。可以通过 Get-Job 查看状态。其他相关的指令自行用 <code>Get-Command *-Job</code> 查询。</p>
+</div>
+<div class="section" id="read-host">
+<h3><a class="toc-backref" href="#id28">Read-Host</a></h3>
+<p>Read-Host 从 stdin 读取输入，返回给一个变量。
+注意，可能会有人用 <code>$input = Read-Host</code> 来接受输入，
+但是 <code>$INPUT</code> 是一个自动变量，有特殊含义，不能被赋值。
+因此最好采用其他变量名。</p>
+<p>Read-Host 的输出格式是 string，常用的参数有</p>
+<dl class="option-list">
+<dt><kbd><span class="option">-P<var>rompt</var></span></kbd></dt>
+<dd>
+<p>提示符</p>
+</dd>
+<dt><kbd><span class="option">-A<var>sSecureString</var></span></kbd></dt>
+<dd>
+<p>是否以安全模式读取，如果设置，则回显将被替换为星号，且
+输出类型为 SecureString <a class="footnote-reference brackets" href="#fn-secure-string" id="id11">1</a> 。</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="out-file">
+<h3><a class="toc-backref" href="#id29">Out-File</a></h3>
+<p>Out-File 用于将内容输出到文件，常用的参数有</p>
+<dl class="option-list">
+<dt><kbd><span class="option">-F<var>ilePath</var></span></kbd></dt>
+<dd>
+<p>被写文件的路径</p>
+</dd>
+<dt><kbd><span class="option">-E<var>ncoding</var></span></kbd></dt>
+<dd>
+<p>设置字符编码，为了通用性，最好都显式设置为 utf-8</p>
+</dd>
+<dt><kbd><span class="option">-I<var>nputObject</var></span></kbd></dt>
+<dd>
+<p>内容，应当为字符串类型，否则会被转换为字符串</p>
+</dd>
+<dt><kbd><span class="option">-A<var>ppend</var></span></kbd></dt>
+<dd>
+<p>switch 类型的参数，是否以追加模式写入，默认是截断模式</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="get-content">
+<h3><a class="toc-backref" href="#id30">Get-Content</a></h3>
+<p>Get-Content 用来获取文件的内容，Set-Content 用来向文件写入内容。</p>
+<p>Get-Content 的输出是按行分隔的 <code>string[]</code>，常用的参数有</p>
+<dl class="option-list">
+<dt><kbd><span class="option">-D<var>elimiter</var></span></kbd></dt>
+<dd>
+<p>分隔符，默认是换行符</p>
+</dd>
+<dt><kbd><span class="option">-E<var>ncoding</var></span></kbd></dt>
+<dd>
+<p>字符编码</p>
+</dd>
+<dt><kbd><span class="option">-E<var>xclude</var></span></kbd></dt>
+<dd>
+<p>排除一些文件，支持通配符；筛选的最后一步</p>
+</dd>
+<dt><kbd><span class="option">-F<var>ilter</var></span></kbd></dt>
+<dd>
+<p>只接受一些文件，支持通配符；在获取对象时就被应用</p>
+</dd>
+<dt><kbd><span class="option">-P<var>ath</var></span></kbd></dt>
+<dd>
+<p>文件路径，支持通配符</p>
+</dd>
+<dt><kbd><span class="option">-R<var>aw</var></span></kbd></dt>
+<dd>
+<p>switch 类型，不分行，以原始模式读取</p>
+</dd>
+<dt><kbd><span class="option">-R<var>eadCount</var></span></kbd></dt>
+<dd>
+<p>限制读取行数</p>
+</dd>
+<dt><kbd><span class="option">-T<var>ail</var></span></kbd></dt>
+<dd>
+<p>读取文件末尾的行</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="id12">
+<h2><a class="toc-backref" href="#id31">例子</a></h2>
+<div class="section" id="powershell-nikola-new-post">
+<h3><a class="toc-backref" href="#id32">用 PowerShell 代替 Nikola 的 new_post 指令</a></h3>
+<p><a class="reference external" href="../../../listings/userfunc-nikola-new.ps1.html">userfunc-nikola-new.ps1</a>  <a class="reference external" href="../../../listings/userfunc-nikola-new.ps1">(源文件)</a></p>
+<pre class="code powershell"><a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-1"></a><span class="k">function</span> <span class="n">Nikola-New</span> <span class="p">{</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-2"></a>    <span class="k">param</span><span class="p">(</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-3"></a>        <span class="no">[string]</span> <span class="nv">$slug</span> <span class="p">=</span> <span class="p">$(</span><span class="nb">Read-Host</span> <span class="n">-Prompt</span> <span class="s2">"slug&gt; "</span><span class="p">),</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-4"></a>        <span class="no">[string]</span> <span class="nv">$title</span> <span class="p">=</span> <span class="nv">$slug</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-5"></a>        <span class="no">[string]</span> <span class="nv">$invalid_replace</span> <span class="p">=</span> <span class="s2">""</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-6"></a>    <span class="p">)</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-7"></a>    <span class="nv">$invalid_chars</span> <span class="p">=</span> <span class="no">[System.IO.Path]</span><span class="p">::</span><span class="n">GetInvalidFileNameChars</span><span class="p">();</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-8"></a>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$ic</span> <span class="k">in</span> <span class="nv">$invalid_chars</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-9"></a>        <span class="nv">$slug</span> <span class="p">=</span> <span class="nv">$slug</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="nv">$ic</span><span class="p">,</span> <span class="s1">' '</span><span class="p">);</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-10"></a>    <span class="p">}</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-11"></a>    <span class="nv">$basename</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$slug</span> <span class="o">-replace</span> <span class="s2">" +"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">).</span><span class="n">ToLower</span><span class="p">();</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-12"></a>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-13"></a>    <span class="c"># 在控制台输入文章标题</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-14"></a>    <span class="nv">$titleread</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Read-Host</span> <span class="n">-Prompt</span> <span class="s2">"title: $title&gt; "</span><span class="p">).</span><span class="n">Trim</span><span class="p">();</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-15"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$titleread</span> <span class="o">-ne</span> <span class="s2">""</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-16"></a>        <span class="nv">$title</span> <span class="p">=</span> <span class="nv">$titleread</span><span class="p">;</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-17"></a>    <span class="p">}</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-18"></a>    <span class="nv">$date</span> <span class="p">=</span> <span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">"yyyy-MM-dd HH:mm:ss UTCzzzz"</span><span class="p">;</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-19"></a>    <span class="c"># 生成头内容</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-20"></a>    <span class="nv">$content</span> <span class="p">=</span> <span class="p">@(</span><span class="s2">"---"</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-21"></a>        <span class="s2">"title: '$title'"</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-22"></a>        <span class="s2">"slug: '$basename'"</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-23"></a>        <span class="s2">"date: $date"</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-24"></a>        <span class="s2">"tags:"</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-25"></a>        <span class="s2">"category:"</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-26"></a>        <span class="s2">"description:"</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-27"></a>        <span class="s2">"type: text"</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-28"></a>        <span class="s2">"---"</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-29"></a>        <span class="s2">""</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-30"></a>        <span class="s2">".. contents::"</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-31"></a>        <span class="s2">""</span><span class="p">,</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-32"></a>        <span class="s2">".. TEASER_END"</span><span class="p">);</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-33"></a>    <span class="nv">$content</span> <span class="p">=</span> <span class="no">[string]</span><span class="p">::</span><span class="n">Join</span><span class="p">(</span><span class="s2">"</span><span class="se">`n</span><span class="s2">"</span><span class="p">,</span> <span class="nv">$content</span><span class="p">);</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-34"></a>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-35"></a>    <span class="c"># 生成目录</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-36"></a>    <span class="c"># 按 yyyy-MM 划分</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-37"></a>    <span class="nv">$ym</span> <span class="p">=</span> <span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">"yyyy-MM"</span><span class="p">;</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-38"></a>    <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">"posts/$ym"</span><span class="p">))</span> <span class="p">{</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-39"></a>        <span class="nb">New-Item</span> <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="n">-Path</span> <span class="s2">"posts/$ym"</span><span class="p">;</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-40"></a>    <span class="p">}</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-41"></a>    <span class="nv">$filename</span> <span class="p">=</span> <span class="s2">"posts/$ym/$basename.rst"</span><span class="p">;</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-42"></a>    <span class="nb">Out-File</span> <span class="n">-Encoding</span> <span class="n">utf8</span> <span class="n">-FilePath</span> <span class="nv">$filename</span> <span class="n">-Append</span> <span class="n">-InputObject</span> <span class="nv">$content</span><span class="p">;</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-43"></a>    <span class="nb">Write-Host</span> <span class="nv">$filename</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span><span class="p">;</span>
+<a name="rest_code_ed3fd31de4d1423286dfabe783fa364f-44"></a><span class="p">}</span>
+</pre>
+</div>
+<div class="section" id="powershell-http">
+<h3><a class="toc-backref" href="#id33">用 PowerShell 起一个 HTTP 服务器</a></h3>
+</div>
+</div>
+<div class="section" id="id13">
+<h2><a class="toc-backref" href="#id34">推荐链接</a></h2>
+<p>学习 PowerShell 的几个好网站：</p>
+<dl>
+<dt>PowerShell 中文博客</dt>
+<dd>
+<p><a class="reference external" href="https://www.pstips.net/">https://www.pstips.net/</a></p>
+<p>人数挺多，挺活跃的。</p>
+</dd>
+<dt>叹为观止</dt>
+<dd>
+<p><a class="reference external" href="https://blog.vichamp.com/">https://blog.vichamp.com/</a></p>
+<p>一个更新非常活跃的个人博客，大部分内容是 PowerShell 技巧。</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id14">
+<h2><a class="toc-backref" href="#id35">参考链接</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="fn-secure-string"><span class="brackets"><a class="fn-backref" href="#id11">1</a></span></dt>
+<dd>
+<p>SecureString 的加密是单向的，无法还原。</p>
+</dd>
+<dt class="label" id="fn-anonymous-block"><span class="brackets"><a class="fn-backref" href="#id8">2</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://blog.vichamp.com/2019/07/15/increasing-pipeline-speed/">https://blog.vichamp.com/2019/07/15/increasing-pipeline-speed/</a></p>
+</dd>
+<dt class="label" id="fn-advanced-methods"><span class="brackets"><a class="fn-backref" href="#id9">3</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_methods?view=powershell-7">https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_methods?view=powershell-7</a></p>
+</dd>
+</dl>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../../categories/powershell/" rel="tag">powershell</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="next">
+                <a href="../migrate-from-hexo-to-nikola/" rel="next" title="关于博客从 Hexo 迁移到 Nikola 这件事">下一篇文章</a>
+            </li>
+        </ul></nav></aside><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="autoRenderKatex();"></script><script>
+        function autoRenderKatex() {
+            renderMathInElement(document.body,
+                {
+                    
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                }
+            );
+        }
+        </script></article></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

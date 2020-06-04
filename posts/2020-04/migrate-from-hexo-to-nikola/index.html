@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Nikola 的优势、主题和插件。
+">
+<meta name="viewport" content="width=device-width">
+<title>关于博客从 Hexo 迁移到 Nikola 这件事 | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/posts/2020-04/migrate-from-hexo-to-nikola/">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+<meta name="author" content="Zombie110year">
+<link rel="prev" href="../simple-powershell-tutorial/" title="简单的 PowerShell 教程" type="text/html">
+<link rel="next" href="../publish-blog-with-github-actions/" title="使用 GitHub Actions 发布博客" type="text/html">
+<meta property="og:site_name" content="ZomHub">
+<meta property="og:title" content="关于博客从 Hexo 迁移到 Nikola 这件事">
+<meta property="og:url" content="https://blog.zombie110year.top/posts/2020-04/migrate-from-hexo-to-nikola/">
+<meta property="og:description" content="Nikola 的优势、主题和插件。
+">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-04-25T21:15:50+08:00">
+<meta property="article:tag" content="nikola">
+<meta property="article:tag" content="restructuredtext">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">关于博客从 Hexo 迁移到 Nikola 这件事</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Zombie110year
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-04-25T21:15:50+08:00" itemprop="datePublished" title="2020-04-25 21:15">2020-04-25 21:15</time></a>
+            </p>
+                    <p class="sourceline"><a href="index.rst" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>由于在编写内容的时候受够了 Markdown 那有限的表达力，因此一直在寻找能够支持 reStructuredText 的博客生成器，
+在经过多篇文章 <a class="footnote-reference brackets" href="#fn-macplay" id="id1">1</a> <a class="footnote-reference brackets" href="#fn-lengyueyang" id="id2">2</a> 的安利，加上对自身 Python 编程能力的自信，跳入了 <a class="reference external" href="https://getnikola.org/">Nikola</a> 的阵营。</p>
+<!-- TEASER_END -->
+<div class="contents topic" id="id3">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#id4" id="id12">使用体验上的更新</a></p></li>
+<li><p><a class="reference internal" href="#id9" id="id13">对主题的处理</a></p></li>
+<li><p><a class="reference internal" href="#id10" id="id14">对插件的处理</a></p></li>
+<li><p><a class="reference internal" href="#id11" id="id15">参考链接</a></p></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id12">使用体验上的更新</a></h2>
+<p>nikola 使用 <code>nikola new_post</code> 创建的博文脚手架会带有 reST 注释风格 <a class="footnote-reference brackets" href="#fn-rest-style-comments" id="id5">3</a> 的元数据，但是我一般都换成 YAML 风格，Nikola 能直接识别。
+一共有这些字段，在 Nikola Handbook 的 Metadate Fields 中有解释 <a class="footnote-reference brackets" href="#fn-metadata-fields" id="id6">5</a> ：</p>
+<dl>
+<dt>title</dt>
+<dd>
+<p>文章的标题，这是方便人类阅读的，因此推荐使用任何 Unicode 符号。</p>
+</dd>
+<dt>slug</dt>
+<dd>
+<p>文章的 slug 名，这是方便 URL 和文件系统解析的，因此推荐使用 ASCII 符号，
+在文章创建时， nikola 会强行将 title 中的非 ASCII 符号替换掉。对于中文，会替换成无音调的拼音字母。</p>
+<p>这个词语在此语境下的表意在词典里查不到，不过 MDN 上有一个词条 <a class="footnote-reference brackets" href="#fn-slug-translate" id="id7">4</a> 解释了它的含义。目前没有汉语翻译。</p>
+<p>认真处理这个字段，有利于 URL 的语义性，也有助于 <abbr>SEO（Search Engine Optimiziation）</abbr> （搜索引擎优化）。</p>
+</dd>
+<dt>date</dt>
+<dd>
+<p>文章的创建日期。</p>
+</dd>
+<dt>tags</dt>
+<dd>
+<p>文章的标签，是一对多的关系，在 YAML 风格下可以传入一个列表。如果仍使用 reST 注释风格的话，就传入用逗号分隔的列表。</p>
+</dd>
+<dt>category</dt>
+<dd>
+<p>文章的分类，是一对一的关系，要么不分类，要么只能分一个。</p>
+</dd>
+<dt>link</dt>
+<dd>
+<p>源文件的链接，在一些主题下可能渲染。对于我来说，没有设置它的需求。</p>
+</dd>
+<dt>description</dt>
+<dd>
+<p>文章的描述，用在 HTML 头的 <code>&lt;meta&gt;</code> 元素中，有助于 <abbr>SEO（Search Engine Optimiziation）</abbr> （搜索引擎优化）。</p>
+</dd>
+<dt>type</dt>
+<dd>
+<p>文章的类型，如果设置，将会在 <code>&lt;article&gt;</code> 元素中加上一个 CSS 类。
+需要主题配合以呈现不同样式。</p>
+</dd>
+</dl>
+<p>其他还有一些有用的元数据：</p>
+<dl>
+<dt>previewimage</dt>
+<dd>
+<p>设定一个地址，用于充当预览图（需要主题支持）。</p>
+</dd>
+<dt>template</dt>
+<dd>
+<p>单独设置该篇文档的渲染模板。</p>
+</dd>
+<dt>status</dt>
+<dd>
+<p>文章状态，可选值 published (default), featured, draft, or private。
+分别表示发布、未来发布、草稿和私有。</p>
+<dl class="simple">
+<dt>published</dt>
+<dd>
+<p>文章被渲染到 index 中，任何人都可以访问</p>
+</dd>
+<dt>featured</dt>
+<dd>
+<p>表示正在写作，但没有完成，在不同主题会有不同的渲染样式。</p>
+</dd>
+<dt>draft</dt>
+<dd>
+<p>不会渲染到输出中。</p>
+</dd>
+<dt>private</dt>
+<dd>
+<p>渲染到输出，但是不渲染到 index，只能通过完整链接访问。</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>在 Hexo 中，可以使用 <code>&lt;!-- more --&gt;</code> 来将内容分成两部分，前半部分在 Index（时间线） 中呈现。在 Nikola，可以用 reST 注释 <code>..TEASER_END</code> 来实现 <a class="footnote-reference brackets" href="#fn-teasers" id="id8">6</a> 。</p>
+<p>同时，在 conf.py 需要将 <code>INDEX_TEASERS</code> 设置为 True。</p>
+</div>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id13">对主题的处理</a></h2>
+<p>和 Hexo 丰富的主题生态相比， Nikola 的确有些贫瘠。
+对于 Nikola 而言，它的衍生主题都必须继承自 <code>base</code> 或 <code>bootstrap</code> 之一。
+默认的模板引擎是 mako，但也可以换成 Jinja2。</p>
+<p>其对主题的继承关系非常傻瓜式：现用主题有的文件，就从现用主题读取，没有的，从父主题读取。</p>
+<p>自带的默认主题满足不了我的需求，一个是需要加 <code>has_math</code> 字段才渲染公式，
+我们希望这是个默认行为；另一个是要从谷歌 API 加载字体，这导致我们的网页渲染异常的慢，最好取消掉，就用每台机器都有的默认字体好了。</p>
+<p>首先，找到默认使用的主题 bootblog4 模板所在的文件夹，然后整个复制过来，确保所有的文件都可以被我们改写掉。</p>
+<p>Nikola 的内置主题文件位于 nikola 包的 <code>data/themes</code> 目录下，例如 <code>.venv/Lib/site-packages/nikola/data/themes/bootblog4/templates</code></p>
+<p>Nikola 将在站点根目录的 <code>themes/&lt;theme name&gt;</code> 目录下加载主题。
+我将在主题修改完成后发布在 <a class="reference external" href="https://github.com/zombie110year/nikola-theme-zomhub">https://github.com/zombie110year/nikola-theme-zomhub</a> 上。</p>
+<p>测试一下语法高亮和 <span class="math">\(\KaTeX\)</span> 数学公式渲染：</p>
+<pre class="code python"><a name="rest_code_769398da77f24bdca07590e3cdfd2284-1"></a><span class="k">def</span> <span class="nf">get_nikola</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"https://getnikola.org/):</span>
+<a name="rest_code_769398da77f24bdca07590e3cdfd2284-2"></a>    <span class="sd">"""下载 Nikola 主页的 HTML"""</span>
+<a name="rest_code_769398da77f24bdca07590e3cdfd2284-3"></a>    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<a name="rest_code_769398da77f24bdca07590e3cdfd2284-4"></a>    <span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+<a name="rest_code_769398da77f24bdca07590e3cdfd2284-5"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre>
+<div class="math">
+\begin{equation*}
+E = mc^2
+\end{equation*}
+</div>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id14">对插件的处理</a></h2>
+<p>Nikola 相比文档生成工具 <a class="reference external" href="https://sphinx-doc.org/">Sphinx</a> 还是有一些不足，比如缺少一些 Directive 和 Role。
+基于 docutils 提供的 Directive 和 Role 可以在 <a class="reference external" href="https://docutils.sourceforge.io/docs/">https://docutils.sourceforge.io/docs/</a> 查看。</p>
+<p>构建 Nikola 插件的内容可以在 <a class="reference external" href="https://learn-rst.zombie110year.top">https://learn-rst.zombie110year.top</a> 查看。</p>
+<p>这里急需补充的 Directive 有两个：highlight 和 literalinclude，前者设置默认代码块的词法高亮，后者则拥有相比 include 更强的导入表现能力。</p>
+<p>这些我用到的插件，会发布在 <a class="reference external" href="https://github.com/zombie110year/nikola-plugin-zomhub">https://github.com/zombie110year/nikola-plugin-zomhub</a> 上。</p>
+</div>
+<div class="section" id="id11">
+<h2><a class="toc-backref" href="#id15">参考链接</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="fn-macplay"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://macplay.github.io/categories/rest/">https://macplay.github.io/categories/rest/</a></p>
+</dd>
+<dt class="label" id="fn-lengyueyang"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://www.lengyueyang.com/post/tools/org_mode/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E6%9D%82%E8%AE%B0-%E4%BB%8E-hexo-%E5%88%B0-nikola">https://www.lengyueyang.com/post/tools/org_mode/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E6%9D%82%E8%AE%B0-%E4%BB%8E-hexo-%E5%88%B0-nikola</a></p>
+</dd>
+<dt class="label" id="fn-rest-style-comments"><span class="brackets"><a class="fn-backref" href="#id5">3</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://www.getnikola.com/handbook.html#rest-style-comments">https://www.getnikola.com/handbook.html#rest-style-comments</a></p>
+</dd>
+<dt class="label" id="fn-slug-translate"><span class="brackets"><a class="fn-backref" href="#id7">4</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Slug">https://developer.mozilla.org/zh-CN/docs/Glossary/Slug</a></p>
+</dd>
+<dt class="label" id="fn-metadata-fields"><span class="brackets"><a class="fn-backref" href="#id6">5</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://www.getnikola.com/handbook.html#metadata-fields">https://www.getnikola.com/handbook.html#metadata-fields</a></p>
+</dd>
+<dt class="label" id="fn-teasers"><span class="brackets"><a class="fn-backref" href="#id8">6</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://www.getnikola.com/handbook.html#teasers">https://www.getnikola.com/handbook.html#teasers</a></p>
+</dd>
+</dl>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../../categories/nikola/" rel="tag">nikola</a></li>
+            <li><a class="tag p-category" href="../../../categories/restructuredtext/" rel="tag">restructuredtext</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../simple-powershell-tutorial/" rel="prev" title="简单的 PowerShell 教程">上一篇文章</a>
+            </li>
+            <li class="next">
+                <a href="../publish-blog-with-github-actions/" rel="next" title="使用 GitHub Actions 发布博客">下一篇文章</a>
+            </li>
+        </ul></nav></aside><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="autoRenderKatex();"></script><script>
+        function autoRenderKatex() {
+            renderMathInElement(document.body,
+                {
+                    
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                }
+            );
+        }
+        </script></article></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

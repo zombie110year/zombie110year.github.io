@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="userfunc-nikola-new.ps1">
+<meta name="viewport" content="width=device-width">
+<title>userfunc-nikola-new.ps1 | ZomHub</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/listings/userfunc-nikola-new.ps1.html">
+<link rel="icon" href="../favicon.ico" sizes="256x256">
+<link rel="icon" href="../favicon.png" sizes="512x512">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../archive.html">归档</a></li>
+                <li><a href="../categories/">标签</a></li>
+                <li><a href="../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><nav class="breadcrumbs"><ul class="breadcrumb">
+<li><a href=".">listings</a></li>
+                <li>userfunc-nikola-new.ps1</li>
+</ul></nav><h1>userfunc-nikola-new.ps1
+            <small><a href="userfunc-nikola-new.ps1">(源文件)</a></small>
+        </h1>
+    <table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#listingsuserfunc-nikola-newps1-1"> 1</a>
+<a href="#listingsuserfunc-nikola-newps1-2"> 2</a>
+<a href="#listingsuserfunc-nikola-newps1-3"> 3</a>
+<a href="#listingsuserfunc-nikola-newps1-4"> 4</a>
+<a href="#listingsuserfunc-nikola-newps1-5"> 5</a>
+<a href="#listingsuserfunc-nikola-newps1-6"> 6</a>
+<a href="#listingsuserfunc-nikola-newps1-7"> 7</a>
+<a href="#listingsuserfunc-nikola-newps1-8"> 8</a>
+<a href="#listingsuserfunc-nikola-newps1-9"> 9</a>
+<a href="#listingsuserfunc-nikola-newps1-10">10</a>
+<a href="#listingsuserfunc-nikola-newps1-11">11</a>
+<a href="#listingsuserfunc-nikola-newps1-12">12</a>
+<a href="#listingsuserfunc-nikola-newps1-13">13</a>
+<a href="#listingsuserfunc-nikola-newps1-14">14</a>
+<a href="#listingsuserfunc-nikola-newps1-15">15</a>
+<a href="#listingsuserfunc-nikola-newps1-16">16</a>
+<a href="#listingsuserfunc-nikola-newps1-17">17</a>
+<a href="#listingsuserfunc-nikola-newps1-18">18</a>
+<a href="#listingsuserfunc-nikola-newps1-19">19</a>
+<a href="#listingsuserfunc-nikola-newps1-20">20</a>
+<a href="#listingsuserfunc-nikola-newps1-21">21</a>
+<a href="#listingsuserfunc-nikola-newps1-22">22</a>
+<a href="#listingsuserfunc-nikola-newps1-23">23</a>
+<a href="#listingsuserfunc-nikola-newps1-24">24</a>
+<a href="#listingsuserfunc-nikola-newps1-25">25</a>
+<a href="#listingsuserfunc-nikola-newps1-26">26</a>
+<a href="#listingsuserfunc-nikola-newps1-27">27</a>
+<a href="#listingsuserfunc-nikola-newps1-28">28</a>
+<a href="#listingsuserfunc-nikola-newps1-29">29</a>
+<a href="#listingsuserfunc-nikola-newps1-30">30</a>
+<a href="#listingsuserfunc-nikola-newps1-31">31</a>
+<a href="#listingsuserfunc-nikola-newps1-32">32</a>
+<a href="#listingsuserfunc-nikola-newps1-33">33</a>
+<a href="#listingsuserfunc-nikola-newps1-34">34</a>
+<a href="#listingsuserfunc-nikola-newps1-35">35</a>
+<a href="#listingsuserfunc-nikola-newps1-36">36</a>
+<a href="#listingsuserfunc-nikola-newps1-37">37</a>
+<a href="#listingsuserfunc-nikola-newps1-38">38</a>
+<a href="#listingsuserfunc-nikola-newps1-39">39</a>
+<a href="#listingsuserfunc-nikola-newps1-40">40</a>
+<a href="#listingsuserfunc-nikola-newps1-41">41</a>
+<a href="#listingsuserfunc-nikola-newps1-42">42</a>
+<a href="#listingsuserfunc-nikola-newps1-43">43</a>
+<a href="#listingsuserfunc-nikola-newps1-44">44</a></pre></div></td>
+<td class="code"><pre class="code literal-block"><a name="listingsuserfunc-nikola-newps1-1"></a><span class="k">function</span> <span class="n">Nikola-New</span> <span class="p">{</span>
+<a name="listingsuserfunc-nikola-newps1-2"></a>    <span class="k">param</span><span class="p">(</span>
+<a name="listingsuserfunc-nikola-newps1-3"></a>        <span class="no">[string]</span> <span class="nv">$slug</span> <span class="p">=</span> <span class="p">$(</span><span class="nb">Read-Host</span> <span class="n">-Prompt</span> <span class="s2">"slug&gt; "</span><span class="p">),</span>
+<a name="listingsuserfunc-nikola-newps1-4"></a>        <span class="no">[string]</span> <span class="nv">$title</span> <span class="p">=</span> <span class="nv">$slug</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-5"></a>        <span class="no">[string]</span> <span class="nv">$invalid_replace</span> <span class="p">=</span> <span class="s2">""</span>
+<a name="listingsuserfunc-nikola-newps1-6"></a>    <span class="p">)</span>
+<a name="listingsuserfunc-nikola-newps1-7"></a>    <span class="nv">$invalid_chars</span> <span class="p">=</span> <span class="no">[System.IO.Path]</span><span class="p">::</span><span class="n">GetInvalidFileNameChars</span><span class="p">();</span>
+<a name="listingsuserfunc-nikola-newps1-8"></a>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$ic</span> <span class="k">in</span> <span class="nv">$invalid_chars</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingsuserfunc-nikola-newps1-9"></a>        <span class="nv">$slug</span> <span class="p">=</span> <span class="nv">$slug</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="nv">$ic</span><span class="p">,</span> <span class="s1">' '</span><span class="p">);</span>
+<a name="listingsuserfunc-nikola-newps1-10"></a>    <span class="p">}</span>
+<a name="listingsuserfunc-nikola-newps1-11"></a>    <span class="nv">$basename</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$slug</span> <span class="o">-replace</span> <span class="s2">" +"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">).</span><span class="n">ToLower</span><span class="p">();</span>
+<a name="listingsuserfunc-nikola-newps1-12"></a>
+<a name="listingsuserfunc-nikola-newps1-13"></a>    <span class="c"># 在控制台输入文章标题</span>
+<a name="listingsuserfunc-nikola-newps1-14"></a>    <span class="nv">$titleread</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Read-Host</span> <span class="n">-Prompt</span> <span class="s2">"title: $title&gt; "</span><span class="p">).</span><span class="n">Trim</span><span class="p">();</span>
+<a name="listingsuserfunc-nikola-newps1-15"></a>    <span class="k">if</span> <span class="p">(</span><span class="nv">$titleread</span> <span class="o">-ne</span> <span class="s2">""</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingsuserfunc-nikola-newps1-16"></a>        <span class="nv">$title</span> <span class="p">=</span> <span class="nv">$titleread</span><span class="p">;</span>
+<a name="listingsuserfunc-nikola-newps1-17"></a>    <span class="p">}</span>
+<a name="listingsuserfunc-nikola-newps1-18"></a>    <span class="nv">$date</span> <span class="p">=</span> <span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">"yyyy-MM-dd HH:mm:ss UTCzzzz"</span><span class="p">;</span>
+<a name="listingsuserfunc-nikola-newps1-19"></a>    <span class="c"># 生成头内容</span>
+<a name="listingsuserfunc-nikola-newps1-20"></a>    <span class="nv">$content</span> <span class="p">=</span> <span class="p">@(</span><span class="s2">"---"</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-21"></a>        <span class="s2">"title: '$title'"</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-22"></a>        <span class="s2">"slug: '$basename'"</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-23"></a>        <span class="s2">"date: $date"</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-24"></a>        <span class="s2">"tags:"</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-25"></a>        <span class="s2">"category:"</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-26"></a>        <span class="s2">"description:"</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-27"></a>        <span class="s2">"type: text"</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-28"></a>        <span class="s2">"---"</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-29"></a>        <span class="s2">""</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-30"></a>        <span class="s2">".. contents::"</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-31"></a>        <span class="s2">""</span><span class="p">,</span>
+<a name="listingsuserfunc-nikola-newps1-32"></a>        <span class="s2">".. TEASER_END"</span><span class="p">);</span>
+<a name="listingsuserfunc-nikola-newps1-33"></a>    <span class="nv">$content</span> <span class="p">=</span> <span class="no">[string]</span><span class="p">::</span><span class="n">Join</span><span class="p">(</span><span class="s2">"</span><span class="se">`n</span><span class="s2">"</span><span class="p">,</span> <span class="nv">$content</span><span class="p">);</span>
+<a name="listingsuserfunc-nikola-newps1-34"></a>
+<a name="listingsuserfunc-nikola-newps1-35"></a>    <span class="c"># 生成目录</span>
+<a name="listingsuserfunc-nikola-newps1-36"></a>    <span class="c"># 按 yyyy-MM 划分</span>
+<a name="listingsuserfunc-nikola-newps1-37"></a>    <span class="nv">$ym</span> <span class="p">=</span> <span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">"yyyy-MM"</span><span class="p">;</span>
+<a name="listingsuserfunc-nikola-newps1-38"></a>    <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">"posts/$ym"</span><span class="p">))</span> <span class="p">{</span>
+<a name="listingsuserfunc-nikola-newps1-39"></a>        <span class="nb">New-Item</span> <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="n">-Path</span> <span class="s2">"posts/$ym"</span><span class="p">;</span>
+<a name="listingsuserfunc-nikola-newps1-40"></a>    <span class="p">}</span>
+<a name="listingsuserfunc-nikola-newps1-41"></a>    <span class="nv">$filename</span> <span class="p">=</span> <span class="s2">"posts/$ym/$basename.rst"</span><span class="p">;</span>
+<a name="listingsuserfunc-nikola-newps1-42"></a>    <span class="nb">Out-File</span> <span class="n">-Encoding</span> <span class="n">utf8</span> <span class="n">-FilePath</span> <span class="nv">$filename</span> <span class="n">-Append</span> <span class="n">-InputObject</span> <span class="nv">$content</span><span class="p">;</span>
+<a name="listingsuserfunc-nikola-newps1-43"></a>    <span class="nb">Write-Host</span> <span class="nv">$filename</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span><span class="p">;</span>
+<a name="listingsuserfunc-nikola-newps1-44"></a><span class="p">}</span>
+</pre></td>
+</tr></table></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

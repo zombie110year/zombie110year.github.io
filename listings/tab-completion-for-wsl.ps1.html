@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="tab-completion-for-wsl.ps1">
+<meta name="viewport" content="width=device-width">
+<title>tab-completion-for-wsl.ps1 | ZomHub</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/listings/tab-completion-for-wsl.ps1.html">
+<link rel="icon" href="../favicon.ico" sizes="256x256">
+<link rel="icon" href="../favicon.png" sizes="512x512">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../archive.html">归档</a></li>
+                <li><a href="../categories/">标签</a></li>
+                <li><a href="../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><nav class="breadcrumbs"><ul class="breadcrumb">
+<li><a href=".">listings</a></li>
+                <li>tab-completion-for-wsl.ps1</li>
+</ul></nav><h1>tab-completion-for-wsl.ps1
+            <small><a href="tab-completion-for-wsl.ps1">(源文件)</a></small>
+        </h1>
+    <table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#listingstab-completion-for-wslps1-1"> 1</a>
+<a href="#listingstab-completion-for-wslps1-2"> 2</a>
+<a href="#listingstab-completion-for-wslps1-3"> 3</a>
+<a href="#listingstab-completion-for-wslps1-4"> 4</a>
+<a href="#listingstab-completion-for-wslps1-5"> 5</a>
+<a href="#listingstab-completion-for-wslps1-6"> 6</a>
+<a href="#listingstab-completion-for-wslps1-7"> 7</a>
+<a href="#listingstab-completion-for-wslps1-8"> 8</a>
+<a href="#listingstab-completion-for-wslps1-9"> 9</a>
+<a href="#listingstab-completion-for-wslps1-10">10</a>
+<a href="#listingstab-completion-for-wslps1-11">11</a>
+<a href="#listingstab-completion-for-wslps1-12">12</a>
+<a href="#listingstab-completion-for-wslps1-13">13</a>
+<a href="#listingstab-completion-for-wslps1-14">14</a>
+<a href="#listingstab-completion-for-wslps1-15">15</a>
+<a href="#listingstab-completion-for-wslps1-16">16</a>
+<a href="#listingstab-completion-for-wslps1-17">17</a>
+<a href="#listingstab-completion-for-wslps1-18">18</a>
+<a href="#listingstab-completion-for-wslps1-19">19</a>
+<a href="#listingstab-completion-for-wslps1-20">20</a>
+<a href="#listingstab-completion-for-wslps1-21">21</a>
+<a href="#listingstab-completion-for-wslps1-22">22</a>
+<a href="#listingstab-completion-for-wslps1-23">23</a>
+<a href="#listingstab-completion-for-wslps1-24">24</a>
+<a href="#listingstab-completion-for-wslps1-25">25</a>
+<a href="#listingstab-completion-for-wslps1-26">26</a>
+<a href="#listingstab-completion-for-wslps1-27">27</a>
+<a href="#listingstab-completion-for-wslps1-28">28</a></pre></div></td>
+<td class="code"><pre class="code literal-block"><a name="listingstab-completion-for-wslps1-1"></a><span class="cm">&lt;#</span>
+<a name="listingstab-completion-for-wslps1-2"></a><span class="cm">wsl 没有子命令</span>
+<a name="listingstab-completion-for-wslps1-3"></a><span class="cm">#&gt;</span>
+<a name="listingstab-completion-for-wslps1-4"></a><span class="nb">Register-ArgumentCompleter</span> <span class="n">-Native</span> <span class="n">-CommandName</span> <span class="n">wsl</span> <span class="n">-ScriptBlock</span> <span class="p">{</span>
+<a name="listingstab-completion-for-wslps1-5"></a>    <span class="k">param</span><span class="p">(</span>
+<a name="listingstab-completion-for-wslps1-6"></a>        <span class="nv">$wordToComplete</span><span class="p">,</span>
+<a name="listingstab-completion-for-wslps1-7"></a>        <span class="nv">$commandAst</span><span class="p">,</span>
+<a name="listingstab-completion-for-wslps1-8"></a>        <span class="nv">$cursorPosition</span>
+<a name="listingstab-completion-for-wslps1-9"></a>    <span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-10"></a>
+<a name="listingstab-completion-for-wslps1-11"></a>    <span class="nv">$completions</span> <span class="p">=</span> <span class="p">@(</span>
+<a name="listingstab-completion-for-wslps1-12"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--exec'</span><span class="p">,</span> <span class="s1">'exec'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s2">"执行指定的命令而不使用默认的 Linux Shell"</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-13"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--distribution'</span><span class="p">,</span> <span class="s1">'distribution'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s2">"运行指定的发行版"</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-14"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--user'</span><span class="p">,</span> <span class="s1">'user'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s2">"指定用户"</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-15"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--export'</span><span class="p">,</span> <span class="s1">'export'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s1">'导出发行版文件系统'</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-16"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--import'</span><span class="p">,</span> <span class="s1">'import'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s1">'通过 tar 包导入发行版文件系统'</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-17"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--list'</span><span class="p">,</span> <span class="s1">'list'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s1">'列出发行版'</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-18"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--set-default'</span><span class="p">,</span> <span class="s1">'set-default'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s1">'设置默认发行版'</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-19"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--set-default-version'</span><span class="p">,</span> <span class="s1">'set-default-version'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s1">'设置新发行版的安装版本（WSL 1 或 WSL 2）'</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-20"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--set-version'</span><span class="p">,</span> <span class="s1">'set-version'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s1">'设置发行版的版本'</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-21"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--shutdown'</span><span class="p">,</span> <span class="s1">'shutdown'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s1">'终止所有正在运行的发行版和 WSL 2 虚拟机'</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-22"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--terminate'</span><span class="p">,</span> <span class="s1">'terminate'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s1">'终止指定的发行版'</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-23"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--unregister'</span><span class="p">,</span> <span class="s1">'unregister'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s1">'注销发行版'</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-24"></a>        <span class="no">[CompletionResult]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">'--help'</span><span class="p">,</span> <span class="s1">'help'</span><span class="p">,</span> <span class="no">[CompletionResultType]</span><span class="p">::</span><span class="n">ParameterName</span><span class="p">,</span> <span class="s1">'显示帮助'</span><span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-25"></a>    <span class="p">)</span>
+<a name="listingstab-completion-for-wslps1-26"></a>
+<a name="listingstab-completion-for-wslps1-27"></a>    <span class="nv">$completions</span>
+<a name="listingstab-completion-for-wslps1-28"></a><span class="p">}</span>
+</pre></td>
+</tr></table></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

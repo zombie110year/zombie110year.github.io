@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>HTML + CSS + JavaScript 技巧收集 | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/posts/2020-05/html%2Bcss%2Bjavascript-skill-collection/">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+<meta name="author" content="Zombie110year">
+<link rel="prev" href="../tampermonkey-development-tutorial/" title="TamperMonkey 脚本开发教程" type="text/html">
+<link rel="next" href="../regex-all-in-one/" title="正则表达式的教程" type="text/html">
+<meta property="og:site_name" content="ZomHub">
+<meta property="og:title" content="HTML + CSS + JavaScript 技巧收集">
+<meta property="og:url" content="https://blog.zombie110year.top/posts/2020-05/html%2Bcss%2Bjavascript-skill-collection/">
+<meta property="og:description" content="目录
+
+让表格相间着色
+参考链接
+
+
+
+
+让表格相间着色
+例如，奇数行背景色设为淡灰色，偶数行则为纯白色。
+可以利用 nth-child 选择器，可以接受一个名为 n 的变量用于表示
+在当前元素的父元素下的兄弟元素中当前子元素的序号，这个序号从 1 开始，
+而 n 的值则从 0 开始。1
+/* 从 2 开始，为了略过表头 */
+table#table1 tr:nth-child(2n+2) {
+ ">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-05-08T16:14:58+08:00">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="html">
+<meta property="article:tag" content="javascript">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="../html%2Bcss%2Bjavascript-skill-collection/" class="u-url">HTML + CSS + JavaScript 技巧收集</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Zombie110year
+            </span></p>
+            <p class="dateline">
+            <a href="../html%2Bcss%2Bjavascript-skill-collection/" rel="bookmark">
+            <time class="published dt-published" datetime="2020-05-08T16:14:58+08:00" itemprop="datePublished" title="2020-05-08 16:14">2020-05-08 16:14</time></a>
+            </p>
+                    <p class="sourceline"><a href="../html%2Bcss%2Bjavascript-skill-collection/index.rst" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<div class="contents topic" id="id1">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../html%2Bcss%2Bjavascript-skill-collection/#id2" id="id5">让表格相间着色</a></p></li>
+<li><p><a class="reference internal" href="../html%2Bcss%2Bjavascript-skill-collection/#id4" id="id6">参考链接</a></p></li>
+</ul>
+</div>
+<!-- TEASER_END -->
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="../html%2Bcss%2Bjavascript-skill-collection/#id5">让表格相间着色</a></h2>
+<p>例如，奇数行背景色设为淡灰色，偶数行则为纯白色。</p>
+<p>可以利用 nth-child 选择器，可以接受一个名为 <code class="docutils literal">n</code> 的变量用于表示
+在当前元素的父元素下的兄弟元素中当前子元素的序号，这个序号从 1 开始，
+而 <code class="docutils literal">n</code> 的值则从 0 开始。<a class="footnote-reference brackets" href="../html%2Bcss%2Bjavascript-skill-collection/#nth-child" id="id3">1</a></p>
+<pre class="code css"><a name="rest_code_250bdf5d20644a029a98817838c80903-1"></a><span class="c">/* 从 2 开始，为了略过表头 */</span>
+<a name="rest_code_250bdf5d20644a029a98817838c80903-2"></a><span class="nt">table</span><span class="p">#</span><span class="nn">table1</span> <span class="nt">tr</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2n</span><span class="o">+</span><span class="nt">2</span><span class="o">)</span> <span class="p">{</span>
+<a name="rest_code_250bdf5d20644a029a98817838c80903-3"></a>    <span class="k">background</span><span class="p">:</span> <span class="kc">white</span><span class="p">;</span>
+<a name="rest_code_250bdf5d20644a029a98817838c80903-4"></a><span class="p">}</span>
+<a name="rest_code_250bdf5d20644a029a98817838c80903-5"></a><span class="nt">table</span><span class="p">#</span><span class="nn">table1</span> <span class="nt">tr</span><span class="p">:</span><span class="nd">nth-child</span><span class="o">(</span><span class="nt">2n</span><span class="o">+</span><span class="nt">3</span><span class="o">)</span> <span class="p">{</span>
+<a name="rest_code_250bdf5d20644a029a98817838c80903-6"></a>    <span class="k">background</span><span class="p">:</span> <span class="kc">lightgrey</span><span class="p">;</span>
+<a name="rest_code_250bdf5d20644a029a98817838c80903-7"></a><span class="p">}</span>
+</pre>
+<style>
+table#table1 tr:nth-child(2n+2) {
+    background: white;
+}
+table#table1 tr:nth-child(2n+3) {
+    background: lightgrey;
+}
+</style>
+<table id="table1">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<tbody>
+<tr>
+<td><p>Example</p></td>
+<td><p>ColumnA</p></td>
+<td><p>ColumnB</p></td>
+<td><p>ColumnC</p></td>
+</tr>
+<tr>
+<td><p>a</p></td>
+<td><p>a1</p></td>
+<td><p>a2</p></td>
+<td><p>a3</p></td>
+</tr>
+<tr>
+<td><p>b</p></td>
+<td><p>b1</p></td>
+<td><p>b2</p></td>
+<td><p>b3</p></td>
+</tr>
+<tr>
+<td><p>c</p></td>
+<td><p>c1</p></td>
+<td><p>c2</p></td>
+<td><p>c3</p></td>
+</tr>
+<tr>
+<td><p>d</p></td>
+<td><p>d1</p></td>
+<td><p>d2</p></td>
+<td><p>d3</p></td>
+</tr>
+<tr>
+<td><p>e</p></td>
+<td><p>e1</p></td>
+<td><p>e2</p></td>
+<td><p>e3</p></td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils">
+<p>你可能会在一些资料里看到 CSS expression 表达式，但那个是 IE8 之前才提供的功能，
+不在现代 CSS 标准里。</p>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="../html%2Bcss%2Bjavascript-skill-collection/#id6">参考链接</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="nth-child"><span class="brackets"><a class="fn-backref" href="../html%2Bcss%2Bjavascript-skill-collection/#id3">1</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:nth-child">https://developer.mozilla.org/zh-CN/docs/Web/CSS/:nth-child</a></p>
+</dd>
+</dl>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../../categories/css/" rel="tag">css</a></li>
+            <li><a class="tag p-category" href="../../../categories/html/" rel="tag">html</a></li>
+            <li><a class="tag p-category" href="../../../categories/javascript/" rel="tag">javascript</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../tampermonkey-development-tutorial/" rel="prev" title="TamperMonkey 脚本开发教程">上一篇文章</a>
+            </li>
+            <li class="next">
+                <a href="../regex-all-in-one/" rel="next" title="正则表达式的教程">下一篇文章</a>
+            </li>
+        </ul></nav></aside><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="autoRenderKatex();"></script><script>
+        function autoRenderKatex() {
+            renderMathInElement(document.body,
+                {
+                    
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                }
+            );
+        }
+        </script></article></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

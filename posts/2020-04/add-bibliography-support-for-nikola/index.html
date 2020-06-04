@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="通过 bibtexparser 库为 Nikola 博客添加解析并显示 bibliography 引用的功能。
+">
+<meta name="viewport" content="width=device-width">
+<title>为 Nikola 添加 Bibliography 支持 | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/posts/2020-04/add-bibliography-support-for-nikola/">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+<meta name="author" content="Zombie110year">
+<meta name="robots" content="noindex">
+<meta property="og:site_name" content="ZomHub">
+<meta property="og:title" content="为 Nikola 添加 Bibliography 支持">
+<meta property="og:url" content="https://blog.zombie110year.top/posts/2020-04/add-bibliography-support-for-nikola/">
+<meta property="og:description" content="通过 bibtexparser 库为 Nikola 博客添加解析并显示 bibliography 引用的功能。
+">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-04-30T15:26:02+08:00">
+<meta property="article:tag" content="bibtex">
+<meta property="article:tag" content="nikola">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="restructuredtext">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">为 Nikola 添加 Bibliography 支持</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Zombie110year
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-04-30T15:26:02+08:00" itemprop="datePublished" title="2020-04-30 15:26">2020-04-30 15:26</time></a>
+            </p>
+                    <p class="sourceline"><a href="index.rst" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>预期：添加 <code>bibliography</code> 指令和 <code>bibcite</code> 角色，前者引入一个 .bib 数据库，
+后者则在段落中添加引用:</p>
+<pre class="literal-block">.. bibliography:: path/to/example.bib
+
+这里引用了 :bibcite:`key`。</pre>
+<div class="contents topic" id="id1">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#nikola" id="id2">Nikola 插件的加载方式</a></p></li>
+<li><p><a class="reference internal" href="#python-bibliography" id="id3">Python 解析 bibliography 的方式</a></p></li>
+</ul>
+</div>
+<!-- TEASER_END -->
+<div class="section" id="nikola">
+<h2><a class="toc-backref" href="#id2">Nikola 插件的加载方式</a></h2>
+<p>一个 Nikola 插件，是处于 <code>plugins</code> 目录下的一个子目录，
+子目录名应当是插件的名字。</p>
+<p>在子目录中，至少存在一个 <code>{{ name }}.plugin</code> 的文件和一个 Python 模块（一个脚本文件，或者包含 <code>__init__.py</code> 文件的包）。
+在 .plugin 文件中，至少需要定义以下字段：</p>
+<dl class="simple">
+<dt>[Core] 表</dt>
+<dd><dl class="simple">
+<dt>name 字段</dt>
+<dd>
+<p>插件的名称</p>
+</dd>
+<dt>module 字段</dt>
+<dd>
+<p>插件所加载的 Python 模块的名称（无需后缀名）</p>
+</dd>
+</dl></dd>
+<dt>[Nikola] 表</dt>
+<dd><dl class="simple">
+<dt>compiler 字段</dt>
+<dd>
+<p>编译器，如果是 reStructuredText 插件的话，此字段设为 rest。</p>
+</dd>
+<dt>PluginCategory 字段</dt>
+<dd>
+<p>插件的分类。本例设为 CompilerExtension。</p>
+</dd>
+</dl></dd>
+<dt>[Documentation] 表</dt>
+<dd><dl class="simple">
+<dt>author 字段</dt>
+<dd>
+<p>作者名称</p>
+</dd>
+<dt>version 字段</dt>
+<dd>
+<p>版本号</p>
+</dd>
+<dt>website</dt>
+<dd>
+<p>插件的主页， <a class="reference external" href="https://github.com/zombie110year/nikola-plugin-bibcite">https://github.com/zombie110year/nikola-plugin-bibcite</a></p>
+</dd>
+<dt>description 字段</dt>
+<dd>
+<p>描述</p>
+</dd>
+</dl></dd>
+</dl>
+<p>在运行时，如果会发生文件的读取，那么需要注意，当前工作目录是 <code>conf.py</code> 所在的目录。</p>
+<dl class="footnote brackets">
+<dt class="label" id="fn-nikola-handbook"><span class="brackets">1</span></dt>
+<dd>
+<p><a class="reference external" href="https://getnikola.com/handbook.html">https://getnikola.com/handbook.html</a></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="python-bibliography">
+<h2><a class="toc-backref" href="#id3">Python 解析 bibliography 的方式</a></h2>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<span class="docutils literal">&lt;string&gt;</span>, line 53)</p>
+<p>Unknown directive type "bibliography".</p>
+<pre class="literal-block">.. bibliography:: files/sample.bib</pre>
+</div>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../../categories/bibtex/" rel="tag">bibtex</a></li>
+            <li><a class="tag p-category" href="../../../categories/nikola/" rel="tag">nikola</a></li>
+            <li><a class="tag p-category" href="../../../categories/python/" rel="tag">python</a></li>
+            <li><a class="tag p-category" href="../../../categories/restructuredtext/" rel="tag">restructuredtext</a></li>
+        </ul></nav></aside><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="autoRenderKatex();"></script><script>
+        function autoRenderKatex() {
+            renderMathInElement(document.body,
+                {
+                    
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                }
+            );
+        }
+        </script></article></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZomHub (关于文章 network)</title><link>https://blog.zombie110year.top/</link><description></description><atom:link href="https://blog.zombie110year.top/categories/network.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2020 &lt;a href="mailto:zombie110year@outlook.com"&gt;Zombie110year&lt;/a&gt; CC BY-NC-SA 4.0</copyright><lastBuildDate>Thu, 04 Jun 2020 16:05:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Windows PowerShell 查看端口占用</title><link>https://blog.zombie110year.top/posts/2020-05/windows-powershell-query-port-listened/</link><dc:creator>Zombie110year</dc:creator><description>&lt;div&gt;&lt;p&gt;TCP 链接和 UDP 链接的查询指令是分别的两个：&lt;/p&gt;
+&lt;dl class="simple"&gt;
+&lt;dt&gt;Get-NetTCPConnection&lt;/dt&gt;
+&lt;dd&gt;&lt;p&gt;查询 TCP 链接&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Get-NetUDPEndPoint&lt;/dt&gt;
+&lt;dd&gt;&lt;p&gt;查询 UDP 链接&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;要查询 8000 被哪个进程占用，查询 TCP 链接情况:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;Get-NetTCPConnection -LocalPort 8000&lt;/pre&gt;
+&lt;p&gt;返回结果具有 &lt;code class="docutils literal"&gt;OwningProcess&lt;/code&gt; 字段，存储了对应的 PID，然后通过 &lt;code class="docutils literal"&gt;&lt;span class="pre"&gt;Get-Process&lt;/span&gt;&lt;/code&gt; 查询:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;Get-Process -Id (Get-NetTCPConnection -LocalPort 8000).OwningProcess&lt;/pre&gt;&lt;/div&gt;</description><category>network</category><category>powershell</category><category>windows</category><guid>https://blog.zombie110year.top/posts/2020-05/windows-powershell-query-port-listened/</guid><pubDate>Tue, 19 May 2020 00:15:24 GMT</pubDate></item></channel></rss>

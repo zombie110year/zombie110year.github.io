@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZomHub (关于文章 aria2)</title><link>https://blog.zombie110year.top/</link><description></description><atom:link href="https://blog.zombie110year.top/categories/aria2.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2020 &lt;a href="mailto:zombie110year@outlook.com"&gt;Zombie110year&lt;/a&gt; CC BY-NC-SA 4.0</copyright><lastBuildDate>Thu, 04 Jun 2020 16:05:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>在 VPS 上配置 Aria2 RPC 服务并将文件同步至坚果云 webdav</title><link>https://blog.zombie110year.top/posts/2020-05/aria2-rpc-webdav-on-vps/</link><dc:creator>Zombie110year</dc:creator><description>&lt;div&gt;&lt;div class="contents topic" id="id1"&gt;
+&lt;p class="topic-title"&gt;目录&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/aria2-rpc-webdav-on-vps/#aria2-rpc" id="id4"&gt;Aria2 RPC 配置&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/aria2-rpc-webdav-on-vps/#webdav-hook" id="id5"&gt;WebDav hook&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/aria2-rpc-webdav-on-vps/#onedrive-hook" id="id6"&gt;OneDrive Hook&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/aria2-rpc-webdav-on-vps/#id3" id="id7"&gt;参考链接&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href="https://blog.zombie110year.top/posts/2020-05/aria2-rpc-webdav-on-vps/"&gt;阅读更多…&lt;/a&gt; (剩余阅读时间 4 分钟)&lt;/p&gt;&lt;/div&gt;</description><category>aria2</category><category>vps</category><category>webdav</category><category>坚果云</category><guid>https://blog.zombie110year.top/posts/2020-05/aria2-rpc-webdav-on-vps/</guid><pubDate>Fri, 15 May 2020 04:51:02 GMT</pubDate></item></channel></rss>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>在 Windows 上配置 Haskell 开发环境 | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/posts/2020-05/haskell-setup/">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+<meta name="author" content="Zombie110year">
+<meta name="robots" content="noindex">
+<meta property="og:site_name" content="ZomHub">
+<meta property="og:title" content="在 Windows 上配置 Haskell 开发环境">
+<meta property="og:url" content="https://blog.zombie110year.top/posts/2020-05/haskell-setup/">
+<meta property="og:description" content="目录
+
+安装 Haskell Stack
+参考链接
+
+
+
+
+安装 Haskell Stack
+Haskell Stack 1 是一个 Haskell 的工具链管理器，在 Windows 平台上可以通过 scoop 下载:
+scoop install stack
+在 scoop info haskell 时，也会给出提示，将用户引导至 stack 工具。
+安装好 stack 后，配置 THU（清华大">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-05-18T10:30:59+08:00">
+<meta property="article:tag" content="haskell">
+<meta property="article:tag" content="windows">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">在 Windows 上配置 Haskell 开发环境</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Zombie110year
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-05-18T10:30:59+08:00" itemprop="datePublished" title="2020-05-18 10:30">2020-05-18 10:30</time></a>
+            </p>
+                    <p class="sourceline"><a href="index.rst" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<div class="contents topic" id="id1">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#haskell-stack" id="id7">安装 Haskell Stack</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id8">参考链接</a></p></li>
+</ul>
+</div>
+<!-- TEASER_END -->
+<div class="section" id="haskell-stack">
+<h2><a class="toc-backref" href="#id7">安装 Haskell Stack</a></h2>
+<p>Haskell Stack <a class="footnote-reference brackets" href="#doc-hs-stack" id="id2">1</a> 是一个 Haskell 的工具链管理器，在 Windows 平台上可以通过 scoop 下载:</p>
+<pre class="literal-block">scoop install stack</pre>
+<p>在 <code class="docutils literal">scoop info haskell</code> 时，也会给出提示，将用户引导至 stack 工具。</p>
+<p>安装好 stack 后，配置 <abbr>THU（清华大学）</abbr> 的镜像 <a class="footnote-reference brackets" href="#mirror-thu" id="id3">2</a>，不过 Windows 系统上的 stack 配置文件不在 <code class="docutils literal"><span class="pre">~/.stack/config.yaml</span></code>，而是 <code class="docutils literal"><span class="pre">%APPDATA%\stack\config.yaml</span></code>。</p>
+<p>然后，通过 <code class="docutils literal">stack setup</code> 安装本机适应的工具链。</p>
+<div class="math">
+\begin{equation*}
+\begin{aligned}
+\text{GHC}          &amp;   \approx 200 \mathrm{MB} \\
+\text{MSYS2}        &amp;   \approx 60  \mathrm{MB} \\
+\end{aligned}
+\end{equation*}
+</div>
+<p>之后，安装 Haskell 的包管理器 Cabal <a class="footnote-reference brackets" href="#site-hs-cabal" id="id4">3</a> ， 并配置镜像 <a class="footnote-reference brackets" href="#mirror-thu" id="id5">2</a>。</p>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id8">参考链接</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="doc-hs-stack"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://docs.haskellstack.org/en/stable/README/">https://docs.haskellstack.org/en/stable/README/</a></p>
+</dd>
+<dt class="label" id="mirror-thu">
+<span class="brackets">2</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id5">2</a>)</span>
+</dt>
+<dd>
+<p><a class="reference external" href="https://mirrors.tuna.tsinghua.edu.cn/help/hackage/">https://mirrors.tuna.tsinghua.edu.cn/help/hackage/</a></p>
+</dd>
+<dt class="label" id="site-hs-cabal"><span class="brackets"><a class="fn-backref" href="#id4">3</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://www.haskell.org/cabal/">https://www.haskell.org/cabal/</a></p>
+</dd>
+</dl>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../../categories/haskell/" rel="tag">haskell</a></li>
+            <li><a class="tag p-category" href="../../../categories/windows/" rel="tag">windows</a></li>
+        </ul></nav></aside><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="autoRenderKatex();"></script><script>
+        function autoRenderKatex() {
+            renderMathInElement(document.body,
+                {
+                    
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                }
+            );
+        }
+        </script></article></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

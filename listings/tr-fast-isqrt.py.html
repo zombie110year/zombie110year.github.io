@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="tr-fast-isqrt.py">
+<meta name="viewport" content="width=device-width">
+<title>tr-fast-isqrt.py | ZomHub</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/listings/tr-fast-isqrt.py.html">
+<link rel="icon" href="../favicon.ico" sizes="256x256">
+<link rel="icon" href="../favicon.png" sizes="512x512">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../archive.html">归档</a></li>
+                <li><a href="../categories/">标签</a></li>
+                <li><a href="../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><nav class="breadcrumbs"><ul class="breadcrumb">
+<li><a href=".">listings</a></li>
+                <li>tr-fast-isqrt.py</li>
+</ul></nav><h1>tr-fast-isqrt.py
+            <small><a href="tr-fast-isqrt.py">(源文件)</a></small>
+        </h1>
+    <table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#listingstr-fast-isqrtpy-1"> 1</a>
+<a href="#listingstr-fast-isqrtpy-2"> 2</a>
+<a href="#listingstr-fast-isqrtpy-3"> 3</a>
+<a href="#listingstr-fast-isqrtpy-4"> 4</a>
+<a href="#listingstr-fast-isqrtpy-5"> 5</a>
+<a href="#listingstr-fast-isqrtpy-6"> 6</a>
+<a href="#listingstr-fast-isqrtpy-7"> 7</a>
+<a href="#listingstr-fast-isqrtpy-8"> 8</a>
+<a href="#listingstr-fast-isqrtpy-9"> 9</a>
+<a href="#listingstr-fast-isqrtpy-10">10</a>
+<a href="#listingstr-fast-isqrtpy-11">11</a>
+<a href="#listingstr-fast-isqrtpy-12">12</a>
+<a href="#listingstr-fast-isqrtpy-13">13</a>
+<a href="#listingstr-fast-isqrtpy-14">14</a>
+<a href="#listingstr-fast-isqrtpy-15">15</a>
+<a href="#listingstr-fast-isqrtpy-16">16</a>
+<a href="#listingstr-fast-isqrtpy-17">17</a>
+<a href="#listingstr-fast-isqrtpy-18">18</a>
+<a href="#listingstr-fast-isqrtpy-19">19</a>
+<a href="#listingstr-fast-isqrtpy-20">20</a>
+<a href="#listingstr-fast-isqrtpy-21">21</a>
+<a href="#listingstr-fast-isqrtpy-22">22</a>
+<a href="#listingstr-fast-isqrtpy-23">23</a>
+<a href="#listingstr-fast-isqrtpy-24">24</a>
+<a href="#listingstr-fast-isqrtpy-25">25</a>
+<a href="#listingstr-fast-isqrtpy-26">26</a>
+<a href="#listingstr-fast-isqrtpy-27">27</a>
+<a href="#listingstr-fast-isqrtpy-28">28</a>
+<a href="#listingstr-fast-isqrtpy-29">29</a>
+<a href="#listingstr-fast-isqrtpy-30">30</a>
+<a href="#listingstr-fast-isqrtpy-31">31</a>
+<a href="#listingstr-fast-isqrtpy-32">32</a>
+<a href="#listingstr-fast-isqrtpy-33">33</a>
+<a href="#listingstr-fast-isqrtpy-34">34</a>
+<a href="#listingstr-fast-isqrtpy-35">35</a>
+<a href="#listingstr-fast-isqrtpy-36">36</a>
+<a href="#listingstr-fast-isqrtpy-37">37</a>
+<a href="#listingstr-fast-isqrtpy-38">38</a>
+<a href="#listingstr-fast-isqrtpy-39">39</a>
+<a href="#listingstr-fast-isqrtpy-40">40</a>
+<a href="#listingstr-fast-isqrtpy-41">41</a>
+<a href="#listingstr-fast-isqrtpy-42">42</a>
+<a href="#listingstr-fast-isqrtpy-43">43</a>
+<a href="#listingstr-fast-isqrtpy-44">44</a>
+<a href="#listingstr-fast-isqrtpy-45">45</a>
+<a href="#listingstr-fast-isqrtpy-46">46</a>
+<a href="#listingstr-fast-isqrtpy-47">47</a>
+<a href="#listingstr-fast-isqrtpy-48">48</a>
+<a href="#listingstr-fast-isqrtpy-49">49</a>
+<a href="#listingstr-fast-isqrtpy-50">50</a>
+<a href="#listingstr-fast-isqrtpy-51">51</a>
+<a href="#listingstr-fast-isqrtpy-52">52</a>
+<a href="#listingstr-fast-isqrtpy-53">53</a>
+<a href="#listingstr-fast-isqrtpy-54">54</a>
+<a href="#listingstr-fast-isqrtpy-55">55</a>
+<a href="#listingstr-fast-isqrtpy-56">56</a>
+<a href="#listingstr-fast-isqrtpy-57">57</a>
+<a href="#listingstr-fast-isqrtpy-58">58</a>
+<a href="#listingstr-fast-isqrtpy-59">59</a>
+<a href="#listingstr-fast-isqrtpy-60">60</a>
+<a href="#listingstr-fast-isqrtpy-61">61</a>
+<a href="#listingstr-fast-isqrtpy-62">62</a>
+<a href="#listingstr-fast-isqrtpy-63">63</a>
+<a href="#listingstr-fast-isqrtpy-64">64</a>
+<a href="#listingstr-fast-isqrtpy-65">65</a>
+<a href="#listingstr-fast-isqrtpy-66">66</a>
+<a href="#listingstr-fast-isqrtpy-67">67</a>
+<a href="#listingstr-fast-isqrtpy-68">68</a>
+<a href="#listingstr-fast-isqrtpy-69">69</a>
+<a href="#listingstr-fast-isqrtpy-70">70</a>
+<a href="#listingstr-fast-isqrtpy-71">71</a>
+<a href="#listingstr-fast-isqrtpy-72">72</a>
+<a href="#listingstr-fast-isqrtpy-73">73</a>
+<a href="#listingstr-fast-isqrtpy-74">74</a>
+<a href="#listingstr-fast-isqrtpy-75">75</a></pre></div></td>
+<td class="code"><pre class="code literal-block"><a name="listingstr-fast-isqrtpy-1"></a><span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a name="listingstr-fast-isqrtpy-2"></a>    <span class="k">class</span> <span class="nc">Counter</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-3"></a>        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+<a name="listingstr-fast-isqrtpy-4"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_fn</span> <span class="o">=</span> <span class="n">fn</span>
+<a name="listingstr-fast-isqrtpy-5"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_c</span> <span class="o">=</span> <span class="mi">0</span>
+<a name="listingstr-fast-isqrtpy-6"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="kc">None</span>
+<a name="listingstr-fast-isqrtpy-7"></a>
+<a name="listingstr-fast-isqrtpy-8"></a>        <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a name="listingstr-fast-isqrtpy-9"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_c</span> <span class="o">+=</span> <span class="mi">1</span>
+<a name="listingstr-fast-isqrtpy-10"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<a name="listingstr-fast-isqrtpy-11"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span>
+<a name="listingstr-fast-isqrtpy-12"></a>
+<a name="listingstr-fast-isqrtpy-13"></a>        <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="listingstr-fast-isqrtpy-14"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_c</span><span class="si">}</span><span class="s2">]: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<a name="listingstr-fast-isqrtpy-15"></a>
+<a name="listingstr-fast-isqrtpy-16"></a>    <span class="k">return</span> <span class="n">Counter</span>
+<a name="listingstr-fast-isqrtpy-17"></a>
+<a name="listingstr-fast-isqrtpy-18"></a>
+<a name="listingstr-fast-isqrtpy-19"></a><span class="nd">@count</span><span class="p">(</span><span class="s2">"isqrt1"</span><span class="p">)</span>
+<a name="listingstr-fast-isqrtpy-20"></a><span class="k">def</span> <span class="nf">isqrt1</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-21"></a>    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-22"></a>        <span class="k">return</span> <span class="mi">0</span>
+<a name="listingstr-fast-isqrtpy-23"></a>    <span class="k">else</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-24"></a>        <span class="n">r2</span> <span class="o">=</span> <span class="n">isqrt1</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<a name="listingstr-fast-isqrtpy-25"></a>        <span class="n">r3</span> <span class="o">=</span> <span class="n">r2</span> <span class="o">+</span> <span class="mi">1</span>
+<a name="listingstr-fast-isqrtpy-26"></a>        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">r3</span> <span class="o">*</span> <span class="n">r3</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-27"></a>            <span class="k">return</span> <span class="n">r2</span>
+<a name="listingstr-fast-isqrtpy-28"></a>        <span class="k">else</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-29"></a>            <span class="k">return</span> <span class="n">r3</span>
+<a name="listingstr-fast-isqrtpy-30"></a>
+<a name="listingstr-fast-isqrtpy-31"></a>
+<a name="listingstr-fast-isqrtpy-32"></a><span class="nd">@count</span><span class="p">(</span><span class="s2">"isqrt2"</span><span class="p">)</span>
+<a name="listingstr-fast-isqrtpy-33"></a><span class="k">def</span> <span class="nf">isqrt2</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-34"></a>    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-35"></a>        <span class="k">return</span> <span class="mi">0</span>
+<a name="listingstr-fast-isqrtpy-36"></a>    <span class="k">else</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-37"></a>        <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">//</span> <span class="mi">4</span>
+<a name="listingstr-fast-isqrtpy-38"></a>        <span class="n">r2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">isqrt2</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<a name="listingstr-fast-isqrtpy-39"></a>        <span class="n">r3</span> <span class="o">=</span> <span class="n">r2</span> <span class="o">+</span> <span class="mi">1</span>
+<a name="listingstr-fast-isqrtpy-40"></a>        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">r3</span> <span class="o">*</span> <span class="n">r3</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-41"></a>            <span class="k">return</span> <span class="n">r2</span>
+<a name="listingstr-fast-isqrtpy-42"></a>        <span class="k">else</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-43"></a>            <span class="k">return</span> <span class="n">r3</span>
+<a name="listingstr-fast-isqrtpy-44"></a>
+<a name="listingstr-fast-isqrtpy-45"></a><span class="k">def</span> <span class="nf">nroot</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<a name="listingstr-fast-isqrtpy-46"></a>    <span class="s2">"Curring 化，以便携带 show 方法"</span>
+<a name="listingstr-fast-isqrtpy-47"></a>    <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">n</span>
+<a name="listingstr-fast-isqrtpy-48"></a>
+<a name="listingstr-fast-isqrtpy-49"></a>    <span class="nd">@count</span><span class="p">(</span><span class="s2">"nroot"</span><span class="p">)</span>
+<a name="listingstr-fast-isqrtpy-50"></a>    <span class="k">def</span> <span class="nf">nroot_</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<a name="listingstr-fast-isqrtpy-51"></a>        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-52"></a>            <span class="k">return</span> <span class="n">x</span>
+<a name="listingstr-fast-isqrtpy-53"></a>        <span class="k">else</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-54"></a>            <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">//</span> <span class="n">b</span>
+<a name="listingstr-fast-isqrtpy-55"></a>            <span class="n">r2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span> <span class="n">nroot_</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<a name="listingstr-fast-isqrtpy-56"></a>            <span class="n">r3</span> <span class="o">=</span> <span class="n">r2</span> <span class="o">+</span> <span class="mi">1</span>
+<a name="listingstr-fast-isqrtpy-57"></a>            <span class="k">if</span> <span class="n">r3</span><span class="o">**</span><span class="n">n</span> <span class="o">&lt;</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-58"></a>                <span class="k">return</span> <span class="n">r3</span>
+<a name="listingstr-fast-isqrtpy-59"></a>            <span class="k">else</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-60"></a>                <span class="k">return</span> <span class="n">r2</span>
+<a name="listingstr-fast-isqrtpy-61"></a>
+<a name="listingstr-fast-isqrtpy-62"></a>    <span class="k">return</span> <span class="n">nroot_</span>
+<a name="listingstr-fast-isqrtpy-63"></a>
+<a name="listingstr-fast-isqrtpy-64"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+<a name="listingstr-fast-isqrtpy-65"></a>    <span class="n">n</span> <span class="o">=</span> <span class="mi">156</span>
+<a name="listingstr-fast-isqrtpy-66"></a>    <span class="n">isqrt1</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a name="listingstr-fast-isqrtpy-67"></a>    <span class="n">isqrt2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a name="listingstr-fast-isqrtpy-68"></a>
+<a name="listingstr-fast-isqrtpy-69"></a>    <span class="n">x</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">3</span>
+<a name="listingstr-fast-isqrtpy-70"></a>    <span class="n">nroot_</span> <span class="o">=</span> <span class="n">nroot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<a name="listingstr-fast-isqrtpy-71"></a>    <span class="n">nroot_</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a name="listingstr-fast-isqrtpy-72"></a>
+<a name="listingstr-fast-isqrtpy-73"></a>    <span class="n">isqrt1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a name="listingstr-fast-isqrtpy-74"></a>    <span class="n">isqrt2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a name="listingstr-fast-isqrtpy-75"></a>    <span class="n">nroot_</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td>
+</tr></table></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

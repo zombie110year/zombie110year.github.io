@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Graphics Magick 命令行使用方法 | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+<meta name="author" content="Zombie110year">
+<link rel="prev" href="../file-steganography/" title="文件隐写术" type="text/html">
+<link rel="next" href="../tmux-simple-tutorial/" title="Tmux 简明教程" type="text/html">
+<meta property="og:site_name" content="ZomHub">
+<meta property="og:title" content="Graphics Magick 命令行使用方法">
+<meta property="og:url" content="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/">
+<meta property="og:description" content="Graphics Magick 是一个 ImageMagick 的分支版本，但它提供了更易懂的命令行接口、
+更精简的二进制体积以及更快速的性能。
+它提供了 gm 可执行文件用于调用 2 ，也可以当作库提供给其他编程语言使用 3 。
+
+警告
+不建议在 Windows 上使用 GraphicsMagick
+环境依赖问题太难搞了！如果有在 Windows 上使用的需要，建议使用 WSL 1 。
+
+
+目录">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-04-27T16:13:13+08:00">
+<meta property="article:tag" content="cli">
+<meta property="article:tag" content="graphicsmagick">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Graphics Magick 命令行使用方法</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Zombie110year
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-04-27T16:13:13+08:00" itemprop="datePublished" title="2020-04-27 16:13">2020-04-27 16:13</time></a>
+            </p>
+                    <p class="sourceline"><a href="index.rst" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>Graphics Magick 是一个 ImageMagick 的分支版本，但它提供了更易懂的命令行接口、
+更精简的二进制体积以及更快速的性能。</p>
+<p>它提供了 <code>gm</code> 可执行文件用于调用 <a class="footnote-reference brackets" href="#fn-cli-usage" id="id1">2</a> ，也可以当作库提供给其他编程语言使用 <a class="footnote-reference brackets" href="#fn-programming-usage" id="id2">3</a> 。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>不建议在 Windows 上使用 GraphicsMagick</p>
+<p>环境依赖问题太难搞了！如果有在 Windows 上使用的需要，建议使用 WSL <a class="footnote-reference brackets" href="#fn-wsl" id="id3">1</a> 。</p>
+</div>
+<div class="contents topic" id="id4">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li>
+<p><a class="reference internal" href="#graphicsmagick" id="id17">GraphicsMagick 命令一览</a></p>
+<ul>
+<li><p><a class="reference internal" href="#convert" id="id18">convert 命令</a></p></li>
+</ul>
+</li>
+<li>
+<p><a class="reference internal" href="#id10" id="id19">实用案例</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id11" id="id20">图片格式转换</a></p></li>
+<li><p><a class="reference internal" href="#id12" id="id21">更改图像尺寸</a></p></li>
+<li><p><a class="reference internal" href="#id13" id="id22">在图像上添加文本标注</a></p></li>
+<li><p><a class="reference internal" href="#id14" id="id23">生成蒙太奇画册</a></p></li>
+<li><p><a class="reference internal" href="#pdf" id="id24">PDF 转透明图片</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id16" id="id25">参考链接</a></p></li>
+</ul>
+</div>
+<!-- TEASER_END -->
+<div class="section" id="graphicsmagick">
+<h2><a class="toc-backref" href="#id17">GraphicsMagick 命令一览</a></h2>
+<p>gm 的命令行接口通常是:</p>
+<pre class="literal-block">gm {{ 子命令 }} {{ 选项 }} {{ 文件 }}</pre>
+<p>子命令一览：</p>
+<dl class="simple">
+<dt>batch</dt>
+<dd>
+<p>以交互式或批处理模式处理多条命令</p>
+</dd>
+<dt>benchmark</dt>
+<dd>
+<p>测试其他命令的性能</p>
+</dd>
+<dt>compare</dt>
+<dd>
+<p>对比两张图片</p>
+</dd>
+<dt>composite</dt>
+<dd>
+<p>合成图片</p>
+</dd>
+<dt>conjure</dt>
+<dd>
+<p>执行 Magick Script 语言（MSL）的 XML 脚本</p>
+</dd>
+<dt>convert</dt>
+<dd>
+<p>转换一张或一组图片的格式</p>
+</dd>
+<dt>help</dt>
+<dd>
+<p>显示其他命令的帮助信息</p>
+</dd>
+<dt>identify</dt>
+<dd>
+<p>描述一张或一组图片</p>
+</dd>
+<dt>mogrify</dt>
+<dd>
+<p>变换一张或一组图片</p>
+</dd>
+<dt>montage</dt>
+<dd>
+<p>蒙太奇，由一组图片创建一个合成图片（在一个网格中）</p>
+</dd>
+<dt>time</dt>
+<dd>
+<p>测试其他命令的运行时间</p>
+</dd>
+<dt>version</dt>
+<dd>
+<p>显示发行版本</p>
+</dd>
+<dt>register</dt>
+<dd>
+<p>register this application as the source of messages</p>
+</dd>
+</dl>
+<p>你可以在 <code>version</code> 中查看 Graphics Magick 支持的特性。</p>
+<div class="section" id="convert">
+<h3><a class="toc-backref" href="#id18">convert 命令</a></h3>
+<p>gm convert 的命令行参数布局是:</p>
+<pre class="literal-block">gm convert [options ...] infile [options ...] outfile</pre>
+<p>常用的选项有</p>
+<dl class="option-list">
+<dt><kbd><span class="option">-b<var>lur</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param</dt>
+<dd>
+<p>&lt;radius&gt;[x&lt;sigma&gt;]</p>
+</dd>
+</dl>
+<p>添加高斯模糊滤镜，radius 是高斯半径，决定了图像的模糊程度，值越大，越模糊；
+sigma 是高斯分布的标准差，决定了高斯分布的聚集程度，越大越分散，越模糊。</p>
+<p>应用示例:</p>
+<pre class="literal-block">gm convert -blur 128 src.webp src-128.webp
+gm convert -blur 128x3 src.webp src-128x3.webp</pre>
+<p>这里是各种参数下的效果展示：</p>
+<div class="figure">
+<img alt="原图" src="../../../images/gm-blur-shown.webp">
+</div>
+<div class="figure">
+<img alt="sigma 1~4, radius 16~128" id="id5" src="../../../images/gm-blur-shown-grid.webp">
+</div>
+<p>2D 图像应用的高斯函数是</p>
+<div class="math">
+\begin{equation*}
+G(x, y) = \frac{ e^{ - \frac{ x^2 + y^2 }{ 2 \sigma^2 } } }
+    { \sqrt{ 2 \pi \sigma^2 } }
+\end{equation*}
+</div>
+<p>要了解一下高斯模糊，可以参考 <a class="footnote-reference brackets" href="#fn-zhihu-composite-blurs" id="id6">4</a> 和 <a class="footnote-reference brackets" href="#fn-jianshu-gaussian-filter" id="id7">5</a> 。</p>
+</dd>
+<dt><kbd><span class="option">-c<var>harcoal</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param</dt>
+<dd>
+<p>factor</p>
+</dd>
+</dl>
+<p>转换为炭笔素描风格。 factor 是一个数字，表示轮廓的粗细。</p>
+<div class="figure">
+<img alt="/images/gm-charcoal-shown.webp" src="../../../images/gm-charcoal-shown.webp"><p class="caption"><code>-charcoal 1</code></p>
+</div>
+</dd>
+<dt><kbd><span class="option">-d<var>efine</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param</dt>
+<dd>
+<p>key=value,...</p>
+</dd>
+</dl>
+<p>定义一个编解码器配置。使用 <code>-define key=value</code> 定义新值，用 <code>+define key,...</code> 取消定义，用 <code>+define '*'</code> 取消所有定义。详细设置见 <a class="footnote-reference brackets" href="#fn-gm-coalesce" id="id8">6</a> 。</p>
+</dd>
+<dt><kbd><span class="option">-d<var>ensity</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param</dt>
+<dd>
+<p>&lt;w&gt;x&lt;h&gt;</p>
+</dd>
+</dl>
+<p>设置图像的像素密度，默认单位是 DPI。</p>
+</dd>
+<dt><kbd><span class="option">-d<var>raw</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param</dt>
+<dd>
+<p>&lt;primitive&gt; &lt;coordinate&gt; &lt;content&gt;</p>
+</dd>
+</dl>
+<p>在图像上绘制图元，详见 <a class="footnote-reference brackets" href="#fn-gm-primitive" id="id9">7</a> 。
+为了防止 content 中出现特殊字符导致读取错误，最好用 <code>''</code> 将文本括起来。</p>
+</dd>
+<dt><kbd><span class="option">-e<var>nhance</var></span></kbd></dt>
+<dd>
+<p>去噪点。</p>
+</dd>
+<dt><kbd><span class="option">-f<var>ill</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param</dt>
+<dd>
+<p>color</p>
+</dd>
+</dl>
+<p>图元的填充色，配合 -draw 使用。</p>
+</dd>
+<dt><kbd><span class="option">-f<var>lip</var></span></kbd></dt>
+<dd>
+<p>竖直对称。</p>
+</dd>
+<dt><kbd><span class="option">-f<var>lop</var></span></kbd></dt>
+<dd>
+<p>水平对称。</p>
+</dd>
+<dt><kbd><span class="option">-f<var>ont</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param</dt>
+<dd>
+<p>font</p>
+</dd>
+</dl>
+<p>指定一个字体，配合 -draw 使用。</p>
+</dd>
+<dt><kbd><span class="option">-f<var>ormat</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param</dt>
+<dd>
+<p>type</p>
+</dd>
+</dl>
+<p>转换格式。一般用于转换多个图像文件。不需要指定输出文件名，
+其名称将由输入文件推导而来（替换后缀名为对应格式）。</p>
+</dd>
+<dt><kbd><span class="option">-f<var>uzz</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param</dt>
+<dd>
+<p>&lt;distance&gt;%</p>
+</dd>
+</dl>
+<p>设置模糊处理的程度。</p>
+</dd>
+<dt><kbd><span class="option">-m<var>agnify</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param optional</dt>
+<dd>
+<p>factor</p>
+</dd>
+</dl>
+<p>放大图像，默认两倍。</p>
+</dd>
+<dt><kbd><span class="option">-n<var>oise</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param</dt>
+<dd>
+<p>radius</p>
+</dd>
+</dl>
+<p>去噪声，用 radius 指定邻域半径。</p>
+</dd>
+<dt><kbd><span class="option">+n<var>oise</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param</dt>
+<dd>
+<p>type</p>
+</dd>
+</dl>
+<p>加噪声，指定随机数分布:</p>
+<pre class="literal-block">Uniform
+Gaussian
+Multiplicative
+Impulse
+Laplacian
+Poisson
+Random</pre>
+</dd>
+<dt><kbd><span class="option">-q<var>uality</var></span></kbd></dt>
+<dd>
+<dl class="field-list simple">
+<dt>param</dt>
+<dd>
+<p>value</p>
+</dd>
+</dl>
+<p>图像压缩质量，0~100 。越高，损失越少。</p>
+</dd>
+<dt><kbd><span class="option">-t<var>rim</var></span></kbd></dt>
+<dd>
+<p>删除所有与角上的像素相同的像素。
+如果使用 -fuzz 选项，则删除相近的像素。</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id19">实用案例</a></h2>
+<div class="section" id="id11">
+<h3><a class="toc-backref" href="#id20">图片格式转换</a></h3>
+<p>任何支持的都可以自动识别文件后缀进行转换:</p>
+<pre class="literal-block">gm convert src.png dst.webp</pre>
+<p>特别地，如果希望进行无损压缩:</p>
+<pre class="literal-block">gm convert src.png -compress LossLess dst.webp</pre>
+</div>
+<div class="section" id="id12">
+<h3><a class="toc-backref" href="#id21">更改图像尺寸</a></h3>
+<p>在输出文件的选项中添加 <code>-resize</code>:</p>
+<pre class="literal-block">gm convert src.png -resize 400x300 dst.png
+
+# {{ 宽 }}x{{ 高 }}</pre>
+</div>
+<div class="section" id="id13">
+<h3><a class="toc-backref" href="#id22">在图像上添加文本标注</a></h3>
+<p>需要:</p>
+<pre class="literal-block">gm convert src.png -font {{ 字体 }} -fill {{ 颜色 }} -draw "text {{ x,y 坐标 }} '{{ 文本 }}'" dst.png</pre>
+<ul class="simple">
+<li><p>文本外最好用 <code>''</code> 包裹起来，否则可能因为一些特殊的字符导致命令被转义而出错</p></li>
+<li><p>可以用 <code>-pointsize</code> 设置字号</p></li>
+<li><p><code>-draw</code> 命令除了 text 之外还可以画多种图元类型</p></li>
+</ul>
+<p>这里有一个 PowerShell 的例子：</p>
+<pre class="code powershell"><a name="rest_code_5c4140c3af2f49988d4f6c9b17f9b8bf-1"></a><span class="c"># 创建 $ix$j 模糊的图片并标注参数</span>
+<a name="rest_code_5c4140c3af2f49988d4f6c9b17f9b8bf-2"></a><span class="k">param</span><span class="p">(</span><span class="no">[int]</span><span class="nv">$i</span><span class="p">,</span> <span class="no">[int]</span><span class="nv">$j</span><span class="p">)</span>
+<a name="rest_code_5c4140c3af2f49988d4f6c9b17f9b8bf-3"></a><span class="n">gm</span><span class="p">.</span><span class="n">exe</span> <span class="n">convert</span> <span class="n">-blur</span> <span class="s2">"</span><span class="p">$(</span><span class="nv">$i</span><span class="p">)</span><span class="s2">x</span><span class="p">$(</span><span class="nv">$j</span><span class="p">)</span><span class="s2">"</span> <span class="n">src</span><span class="p">.</span><span class="n">webp</span> <span class="s2">"out-</span><span class="p">$(</span><span class="nv">$i</span><span class="p">)</span><span class="s2">x</span><span class="p">$(</span><span class="nv">$j</span><span class="p">)</span><span class="s2">-origin.webp"</span>
+<a name="rest_code_5c4140c3af2f49988d4f6c9b17f9b8bf-4"></a><span class="n">gm</span><span class="p">.</span><span class="n">exe</span> <span class="n">convert</span> <span class="n">-draw</span> <span class="s2">"text 0,18 '</span><span class="p">$(</span><span class="nv">$i</span><span class="p">)</span><span class="s2">x</span><span class="p">$(</span><span class="nv">$j</span><span class="p">)</span><span class="s2">'"</span> <span class="n">-pointsize</span> <span class="n">18</span> <span class="n">-font</span> <span class="n">Arial</span> <span class="n">-fill</span> <span class="s1">'black'</span> <span class="s2">"out-</span><span class="p">$(</span><span class="nv">$i</span><span class="p">)</span><span class="s2">x</span><span class="p">$(</span><span class="nv">$j</span><span class="p">)</span><span class="s2">-origin.webp"</span> <span class="s2">"out-</span><span class="p">$(</span><span class="nv">$i</span><span class="p">)</span><span class="s2">x</span><span class="p">$(</span><span class="nv">$j</span><span class="p">)</span><span class="s2">.webp"</span>
+</pre>
+</div>
+<div class="section" id="id14">
+<h3><a class="toc-backref" href="#id23">生成蒙太奇画册</a></h3>
+<p>使用 <code>montage</code> 命令:</p>
+<pre class="literal-block">gm montage {{ src.png }}+ [:options:] {{ dst.png }}</pre>
+<p>常用的选项有</p>
+<p>-tile {{ m }}x{{ n }}               设置画册的网格样式，m 列 n 行
+-geometry {{ w }}x{{ h }}+{{ b }}   设置整体的宽 w，高 h，和每个格块的间距 b</p>
+<ul class="simple">
+<li><p>{{ src }} 可以传入通配符。</p></li>
+</ul>
+<p>上面的那张 <a class="reference internal" href="#id5">演示图</a> 就是通过下面这个脚本创建的：</p>
+<pre class="code powershell"><a name="rest_code_9996a9aefff443cfb76a6580afe22c37-1"></a><span class="n">gm</span><span class="p">.</span><span class="n">exe</span> <span class="n">montage</span> <span class="n">out</span><span class="p">*.</span><span class="n">webp</span> <span class="n">-geometry</span> <span class="n">3000x4000</span><span class="p">+</span><span class="n">10</span> <span class="n">result</span><span class="p">.</span><span class="n">webp</span>
+</pre>
+</div>
+<div class="section" id="pdf">
+<h3><a class="toc-backref" href="#id24">PDF 转透明图片</a></h3>
+<p>这在嵌入用 LaTeX 编译的公式时非常有用（对于没有额外渲染机制的媒体）:</p>
+<pre class="literal-block">gm convert src.pdf -trim dst.svg
+gm convert src.pdf -trim dst.png
+gm convert src.pdf -trim dst.webp</pre>
+<p>最好使用矢量图或者支持透明通道的图像格式。
+转换 PDF 需要安装 GhostScript <a class="footnote-reference brackets" href="#fn-gs-site" id="id15">8</a> 。
+在 Windows 系统中，GraphicsMagick 在寻找 GhostScript 的动态库时，会查找
+<code>\HKEY_*\SOFTWARE\GPL Ghostscript\#.##\GS_DLL</code> 串的值所值的
+路径（<code>#.##</code> 表示 GhostScript 的当前版本），而在安装 GhostScript 时，
+不一定会修改注册表，因此可能需要手动添加，为了这个键可以记录在任何一个作用域中，
+为了环境的独立性，可以安装到 <code>HKEY_CURRENT_USER</code> ，我安装的 GS 是 9.52 版：</p>
+<pre class="code registry"><a name="rest_code_3b72f14ff65a4f228e269b3b06ea30ad-1"></a><span class="k">[</span><span class="nb">HKEY_CURRENT_USER</span><span class="k">\SOFTWARE\GPL Ghostscript\9.52]</span>
+<a name="rest_code_3b72f14ff65a4f228e269b3b06ea30ad-2"></a><span class="na">"GS_DALL"</span><span class="o">=</span><span class="s">"%USERPROFILE%\scoop\apps\ghostscript\current\bin\gsdll64.dll"</span>
+</pre>
+<p>特别说明的是，在 GraphicsMagick 读写 SVG 依赖 libxml2 和 FreeType，
+这两者在 Windows 上的安装非常地麻烦，建议避开它们。</p>
+<pre class="code tex"><a name="rest_code_a9b2d2255c784b79a3597458e1f20988-1"></a><span class="c">%! TEX = xelatex</span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-2"></a><span class="sb">\[</span><span class="nb"></span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-3"></a><span class="nv">\iint</span><span class="nb">_{</span><span class="nv">\Sigma</span><span class="nb">}</span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-4"></a><span class="o">(</span><span class="nb"></span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-5"></a><span class="nb">    </span><span class="nv">\frac</span><span class="nb">{ </span><span class="nv">\partial</span><span class="nb"> R }{ </span><span class="nv">\partial</span><span class="nb"> y } </span><span class="o">-</span><span class="nb"></span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-6"></a><span class="nb">    </span><span class="nv">\frac</span><span class="nb">{ </span><span class="nv">\partial</span><span class="nb"> Q }{ </span><span class="nv">\partial</span><span class="nb"> z }</span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-7"></a><span class="o">)</span><span class="nb">   </span><span class="nv">\mathrm</span><span class="nb">{d}y </span><span class="nv">\mathrm</span><span class="nb">{d}z </span><span class="o">+</span><span class="nb"></span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-8"></a><span class="o">(</span><span class="nb"></span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-9"></a><span class="nb">    </span><span class="nv">\frac</span><span class="nb">{ </span><span class="nv">\partial</span><span class="nb"> P }{ </span><span class="nv">\partial</span><span class="nb"> z } </span><span class="o">-</span><span class="nb"></span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-10"></a><span class="nb">    </span><span class="nv">\frac</span><span class="nb">{ </span><span class="nv">\partial</span><span class="nb"> R }{ </span><span class="nv">\partial</span><span class="nb"> x }</span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-11"></a><span class="o">)</span><span class="nb">   </span><span class="nv">\mathrm</span><span class="nb">{d}z </span><span class="nv">\mathrm</span><span class="nb">{d}x </span><span class="o">+</span><span class="nb"></span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-12"></a><span class="o">(</span><span class="nb"></span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-13"></a><span class="nb">    </span><span class="nv">\frac</span><span class="nb">{ </span><span class="nv">\partial</span><span class="nb"> Q }{ </span><span class="nv">\partial</span><span class="nb"> x } </span><span class="o">-</span><span class="nb"></span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-14"></a><span class="nb">    </span><span class="nv">\frac</span><span class="nb">{ </span><span class="nv">\partial</span><span class="nb"> P }{ </span><span class="nv">\partial</span><span class="nb"> y }</span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-15"></a><span class="o">)</span><span class="nb">   </span><span class="nv">\mathrm</span><span class="nb">{d}x </span><span class="nv">\mathrm</span><span class="nb">{d}y </span><span class="o">=</span><span class="nb"></span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-16"></a><span class="nv">\oint</span><span class="nb">_{r} P</span><span class="nv">\mathrm</span><span class="nb">{d}x </span><span class="o">+</span><span class="nb"> Q</span><span class="nv">\mathrm</span><span class="nb">{d}y </span><span class="o">+</span><span class="nb"> R</span><span class="nv">\mathrm</span><span class="nb">{d}z</span>
+<a name="rest_code_a9b2d2255c784b79a3597458e1f20988-17"></a><span class="s">\]</span>
+</pre>
+<div class="math">
+\begin{equation*}
+\iint_{\Sigma}
+(
+    \frac{ \partial R }{ \partial y } -
+    \frac{ \partial Q }{ \partial z }
+)   \mathrm{d}y \mathrm{d}z +
+(
+    \frac{ \partial P }{ \partial z } -
+    \frac{ \partial R }{ \partial x }
+)   \mathrm{d}z \mathrm{d}x +
+(
+    \frac{ \partial Q }{ \partial x } -
+    \frac{ \partial P }{ \partial y }
+)   \mathrm{d}x \mathrm{d}y =
+\oint_{r} P\mathrm{d}x + Q\mathrm{d}y + R\mathrm{d}z
+\end{equation*}
+</div>
+<pre class="literal-block">gm convert sample.pdf -trim sample.webp</pre>
+<div class="figure">
+<img alt="/images/gm-pdf-webp-shown.webp" src="../../../images/gm-pdf-webp-shown.webp"><p class="caption">展示 PDF 转 WebP 的效果</p>
+</div>
+</div>
+</div>
+<div class="section" id="id16">
+<h2><a class="toc-backref" href="#id25">参考链接</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="fn-wsl"><span class="brackets"><a class="fn-backref" href="#id3">1</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">https://docs.microsoft.com/en-us/windows/wsl/install-win10</a></p>
+</dd>
+<dt class="label" id="fn-cli-usage"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd>
+<p><a class="reference external" href="http://www.graphicsmagick.org/utilities.html">http://www.graphicsmagick.org/utilities.html</a></p>
+</dd>
+<dt class="label" id="fn-programming-usage"><span class="brackets"><a class="fn-backref" href="#id2">3</a></span></dt>
+<dd>
+<p><a class="reference external" href="http://www.graphicsmagick.org/programming.html">http://www.graphicsmagick.org/programming.html</a></p>
+</dd>
+<dt class="label" id="fn-zhihu-composite-blurs"><span class="brackets"><a class="fn-backref" href="#id6">4</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://zhuanlan.zhihu.com/p/125744132">https://zhuanlan.zhihu.com/p/125744132</a></p>
+</dd>
+<dt class="label" id="fn-jianshu-gaussian-filter"><span class="brackets"><a class="fn-backref" href="#id7">5</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://www.jianshu.com/p/961490ea0458">https://www.jianshu.com/p/961490ea0458</a></p>
+</dd>
+<dt class="label" id="fn-gm-coalesce"><span class="brackets"><a class="fn-backref" href="#id8">6</a></span></dt>
+<dd>
+<p><a class="reference external" href="http://www.graphicsmagick.org/GraphicsMagick.html#details-coalesce">http://www.graphicsmagick.org/GraphicsMagick.html#details-coalesce</a></p>
+</dd>
+<dt class="label" id="fn-gm-primitive"><span class="brackets"><a class="fn-backref" href="#id9">7</a></span></dt>
+<dd>
+<p><a class="reference external" href="http://www.graphicsmagick.org/GraphicsMagick.html#details-draw">http://www.graphicsmagick.org/GraphicsMagick.html#details-draw</a></p>
+</dd>
+<dt class="label" id="fn-gs-site"><span class="brackets"><a class="fn-backref" href="#id15">8</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://www.ghostscript.com/">https://www.ghostscript.com/</a></p>
+</dd>
+</dl>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../../categories/cli/" rel="tag">cli</a></li>
+            <li><a class="tag p-category" href="../../../categories/graphicsmagick/" rel="tag">graphicsmagick</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../file-steganography/" rel="prev" title="文件隐写术">上一篇文章</a>
+            </li>
+            <li class="next">
+                <a href="../tmux-simple-tutorial/" rel="next" title="Tmux 简明教程">下一篇文章</a>
+            </li>
+        </ul></nav></aside><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="autoRenderKatex();"></script><script>
+        function autoRenderKatex() {
+            renderMathInElement(document.body,
+                {
+                    
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                }
+            );
+        }
+        </script></article></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

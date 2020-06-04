@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZomHub (关于文章 graphicsmagick)</title><link>https://blog.zombie110year.top/</link><description></description><atom:link href="https://blog.zombie110year.top/categories/graphicsmagick.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2020 &lt;a href="mailto:zombie110year@outlook.com"&gt;Zombie110year&lt;/a&gt; CC BY-NC-SA 4.0</copyright><lastBuildDate>Thu, 04 Jun 2020 16:05:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Graphics Magick 命令行使用方法</title><link>https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/</link><dc:creator>Zombie110year</dc:creator><description>&lt;div&gt;&lt;p&gt;Graphics Magick 是一个 ImageMagick 的分支版本，但它提供了更易懂的命令行接口、
+更精简的二进制体积以及更快速的性能。&lt;/p&gt;
+&lt;p&gt;它提供了 &lt;code&gt;gm&lt;/code&gt; 可执行文件用于调用 &lt;a class="footnote-reference brackets" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/#fn-cli-usage" id="id1"&gt;2&lt;/a&gt; ，也可以当作库提供给其他编程语言使用 &lt;a class="footnote-reference brackets" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/#fn-programming-usage" id="id2"&gt;3&lt;/a&gt; 。&lt;/p&gt;
+&lt;div class="admonition warning"&gt;
+&lt;p class="admonition-title"&gt;警告&lt;/p&gt;
+&lt;p&gt;不建议在 Windows 上使用 GraphicsMagick&lt;/p&gt;
+&lt;p&gt;环境依赖问题太难搞了！如果有在 Windows 上使用的需要，建议使用 WSL &lt;a class="footnote-reference brackets" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/#fn-wsl" id="id3"&gt;1&lt;/a&gt; 。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="contents topic" id="id4"&gt;
+&lt;p class="topic-title"&gt;目录&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/#graphicsmagick" id="id17"&gt;GraphicsMagick 命令一览&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/#convert" id="id18"&gt;convert 命令&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/#id10" id="id19"&gt;实用案例&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/#id11" id="id20"&gt;图片格式转换&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/#id12" id="id21"&gt;更改图像尺寸&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/#id13" id="id22"&gt;在图像上添加文本标注&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/#id14" id="id23"&gt;生成蒙太奇画册&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/#pdf" id="id24"&gt;PDF 转透明图片&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/#id16" id="id25"&gt;参考链接&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href="https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/"&gt;阅读更多…&lt;/a&gt; (剩余阅读时间 4 分钟)&lt;/p&gt;&lt;/div&gt;</description><category>cli</category><category>graphicsmagick</category><guid>https://blog.zombie110year.top/posts/2020-04/graphicsmagick-usage/</guid><pubDate>Mon, 27 Apr 2020 08:13:13 GMT</pubDate></item></channel></rss>

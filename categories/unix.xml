@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZomHub (关于文章 unix)</title><link>https://blog.zombie110year.top/</link><description></description><atom:link href="https://blog.zombie110year.top/categories/unix.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2020 &lt;a href="mailto:zombie110year@outlook.com"&gt;Zombie110year&lt;/a&gt; CC BY-NC-SA 4.0</copyright><lastBuildDate>Thu, 04 Jun 2020 16:05:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>优秀的跨平台命令行工具</title><link>https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/</link><dc:creator>Zombie110year</dc:creator><description>&lt;div&gt;&lt;div class="contents topic" id="id1"&gt;
+&lt;p class="topic-title"&gt;目录&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/#nushell" id="id18"&gt;NuShell&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/#id3" id="id19"&gt;NuShell 哲学&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/#id4" id="id20"&gt;数据类型&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/#id7" id="id21"&gt;加载数据&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/#id9" id="id22"&gt;管道&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/#id10" id="id23"&gt;内置命令与外部程序冲突&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/#id11" id="id24"&gt;环境变量&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/#id12" id="id25"&gt;二维表操作&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/#starship" id="id26"&gt;starship&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/#id15" id="id27"&gt;个人配置&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/#id17" id="id28"&gt;参考链接&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/"&gt;阅读更多…&lt;/a&gt; (剩余阅读时间 1 分钟)&lt;/p&gt;&lt;/div&gt;</description><category>cli</category><category>unix</category><category>windows</category><guid>https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/</guid><pubDate>Thu, 14 May 2020 09:17:43 GMT</pubDate></item></channel></rss>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZomHub (关于文章 c)</title><link>https://blog.zombie110year.top/</link><description></description><atom:link href="https://blog.zombie110year.top/categories/c.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2020 &lt;a href="mailto:zombie110year@outlook.com"&gt;Zombie110year&lt;/a&gt; CC BY-NC-SA 4.0</copyright><lastBuildDate>Thu, 04 Jun 2020 16:05:55 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>用 C 语言扩展 Python</title><link>https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/</link><dc:creator>Zombie110year</dc:creator><description>&lt;div&gt;&lt;p&gt;Python 官方给出教程如下 &lt;a class="footnote-reference brackets" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#doc-ext" id="id1"&gt;1&lt;/a&gt;，本文总结几个要点，并介绍与 Python Poetry &lt;a class="footnote-reference brackets" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#site-poetry" id="id2"&gt;2&lt;/a&gt; 工具相结合的方法。&lt;/p&gt;
+&lt;div class="contents topic" id="id3"&gt;
+&lt;p class="topic-title"&gt;目录&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#id4" id="id15"&gt;文件安排与开发前的准备&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#id6" id="id16"&gt;自顶向下的教程&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#id7" id="id17"&gt;初始化模块&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#id8" id="id18"&gt;试运行&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#id9" id="id19"&gt;解析位置参数&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#iterator-protocol" id="id20"&gt;通过 Iterator Protocol 解析不定参数&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#id11" id="id21"&gt;解析关键字参数&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#python-c" id="id22"&gt;Python 与 C 对象的互相转化&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#poetry-build" id="id23"&gt;将扩展编译过程集成到 poetry build&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#id13" id="id24"&gt;添加类型定义&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/#id14" id="id25"&gt;参考链接&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href="https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/"&gt;阅读更多…&lt;/a&gt; (剩余阅读时间 3 分钟)&lt;/p&gt;&lt;/div&gt;</description><category>c</category><category>python</category><guid>https://blog.zombie110year.top/posts/2020-05/extend-python-with-c/</guid><pubDate>Sat, 30 May 2020 07:00:48 GMT</pubDate></item></channel></rss>

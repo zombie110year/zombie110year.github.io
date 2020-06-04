@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="使用 Pandoc 为 Markdown 赋能！">
+<meta name="viewport" content="width=device-width">
+<title>使用 Pandoc 进行文档编辑 | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+<meta name="author" content="Zombie110year">
+<link rel="prev" href="../msoffice-unicode-math/" title="MSOffice Unicode Math" type="text/html">
+<meta property="og:site_name" content="ZomHub">
+<meta property="og:title" content="使用 Pandoc 进行文档编辑">
+<meta property="og:url" content="https://blog.zombie110year.top/posts/2020-06/write-article-with-pandoc/">
+<meta property="og:description" content="使用 Pandoc 为 Markdown 赋能！">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-06-04T20:13:33+08:00">
+<meta property="article:tag" content="markdown">
+<meta property="article:tag" content="pandoc">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">使用 Pandoc 进行文档编辑</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Zombie110year
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-06-04T20:13:33+08:00" itemprop="datePublished" title="2020-06-04 20:13">2020-06-04 20:13</time></a>
+            </p>
+                    <p class="sourceline"><a href="index.rst" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>Pandoc 是一个标记语言转换工具，它支持非常多的语言之间的相互转换，并且，支持一种功能非常强大的 Markdown 解析功能，
+也提出了对应的标准： Pandoc Markdown <a class="footnote-reference brackets" href="#doc-pandoc-markdown" id="id1">1</a>。</p>
+<p>并且，Pandoc 提出 filter 协议，可以用 JSON 的方式与其他可执行文件交流数据，为标记语言的扩展解析功能提供了接口。
+本文介绍利用 Pandoc 进行大型文档写作的方法。</p>
+<div class="contents topic" id="id2">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#id3" id="id13">利其器</a></p></li>
+<li>
+<p><a class="reference internal" href="#id4" id="id14">工作区布置</a></p>
+<ul>
+<li><p><a class="reference internal" href="#pandoc-yaml" id="id15">pandoc.yaml</a></p></li>
+<li><p><a class="reference internal" href="#main-md" id="id16">main.md</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#makefile" id="id17">Makefile 调用</a></p></li>
+<li><p><a class="reference internal" href="#markdown-preview-enhanced" id="id18">Markdown Preview Enhanced</a></p></li>
+<li>
+<p><a class="reference internal" href="#pandoc" id="id19">Pandoc 的重要扩展语法</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id5" id="id20">隐式标题引用</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id21">定义列表</a></p></li>
+<li><p><a class="reference internal" href="#id7" id="id22">交叉引用与引文引用</a></p></li>
+<li><p><a class="reference internal" href="#id10" id="id23">属性标注</a></p></li>
+<li><p><a class="reference internal" href="#id11" id="id24">通用原始属性</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-dir" id="id25">data dir 机制</a></p></li>
+<li><p><a class="reference internal" href="#pandoc-template" id="id26">Pandoc Template</a></p></li>
+<li><p><a class="reference internal" href="#id12" id="id27">参考文献</a></p></li>
+</ul>
+</div>
+<!-- TEASER_END -->
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id13">利其器</a></h2>
+<p>在用 Pandoc 进行文章写作时，通常为用到以下工具：</p>
+<dl class="simple">
+<dt>pandoc</dt>
+<dd>
+<p>pandoc 本体</p>
+</dd>
+<dt>pandoc-crossref[#doc-pandoc-crossref]_</dt>
+<dd>
+<p>为 pandoc markdown 提供交叉引用功能。</p>
+</dd>
+<dt>pandoc-citeproc</dt>
+<dd>
+<p>一般跟随 pandoc 本体一同分发。提供解析参考文献引用的功能。</p>
+</dd>
+<dt>vscode</dt>
+<dd>
+<p>说它是目前地球最强的文本编辑器应该没人反对吧？</p>
+</dd>
+<dt>shd101wyy.markdown-preview-enhanced</dt>
+<dd>
+<p>vscode 与 atom 编辑器上最好用的 Markdown 实时渲染扩展。</p>
+</dd>
+</dl>
+<p>其中，由于 pandoc-crossref 与 pandoc-citeproc 使用了相同的标记语法，因此在配置 filter 时，
+需要让 crossref 在 citeproc 之前工作，否则会引起冲突。
+并且 pandoc-crossref 与 pandoc 本体的版本高度耦合，甚至会出现兼容 2.9.2.1 但不兼容 2.9.2 的情况，
+因此在安装时需要提前确认好本地 pandoc 的版本，到 GitHub Release 下载兼容的版本。</p>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id14">工作区布置</a></h2>
+<p>我们创建一个空的文件夹作为工作区，通常，我们希望工作区包含以下内容（用缩进代表一个文件夹）:</p>
+<pre class="literal-block">/
+    Makefile                # 利用 Makefile 进行任务控制
+    pandoc.yaml             # 利用 pandoc 的 --defaults 选项，将所有命令行参数写为 yaml 格式
+
+    .vscode/
+        settings.json       # 针对当前项目进行一些布置
+
+    src/                    # 将所有作者创造的内容保存在此文件夹下
+        main.md             # 一个入口文档，通常在此文档编辑 YAML 元数据头
+        chapter1.md         # 其他的章节内容
+        asset/              # 在文章中引用的图片、代码、或其他资源保存在此文件夹中
+
+    static/                 # 不在文章中引用的资源文件
+        highlight.theme     # 语法高亮样式文件（在 pandoc.yaml 中使用）
+        template.*          # 使用的模板（在 pandoc.yaml 中配置）
+
+    build/                  # 所有由程序生成的内容保存在此</pre>
+<div class="section" id="pandoc-yaml">
+<h3><a class="toc-backref" href="#id15">pandoc.yaml</a></h3>
+<p>pandoc 可以将命令行参数写成 yaml 格式，其选项名的长形式和 yaml 中的键名一一对应，对于一些命令行表现和 yaml 键值对表现相异的部分，一般都遵循以下规律：</p>
+<dl>
+<dt>值的数目超过一的参数、选项在 yaml 中也可以用复数形式的键名 + yaml 列表来进行配置。</dt>
+<dd>
+<pre class="literal-block">pandoc --filter pandoc-crossref --filter pandoc-citeproc
+
+filters:
+- pandoc-crossref
+- pandoc-citeproc</pre>
+</dd>
+<dt>作标志（flag）作用的选项，在 yaml 中的值类型应当为 bool。</dt>
+<dd>
+<pre class="literal-block">pandoc --toc
+
+toc: true</pre>
+</dd>
+</dl>
+<p>一个典型的 yaml 文件通常有以下内容：</p>
+<pre class="code yaml"><a name="rest_code_9e81793b2d724863a13fb27b9893e70c-1"></a><span class="c1"># 路径相对于 pandoc 可执行文件的当前工作目录</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-2"></a><span class="c1"># 为了与 Markdown Preview Enhanced 相配合（通过 stdout）不配置输入输出文件</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-3"></a><span class="c1"># input-files:</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-4"></a><span class="c1"># output:</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-5"></a>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-6"></a><span class="nt">filters</span><span class="p">:</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-7"></a><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pandoc-crossref</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-8"></a><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pandoc-citeproc</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-9"></a>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-10"></a><span class="nt">html-math-method</span><span class="p">:</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-11"></a>    <span class="nt">method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">katex</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-12"></a>    <span class="nt">url</span><span class="p">:</span> <span class="s">"https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-13"></a>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-14"></a><span class="nt">metadata</span><span class="p">:</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-15"></a>    <span class="nt">bibliography</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">inbox.bib</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-16"></a>    <span class="nt">csl</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">chinese-gb7714-2015-numeric.csl</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-17"></a>    <span class="nt">link-citations</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-18"></a>    <span class="nt">reference-section-title</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">参考文献</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-19"></a>    <span class="nt">figPrefix</span><span class="p">:</span> <span class="s">"图"</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-20"></a>    <span class="nt">lstPrefix</span><span class="p">:</span> <span class="s">"代码"</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-21"></a>    <span class="nt">secPrefix</span><span class="p">:</span> <span class="s">"章"</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-22"></a>    <span class="nt">eqnPrefix</span><span class="p">:</span> <span class="s">"式"</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-23"></a>    <span class="nt">figureTitle</span><span class="p">:</span> <span class="s">"图"</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-24"></a>    <span class="nt">tableTitle</span><span class="p">:</span> <span class="s">"表"</span>
+<a name="rest_code_9e81793b2d724863a13fb27b9893e70c-25"></a>    <span class="nt">listingTitle</span><span class="p">:</span> <span class="s">"代码"</span>
+</pre>
+<p>在转换文档时，不再传递过长的命令行参数，而使用:</p>
+<pre class="literal-block">pandoc --defaults=pandoc.yaml --standalone -o &lt;output&gt;</pre>
+<p>两个参数代替。如上例所述，为了方便配置 <abbr>MPE（Markdown Preview Enhanced）</abbr> 的渲染，没有指定输出文件，而是在转换时才通过 -o 参数来指定，这样，就可以很方便地配置 MPE 使用 pandoc 来代替 markdown-it 了。</p>
+<p>另外，在这里可以看到一个 <code class="docutils literal">metadata</code> 键，这个键对应 <code class="docutils literal"><span class="pre">--metadata=KEY:VALUE</span></code> 命令行参数。对于 Markdown 来说，它指定的就是一个文档的 YAML 头。</p>
+<p>为了在编辑由多个文件组成的项目时，MPE 能够独立预览单个文件，不至于让 pandoc 每次都全量渲染，没有指定 input-files。
+当然，可以指定并注释，在最后生成结果时再取消注释并调用 pandoc 渲染。</p>
+</div>
+<div class="section" id="main-md">
+<h3><a class="toc-backref" href="#id16">main.md</a></h3>
+<p>通常，我们把每个文件都可能用到的元数据写在 pandoc.yaml 文件里，把整个项目只使用一次的元数据以 YAML header 的形式写在入口 Markdown 文件的头部:</p>
+<pre class="literal-block">---
+title: 文档的标题
+author: 作者
+date: 文档编撰时间
+toc: true
+toc-depth: 2
+number-sections: true
+...</pre>
+</div>
+</div>
+<div class="section" id="makefile">
+<h2><a class="toc-backref" href="#id17">Makefile 调用</a></h2>
+<p>在根目录的 Makefile 里，配置：</p>
+<pre class="code makefile"><a name="rest_code_601e3fba051c4964a635303930ab81b3-1"></a><span class="c"># Markdown 源文件</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-2"></a><span class="nv">SOURCE</span> <span class="o">:=</span> src/<span class="k">$(</span>wildcard *.md<span class="k">)</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-3"></a><span class="c"># 资源文件</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-4"></a><span class="nv">ASSET</span>  <span class="o">:=</span> src/asset/<span class="k">$(</span>wildcard *<span class="k">)</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-5"></a><span class="nv">ASSET_COPIED</span> <span class="o">:=</span> <span class="k">$(</span>subst src/,build/,<span class="k">$(</span>ASSET<span class="k">))</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-6"></a>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-7"></a><span class="c"># 配置 pandoc 可执行文件的路径，默认使用 PATH 里的第一个</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-8"></a><span class="nv">PANDOC</span> <span class="o">:=</span> pandoc
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-9"></a><span class="nv">DEFAULTS</span> <span class="o">:=</span> pandoc.yaml
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-10"></a>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-11"></a><span class="c"># 配置默认目标</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-12"></a><span class="nf">out</span><span class="o">:</span> <span class="n">build</span>/<span class="n">main</span>.<span class="n">tex</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-13"></a>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-14"></a><span class="nf">build/main.tex</span><span class="o">:</span> <span class="k">$(</span><span class="nv">SOURCE</span><span class="k">)</span> <span class="n">copy_asset</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-15"></a>    <span class="k">$(</span>PANDOC<span class="k">)</span> --defaults <span class="k">$(</span>DEFAULTS<span class="k">)</span> --standalone -o <span class="nv">$@</span> <span class="k">$(</span>SOURCE<span class="k">)</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-16"></a><span class="c"># 对于 LaTeX 这种分离编译的目标，将其他依赖的资源按同样的相对拷贝过去是很重要的</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-17"></a>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-18"></a><span class="nf">copy_asset</span><span class="o">:</span> <span class="k">$(</span><span class="nv">ASSET_COPIED</span><span class="k">)</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-19"></a><span class="nf">build/asset/%</span><span class="o">:</span> <span class="n">src</span>/<span class="n">asset</span>/%
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-20"></a>    <span class="o">[[</span> -d <span class="k">$(</span>@D<span class="k">)</span> <span class="o">]]</span> <span class="o">||</span> mkdir build/asset
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-21"></a>    cp $&lt; <span class="nv">$@</span>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-22"></a>
+<a name="rest_code_601e3fba051c4964a635303930ab81b3-23"></a><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">out</span> <span class="n">copy_asset</span>
+</pre>
+<p>当 latex 文档渲染出来后，进入 build 目录用 LaTeX 发行版进行编译。有些编译比较麻烦的，比如要建立目录、索引之类的，
+需要多次编译，还需要插入 makeindex 指令等，可以在 build/ 目录下编写一个新的 Makefile，反正也不长。</p>
+</div>
+<div class="section" id="markdown-preview-enhanced">
+<h2><a class="toc-backref" href="#id18">Markdown Preview Enhanced</a></h2>
+<p>在 vscode 工作区的配置文件中添加：</p>
+<pre class="code json"><a name="rest_code_617313db800a4c7296f26354d3aa6b33-1"></a><span class="p">{</span>
+<a name="rest_code_617313db800a4c7296f26354d3aa6b33-2"></a>    <span class="nt">"markdown-preview-enhanced.usePandocParser"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+<a name="rest_code_617313db800a4c7296f26354d3aa6b33-3"></a>    <span class="nt">"markdown-preview-enhanced.pandocArguments"</span><span class="p">:</span> <span class="s2">"--defaults=pandoc.yaml"</span>
+<a name="rest_code_617313db800a4c7296f26354d3aa6b33-4"></a><span class="p">}</span>
+</pre>
+</div>
+<div class="section" id="pandoc">
+<h2><a class="toc-backref" href="#id19">Pandoc 的重要扩展语法</a></h2>
+<p>介绍 pandoc 所扩展的最有诱惑力的语法。</p>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id20">隐式标题引用</a></h3>
+<p>当启用 <code class="docutils literal">implicit_header_references</code> 扩展时，可以用 <code class="docutils literal">[]</code> 包括标题原文创建一个指向标题的引用。</p>
+<pre class="literal-block"># 标题文本
+
+[标题文本]</pre>
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id21">定义列表</a></h3>
+<pre class="literal-block">术语
+:   定义</pre>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id22">交叉引用与引文引用</a></h3>
+<p>这其实是 pandoc-crossref 和 pandoc-citeproc 提供的语法:</p>
+<pre class="literal-block">Blah blah [参院 @doe99， 33-35 页; 以及 @smith04, 第 1 章].
+
+Blah blah [@doe99，33-35、38-39 页和 *passim*].
+
+Blah blah [@smith04; @doe99].</pre>
+<p>当文档中存在无法指定具体位置的引用时，在 YAML 头中添加:</p>
+<pre class="literal-block">nocite: |
+    @key</pre>
+<p>这样，引文仍然会包含在引文目录中。</p>
+<p>更多的注意事项参考 pandoc-citeproc <a class="footnote-reference brackets" href="#doc-pandoc-citeproc" id="id8">3</a> 和 pandoc-crossref <a class="footnote-reference brackets" href="#doc-pandoc-crossref" id="id9">2</a> 的文档。</p>
+</div>
+<div class="section" id="id10">
+<h3><a class="toc-backref" href="#id23">属性标注</a></h3>
+<p>在任意 Markdown 元素后用 <code class="docutils literal">{attr }</code> 的格式添加属性，语法类似 HTML:</p>
+<pre class="literal-block">![image](foo.jpg){#id .class width=30 height=20px}
+
+~~~~ {#mycode .haskell .numberLines startFrom="100"}
+qsort []     = []
+qsort (x:xs) = qsort (filter (&lt; x) xs) ++ [x] ++
+            qsort (filter (&gt;= x) xs)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::: {.warning}
+警告段落！
+:::</pre>
+</div>
+<div class="section" id="id11">
+<h3><a class="toc-backref" href="#id24">通用原始属性</a></h3>
+<p>在一个栅栏式代码块中使用属性 <code class="docutils literal">{=format}</code> 可以指定当输出格式为 format 时将代码块中内容作为原始输出内容:</p>
+<pre class="literal-block">```{=openxml}
+&lt;w:p&gt;
+&lt;w:r&gt;
+    &lt;w:br w:type="page"/&gt;
+&lt;/w:r&gt;
+&lt;/w:p&gt;
+```</pre>
+</div>
+</div>
+<div class="section" id="data-dir">
+<h2><a class="toc-backref" href="#id25">data dir 机制</a></h2>
+<!-- todo -->
+</div>
+<div class="section" id="pandoc-template">
+<h2><a class="toc-backref" href="#id26">Pandoc Template</a></h2>
+<!-- todo -->
+</div>
+<div class="section" id="id12">
+<h2><a class="toc-backref" href="#id27">参考文献</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="doc-pandoc-markdown"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://pandoc.org/MANUAL.html#pandocs-markdown">https://pandoc.org/MANUAL.html#pandocs-markdown</a></p>
+</dd>
+<dt class="label" id="doc-pandoc-crossref"><span class="brackets"><a class="fn-backref" href="#id9">2</a></span></dt>
+<dd>
+<p><a class="reference external" href="http://lierdakil.github.io/pandoc-crossref/">http://lierdakil.github.io/pandoc-crossref/</a></p>
+</dd>
+<dt class="label" id="doc-pandoc-citeproc"><span class="brackets"><a class="fn-backref" href="#id8">3</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md">https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md</a></p>
+</dd>
+</dl>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../../categories/markdown/" rel="tag">markdown</a></li>
+            <li><a class="tag p-category" href="../../../categories/pandoc/" rel="tag">pandoc</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../msoffice-unicode-math/" rel="prev" title="MSOffice Unicode Math">上一篇文章</a>
+            </li>
+        </ul></nav></aside><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="autoRenderKatex();"></script><script>
+        function autoRenderKatex() {
+            renderMathInElement(document.body,
+                {
+                    
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                }
+            );
+        }
+        </script></article></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

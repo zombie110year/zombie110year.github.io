@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="利用文件读写特性和 NTFS 系统的交换数据流来隐藏数据。
+">
+<meta name="viewport" content="width=device-width">
+<title>文件隐写术 | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/posts/2020-04/file-steganography/">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+<meta name="author" content="Zombie110year">
+<link rel="prev" href="../publish-blog-with-github-actions/" title="使用 GitHub Actions 发布博客" type="text/html">
+<link rel="next" href="../graphicsmagick-usage/" title="Graphics Magick 命令行使用方法" type="text/html">
+<meta property="og:site_name" content="ZomHub">
+<meta property="og:title" content="文件隐写术">
+<meta property="og:url" content="https://blog.zombie110year.top/posts/2020-04/file-steganography/">
+<meta property="og:description" content="利用文件读写特性和 NTFS 系统的交换数据流来隐藏数据。
+">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-04-27T11:44:30+08:00">
+<meta property="article:tag" content="powershell">
+<meta property="article:tag" content="security">
+<meta property="article:tag" content="steganography">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">文件隐写术</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Zombie110year
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-04-27T11:44:30+08:00" itemprop="datePublished" title="2020-04-27 11:44">2020-04-27 11:44</time></a>
+            </p>
+                    <p class="sourceline"><a href="index.rst" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>谁不想在自己的电脑上藏一些东西呢？
+要隐藏一些内容，设置隐藏文件夹太 LOW，可以将硬盘主动分一个区，在不用的时候取消挂载，这样别人就算勾选了 『显示隐藏文件和文件夹』也看不到，因为内容根本没进入文件系统。</p>
+<div class="figure">
+<a class="reference external image-reference" href="../../../images/windows10-diskmgr-unmount.webp"><img alt="/images/windows10-diskmgr-unmount.thumbnail.webp" src="../../../images/windows10-diskmgr-unmount.thumbnail.webp" style="width: 400px;"></a>
+<p class="caption">在 Windows 10 的磁盘管理器中取消分配盘符</p>
+</div>
+<p>不过，这种方法只适用于本地环境，如果通过网络传输，就没有意义了。
+因此，我们可以尝试使用文件级的 Hack 来达成目的。</p>
+<div class="contents topic" id="id1">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#id2" id="id6">一个老办法：将文件追加到图片后</a></p></li>
+<li>
+<p><a class="reference internal" href="#ntfs" id="id7">NTFS 交换数据流</a></p>
+<ul>
+<li><p><a class="reference internal" href="#ads" id="id8">创建 ADS</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id5" id="id9">参考链接</a></p></li>
+</ul>
+</div>
+<!-- TEASER_END -->
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id6">一个老办法：将文件追加到图片后</a></h2>
+<p>相信很多人都看过这样的一个技巧:</p>
+<pre class="literal-block">copy /b a.png+b.txt c.png</pre>
+<p>这样就能把一个文件文件隐藏在图片中，并且 c.png 可以正常打开，从图像上也读不出任何信息。
+但在这个文件的末尾，却能够看到出现文本文件中的内容。</p>
+<p>这是因为，图片等文件在文件头处存储了内容的长度，超过这个长度的部分将被忽略，不会被图片浏览器读取。
+因此，在二进制层面上看，虽然文件的末尾已经添加了一部分字节，但是图像本身是不知道的。</p>
+<p><code>copy</code> 是 cmd.exe 的指令，它的作用是复制文件。
+懂得了上面处理的原理，应该就能写出在其他各平台上的处理办法:</p>
+<pre class="literal-block"># Linux
+cat a.png b.txt &gt; c.png
+# cmd.exe
+type a.png b.txt &gt; c.png
+# PowerShell
+# 不建议用 PowerShell，读取字节时卡爆了</pre>
+<p>除了文本文件，还可以加 ZIP 压缩包等。</p>
+<p>其他图片隐写需要一定的专业知识， 这篇文章 <a class="footnote-reference brackets" href="#zh-pic-ste" id="id3">1</a> 进行了简单的介绍。</p>
+</div>
+<div class="section" id="ntfs">
+<h2><a class="toc-backref" href="#id7">NTFS 交换数据流</a></h2>
+<p>对于 Windows 使用的 NTFS 文件系统，它提供了名为 <abbr>ADS（Alternate Data Stream）</abbr> 的特性，可以让我们将一些数据附加（也称「寄生」）在一个文件上。
+为了接下来表达上不出现歧义，我们将一个能通过文件系统直接访问的对象称为「文件入口」、
+将一个文件在磁盘上的实际数据称为「文件内容」。</p>
+<p>ADS 所寄生的数据拥有实际的文件内容，但没有文件入口，除非创建一个符号链接。</p>
+<div class="section" id="ads">
+<h3><a class="toc-backref" href="#id8">创建 ADS</a></h3>
+<p>cmd.exe 可以通过管道重定向的方式创建 ADS:</p>
+<pre class="literal-block"># 创建宿主文件
+echo Hello &gt; a.txt
+# 将内容写入 ADS
+echo World &gt; a.txt:b.txt</pre>
+<p>如上，便创建了一个名为 b.txt 的寄生在 a.txt 上的 ADS。
+这个 ADS 不会在图形界面上显示，也不会在 a.txt 的尺寸上统计、甚至不会统计到文件夹的尺寸大小上。</p>
+<p>可以用 more 读取文本内容的 ADS:</p>
+<pre class="literal-block">more &lt; a.txt:b.txt</pre>
+<p>一些二进制编辑器，例如 HxD <a class="footnote-reference brackets" href="#site-hxd" id="id4">2</a> 也可以通过命令行参数读取 ADS:</p>
+<pre class="literal-block">hxd a.txt:b.txt</pre>
+<p>交换流的发现:</p>
+<pre class="literal-block"># 可以通过 dir /r 来查看交换流
+dir /r</pre>
+<p>创建符号链接以便访问（需要管理员权限）:</p>
+<pre class="literal-block">mklink b.txt a.txt:b.txt</pre>
+<p>通过二进制读写，将交换流的文件内容复制到另一个文件:</p>
+<pre class="literal-block">more &lt;a.txt:b.txt &gt;bb.txt</pre>
+<p>交换流的删除:</p>
+<pre class="literal-block"># 删除宿主，则 ADS 也被删除
+del a.txt</pre>
+<p>复制宿主也会复制 ADS:</p>
+<pre class="literal-block">copy a.txt aa.txt
+dir /r</pre>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id9">参考链接</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="zh-pic-ste"><span class="brackets"><a class="fn-backref" href="#id3">1</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://zhuanlan.zhihu.com/p/62895080">https://zhuanlan.zhihu.com/p/62895080</a></p>
+</dd>
+<dt class="label" id="site-hxd"><span class="brackets"><a class="fn-backref" href="#id4">2</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://mh-nexus.de/en/hxd/">https://mh-nexus.de/en/hxd/</a></p>
+</dd>
+</dl>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../../categories/powershell/" rel="tag">powershell</a></li>
+            <li><a class="tag p-category" href="../../../categories/security/" rel="tag">security</a></li>
+            <li><a class="tag p-category" href="../../../categories/steganography/" rel="tag">steganography</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../publish-blog-with-github-actions/" rel="prev" title="使用 GitHub Actions 发布博客">上一篇文章</a>
+            </li>
+            <li class="next">
+                <a href="../graphicsmagick-usage/" rel="next" title="Graphics Magick 命令行使用方法">下一篇文章</a>
+            </li>
+        </ul></nav></aside><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="autoRenderKatex();"></script><script>
+        function autoRenderKatex() {
+            renderMathInElement(document.body,
+                {
+                    
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                }
+            );
+        }
+        </script></article></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

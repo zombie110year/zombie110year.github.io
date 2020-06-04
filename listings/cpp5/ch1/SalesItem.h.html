@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="SalesItem.h">
+<meta name="viewport" content="width=device-width">
+<title>SalesItem.h | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/listings/cpp5/ch1/SalesItem.h.html">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><nav class="breadcrumbs"><ul class="breadcrumb">
+<li><a href="../../">listings</a></li>
+                <li><a href="../">cpp5</a></li>
+                <li><a href=".">ch1</a></li>
+                <li>SalesItem.h</li>
+</ul></nav><h1>SalesItem.h
+            <small><a href="SalesItem.h">(源文件)</a></small>
+        </h1>
+    <table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#listingscpp5ch1salesitemh-1">  1</a>
+<a href="#listingscpp5ch1salesitemh-2">  2</a>
+<a href="#listingscpp5ch1salesitemh-3">  3</a>
+<a href="#listingscpp5ch1salesitemh-4">  4</a>
+<a href="#listingscpp5ch1salesitemh-5">  5</a>
+<a href="#listingscpp5ch1salesitemh-6">  6</a>
+<a href="#listingscpp5ch1salesitemh-7">  7</a>
+<a href="#listingscpp5ch1salesitemh-8">  8</a>
+<a href="#listingscpp5ch1salesitemh-9">  9</a>
+<a href="#listingscpp5ch1salesitemh-10"> 10</a>
+<a href="#listingscpp5ch1salesitemh-11"> 11</a>
+<a href="#listingscpp5ch1salesitemh-12"> 12</a>
+<a href="#listingscpp5ch1salesitemh-13"> 13</a>
+<a href="#listingscpp5ch1salesitemh-14"> 14</a>
+<a href="#listingscpp5ch1salesitemh-15"> 15</a>
+<a href="#listingscpp5ch1salesitemh-16"> 16</a>
+<a href="#listingscpp5ch1salesitemh-17"> 17</a>
+<a href="#listingscpp5ch1salesitemh-18"> 18</a>
+<a href="#listingscpp5ch1salesitemh-19"> 19</a>
+<a href="#listingscpp5ch1salesitemh-20"> 20</a>
+<a href="#listingscpp5ch1salesitemh-21"> 21</a>
+<a href="#listingscpp5ch1salesitemh-22"> 22</a>
+<a href="#listingscpp5ch1salesitemh-23"> 23</a>
+<a href="#listingscpp5ch1salesitemh-24"> 24</a>
+<a href="#listingscpp5ch1salesitemh-25"> 25</a>
+<a href="#listingscpp5ch1salesitemh-26"> 26</a>
+<a href="#listingscpp5ch1salesitemh-27"> 27</a>
+<a href="#listingscpp5ch1salesitemh-28"> 28</a>
+<a href="#listingscpp5ch1salesitemh-29"> 29</a>
+<a href="#listingscpp5ch1salesitemh-30"> 30</a>
+<a href="#listingscpp5ch1salesitemh-31"> 31</a>
+<a href="#listingscpp5ch1salesitemh-32"> 32</a>
+<a href="#listingscpp5ch1salesitemh-33"> 33</a>
+<a href="#listingscpp5ch1salesitemh-34"> 34</a>
+<a href="#listingscpp5ch1salesitemh-35"> 35</a>
+<a href="#listingscpp5ch1salesitemh-36"> 36</a>
+<a href="#listingscpp5ch1salesitemh-37"> 37</a>
+<a href="#listingscpp5ch1salesitemh-38"> 38</a>
+<a href="#listingscpp5ch1salesitemh-39"> 39</a>
+<a href="#listingscpp5ch1salesitemh-40"> 40</a>
+<a href="#listingscpp5ch1salesitemh-41"> 41</a>
+<a href="#listingscpp5ch1salesitemh-42"> 42</a>
+<a href="#listingscpp5ch1salesitemh-43"> 43</a>
+<a href="#listingscpp5ch1salesitemh-44"> 44</a>
+<a href="#listingscpp5ch1salesitemh-45"> 45</a>
+<a href="#listingscpp5ch1salesitemh-46"> 46</a>
+<a href="#listingscpp5ch1salesitemh-47"> 47</a>
+<a href="#listingscpp5ch1salesitemh-48"> 48</a>
+<a href="#listingscpp5ch1salesitemh-49"> 49</a>
+<a href="#listingscpp5ch1salesitemh-50"> 50</a>
+<a href="#listingscpp5ch1salesitemh-51"> 51</a>
+<a href="#listingscpp5ch1salesitemh-52"> 52</a>
+<a href="#listingscpp5ch1salesitemh-53"> 53</a>
+<a href="#listingscpp5ch1salesitemh-54"> 54</a>
+<a href="#listingscpp5ch1salesitemh-55"> 55</a>
+<a href="#listingscpp5ch1salesitemh-56"> 56</a>
+<a href="#listingscpp5ch1salesitemh-57"> 57</a>
+<a href="#listingscpp5ch1salesitemh-58"> 58</a>
+<a href="#listingscpp5ch1salesitemh-59"> 59</a>
+<a href="#listingscpp5ch1salesitemh-60"> 60</a>
+<a href="#listingscpp5ch1salesitemh-61"> 61</a>
+<a href="#listingscpp5ch1salesitemh-62"> 62</a>
+<a href="#listingscpp5ch1salesitemh-63"> 63</a>
+<a href="#listingscpp5ch1salesitemh-64"> 64</a>
+<a href="#listingscpp5ch1salesitemh-65"> 65</a>
+<a href="#listingscpp5ch1salesitemh-66"> 66</a>
+<a href="#listingscpp5ch1salesitemh-67"> 67</a>
+<a href="#listingscpp5ch1salesitemh-68"> 68</a>
+<a href="#listingscpp5ch1salesitemh-69"> 69</a>
+<a href="#listingscpp5ch1salesitemh-70"> 70</a>
+<a href="#listingscpp5ch1salesitemh-71"> 71</a>
+<a href="#listingscpp5ch1salesitemh-72"> 72</a>
+<a href="#listingscpp5ch1salesitemh-73"> 73</a>
+<a href="#listingscpp5ch1salesitemh-74"> 74</a>
+<a href="#listingscpp5ch1salesitemh-75"> 75</a>
+<a href="#listingscpp5ch1salesitemh-76"> 76</a>
+<a href="#listingscpp5ch1salesitemh-77"> 77</a>
+<a href="#listingscpp5ch1salesitemh-78"> 78</a>
+<a href="#listingscpp5ch1salesitemh-79"> 79</a>
+<a href="#listingscpp5ch1salesitemh-80"> 80</a>
+<a href="#listingscpp5ch1salesitemh-81"> 81</a>
+<a href="#listingscpp5ch1salesitemh-82"> 82</a>
+<a href="#listingscpp5ch1salesitemh-83"> 83</a>
+<a href="#listingscpp5ch1salesitemh-84"> 84</a>
+<a href="#listingscpp5ch1salesitemh-85"> 85</a>
+<a href="#listingscpp5ch1salesitemh-86"> 86</a>
+<a href="#listingscpp5ch1salesitemh-87"> 87</a>
+<a href="#listingscpp5ch1salesitemh-88"> 88</a>
+<a href="#listingscpp5ch1salesitemh-89"> 89</a>
+<a href="#listingscpp5ch1salesitemh-90"> 90</a>
+<a href="#listingscpp5ch1salesitemh-91"> 91</a>
+<a href="#listingscpp5ch1salesitemh-92"> 92</a>
+<a href="#listingscpp5ch1salesitemh-93"> 93</a>
+<a href="#listingscpp5ch1salesitemh-94"> 94</a>
+<a href="#listingscpp5ch1salesitemh-95"> 95</a>
+<a href="#listingscpp5ch1salesitemh-96"> 96</a>
+<a href="#listingscpp5ch1salesitemh-97"> 97</a>
+<a href="#listingscpp5ch1salesitemh-98"> 98</a>
+<a href="#listingscpp5ch1salesitemh-99"> 99</a>
+<a href="#listingscpp5ch1salesitemh-100">100</a>
+<a href="#listingscpp5ch1salesitemh-101">101</a>
+<a href="#listingscpp5ch1salesitemh-102">102</a>
+<a href="#listingscpp5ch1salesitemh-103">103</a>
+<a href="#listingscpp5ch1salesitemh-104">104</a>
+<a href="#listingscpp5ch1salesitemh-105">105</a>
+<a href="#listingscpp5ch1salesitemh-106">106</a>
+<a href="#listingscpp5ch1salesitemh-107">107</a>
+<a href="#listingscpp5ch1salesitemh-108">108</a>
+<a href="#listingscpp5ch1salesitemh-109">109</a>
+<a href="#listingscpp5ch1salesitemh-110">110</a>
+<a href="#listingscpp5ch1salesitemh-111">111</a>
+<a href="#listingscpp5ch1salesitemh-112">112</a>
+<a href="#listingscpp5ch1salesitemh-113">113</a>
+<a href="#listingscpp5ch1salesitemh-114">114</a>
+<a href="#listingscpp5ch1salesitemh-115">115</a>
+<a href="#listingscpp5ch1salesitemh-116">116</a>
+<a href="#listingscpp5ch1salesitemh-117">117</a>
+<a href="#listingscpp5ch1salesitemh-118">118</a>
+<a href="#listingscpp5ch1salesitemh-119">119</a>
+<a href="#listingscpp5ch1salesitemh-120">120</a>
+<a href="#listingscpp5ch1salesitemh-121">121</a>
+<a href="#listingscpp5ch1salesitemh-122">122</a>
+<a href="#listingscpp5ch1salesitemh-123">123</a>
+<a href="#listingscpp5ch1salesitemh-124">124</a>
+<a href="#listingscpp5ch1salesitemh-125">125</a>
+<a href="#listingscpp5ch1salesitemh-126">126</a>
+<a href="#listingscpp5ch1salesitemh-127">127</a>
+<a href="#listingscpp5ch1salesitemh-128">128</a>
+<a href="#listingscpp5ch1salesitemh-129">129</a>
+<a href="#listingscpp5ch1salesitemh-130">130</a>
+<a href="#listingscpp5ch1salesitemh-131">131</a></pre></div></td>
+<td class="code"><pre class="code literal-block"><a name="listingscpp5ch1salesitemh-1"></a><span class="cm">/*</span>
+<a name="listingscpp5ch1salesitemh-2"></a><span class="cm"> * This file contains code from "C++ Primer, Fifth Edition", by Stanley B.</span>
+<a name="listingscpp5ch1salesitemh-3"></a><span class="cm"> * Lippman, Josee Lajoie, and Barbara E. Moo, and is covered under the</span>
+<a name="listingscpp5ch1salesitemh-4"></a><span class="cm"> * copyright and warranty notices given in that book:</span>
+<a name="listingscpp5ch1salesitemh-5"></a><span class="cm"> *</span>
+<a name="listingscpp5ch1salesitemh-6"></a><span class="cm"> * "Copyright (c) 2013 by Objectwrite, Inc., Josee Lajoie, and Barbara E. Moo."</span>
+<a name="listingscpp5ch1salesitemh-7"></a><span class="cm"> *</span>
+<a name="listingscpp5ch1salesitemh-8"></a><span class="cm"> *</span>
+<a name="listingscpp5ch1salesitemh-9"></a><span class="cm"> * "The authors and publisher have taken care in the preparation of this book,</span>
+<a name="listingscpp5ch1salesitemh-10"></a><span class="cm"> * but make no expressed or implied warranty of any kind and assume no</span>
+<a name="listingscpp5ch1salesitemh-11"></a><span class="cm"> * responsibility for errors or omissions. No liability is assumed for</span>
+<a name="listingscpp5ch1salesitemh-12"></a><span class="cm"> * incidental or consequential damages in connection with or arising out of the</span>
+<a name="listingscpp5ch1salesitemh-13"></a><span class="cm"> * use of the information or programs contained herein."</span>
+<a name="listingscpp5ch1salesitemh-14"></a><span class="cm"> *</span>
+<a name="listingscpp5ch1salesitemh-15"></a><span class="cm"> * Permission is granted for this code to be used for educational purposes in</span>
+<a name="listingscpp5ch1salesitemh-16"></a><span class="cm"> * association with the book, given proper citation if and when posted or</span>
+<a name="listingscpp5ch1salesitemh-17"></a><span class="cm"> * reproduced.Any commercial use of this code requires the explicit written</span>
+<a name="listingscpp5ch1salesitemh-18"></a><span class="cm"> * permission of the publisher, Addison-Wesley Professional, a division of</span>
+<a name="listingscpp5ch1salesitemh-19"></a><span class="cm"> * Pearson Education, Inc. Send your request for permission, stating clearly</span>
+<a name="listingscpp5ch1salesitemh-20"></a><span class="cm"> * what code you would like to use, and in what specific way, to the following</span>
+<a name="listingscpp5ch1salesitemh-21"></a><span class="cm"> * address:</span>
+<a name="listingscpp5ch1salesitemh-22"></a><span class="cm"> *</span>
+<a name="listingscpp5ch1salesitemh-23"></a><span class="cm"> *     Pearson Education, Inc.</span>
+<a name="listingscpp5ch1salesitemh-24"></a><span class="cm"> *     Rights and Permissions Department</span>
+<a name="listingscpp5ch1salesitemh-25"></a><span class="cm"> *     One Lake Street</span>
+<a name="listingscpp5ch1salesitemh-26"></a><span class="cm"> *     Upper Saddle River, NJ  07458</span>
+<a name="listingscpp5ch1salesitemh-27"></a><span class="cm"> *     Fax: (201) 236-3290</span>
+<a name="listingscpp5ch1salesitemh-28"></a><span class="cm"> */</span>
+<a name="listingscpp5ch1salesitemh-29"></a>
+<a name="listingscpp5ch1salesitemh-30"></a><span class="cm">/* This file defines the SalesItem class used in chapter 1.</span>
+<a name="listingscpp5ch1salesitemh-31"></a><span class="cm"> * The code used in this file will be explained in</span>
+<a name="listingscpp5ch1salesitemh-32"></a><span class="cm"> * Chapter 7 (Classes) and Chapter 14 (Overloaded Operators)</span>
+<a name="listingscpp5ch1salesitemh-33"></a><span class="cm"> * Readers shouldn't try to understand the code in this file</span>
+<a name="listingscpp5ch1salesitemh-34"></a><span class="cm"> * until they have read those chapters.</span>
+<a name="listingscpp5ch1salesitemh-35"></a><span class="cm"> */</span>
+<a name="listingscpp5ch1salesitemh-36"></a>
+<a name="listingscpp5ch1salesitemh-37"></a><span class="cp">#ifndef SALESITEM_H</span>
+<a name="listingscpp5ch1salesitemh-38"></a><span class="c1">// we're here only if SALESITEM_H has not yet been defined</span>
+<a name="listingscpp5ch1salesitemh-39"></a><span class="cp">#define SALESITEM_H</span>
+<a name="listingscpp5ch1salesitemh-40"></a>
+<a name="listingscpp5ch1salesitemh-41"></a><span class="c1">// Definition of SalesItem class and related functions goes here</span>
+<a name="listingscpp5ch1salesitemh-42"></a><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<a name="listingscpp5ch1salesitemh-43"></a><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<a name="listingscpp5ch1salesitemh-44"></a>
+<a name="listingscpp5ch1salesitemh-45"></a><span class="n">class</span> <span class="n">SalesItem</span> <span class="p">{</span>
+<a name="listingscpp5ch1salesitemh-46"></a>  <span class="c1">// these declarations are explained section 7.2.1, p. 270</span>
+<a name="listingscpp5ch1salesitemh-47"></a>  <span class="c1">// and in chapter 14, pages 557, 558, 561</span>
+<a name="listingscpp5ch1salesitemh-48"></a>  <span class="n">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">operator</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="p">,</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">);</span>
+<a name="listingscpp5ch1salesitemh-49"></a>  <span class="n">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">);</span>
+<a name="listingscpp5ch1salesitemh-50"></a>  <span class="n">friend</span> <span class="kt">bool</span> <span class="n">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">);</span>
+<a name="listingscpp5ch1salesitemh-51"></a>  <span class="n">friend</span> <span class="kt">bool</span> <span class="n">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">);</span>
+<a name="listingscpp5ch1salesitemh-52"></a>
+<a name="listingscpp5ch1salesitemh-53"></a><span class="nl">public</span><span class="p">:</span>
+<a name="listingscpp5ch1salesitemh-54"></a>  <span class="c1">// constructors are explained in section 7.1.4, pages 262 - 265</span>
+<a name="listingscpp5ch1salesitemh-55"></a>  <span class="c1">// default constructor needed to initialize members of built-in type</span>
+<a name="listingscpp5ch1salesitemh-56"></a>  <span class="n">SalesItem</span><span class="p">()</span> <span class="o">:</span> <span class="n">units_sold</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span> <span class="p">{}</span>
+<a name="listingscpp5ch1salesitemh-57"></a>  <span class="n">SalesItem</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">book</span><span class="p">)</span>
+<a name="listingscpp5ch1salesitemh-58"></a>      <span class="o">:</span> <span class="n">bookNo</span><span class="p">(</span><span class="n">book</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span> <span class="p">{}</span>
+<a name="listingscpp5ch1salesitemh-59"></a>  <span class="n">SalesItem</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">is</span><span class="p">)</span> <span class="p">{</span> <span class="n">is</span> <span class="o">&gt;&gt;</span> <span class="o">*</span><span class="n">this</span><span class="p">;</span> <span class="p">}</span>
+<a name="listingscpp5ch1salesitemh-60"></a>
+<a name="listingscpp5ch1salesitemh-61"></a><span class="nl">public</span><span class="p">:</span>
+<a name="listingscpp5ch1salesitemh-62"></a>  <span class="c1">// operations on SalesItem objects</span>
+<a name="listingscpp5ch1salesitemh-63"></a>  <span class="c1">// member binary operator: left-hand operand bound to implicit this pointer</span>
+<a name="listingscpp5ch1salesitemh-64"></a>  <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">operator</span><span class="o">+=</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">);</span>
+<a name="listingscpp5ch1salesitemh-65"></a>
+<a name="listingscpp5ch1salesitemh-66"></a>  <span class="c1">// operations on SalesItem objects</span>
+<a name="listingscpp5ch1salesitemh-67"></a>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">isbn</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">bookNo</span><span class="p">;</span> <span class="p">}</span>
+<a name="listingscpp5ch1salesitemh-68"></a>  <span class="kt">double</span> <span class="n">avg_price</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-69"></a>  <span class="c1">// private members as before</span>
+<a name="listingscpp5ch1salesitemh-70"></a><span class="nl">private</span><span class="p">:</span>
+<a name="listingscpp5ch1salesitemh-71"></a>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">bookNo</span><span class="p">;</span> <span class="c1">// implicitly initialized to the empty string</span>
+<a name="listingscpp5ch1salesitemh-72"></a>  <span class="kt">unsigned</span> <span class="n">units_sold</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-73"></a>  <span class="kt">double</span> <span class="n">revenue</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-74"></a><span class="p">};</span>
+<a name="listingscpp5ch1salesitemh-75"></a>
+<a name="listingscpp5ch1salesitemh-76"></a><span class="c1">// used in chapter 10</span>
+<a name="listingscpp5ch1salesitemh-77"></a><span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">compareIsbn</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingscpp5ch1salesitemh-78"></a>  <span class="k">return</span> <span class="n">lhs</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">isbn</span><span class="p">();</span>
+<a name="listingscpp5ch1salesitemh-79"></a><span class="p">}</span>
+<a name="listingscpp5ch1salesitemh-80"></a>
+<a name="listingscpp5ch1salesitemh-81"></a><span class="c1">// nonmember binary operator: must declare a parameter for each operand</span>
+<a name="listingscpp5ch1salesitemh-82"></a><span class="n">SalesItem</span> <span class="n">operator</span><span class="o">+</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">);</span>
+<a name="listingscpp5ch1salesitemh-83"></a>
+<a name="listingscpp5ch1salesitemh-84"></a><span class="kr">inline</span> <span class="kt">bool</span> <span class="n">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingscpp5ch1salesitemh-85"></a>  <span class="c1">// must be made a friend of SalesItem</span>
+<a name="listingscpp5ch1salesitemh-86"></a>  <span class="k">return</span> <span class="n">lhs</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">&amp;&amp;</span> <span class="n">lhs</span><span class="p">.</span><span class="n">revenue</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">revenue</span> <span class="o">&amp;&amp;</span>
+<a name="listingscpp5ch1salesitemh-87"></a>         <span class="n">lhs</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">isbn</span><span class="p">();</span>
+<a name="listingscpp5ch1salesitemh-88"></a><span class="p">}</span>
+<a name="listingscpp5ch1salesitemh-89"></a>
+<a name="listingscpp5ch1salesitemh-90"></a><span class="kr">inline</span> <span class="kt">bool</span> <span class="n">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingscpp5ch1salesitemh-91"></a>  <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">lhs</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">);</span> <span class="c1">// != defined in terms of operator==</span>
+<a name="listingscpp5ch1salesitemh-92"></a><span class="p">}</span>
+<a name="listingscpp5ch1salesitemh-93"></a>
+<a name="listingscpp5ch1salesitemh-94"></a><span class="c1">// assumes that both objects refer to the same ISBN</span>
+<a name="listingscpp5ch1salesitemh-95"></a><span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">SalesItem</span><span class="o">::</span><span class="n">operator</span><span class="o">+=</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingscpp5ch1salesitemh-96"></a>  <span class="n">units_sold</span> <span class="o">+=</span> <span class="n">rhs</span><span class="p">.</span><span class="n">units_sold</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-97"></a>  <span class="n">revenue</span> <span class="o">+=</span> <span class="n">rhs</span><span class="p">.</span><span class="n">revenue</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-98"></a>  <span class="k">return</span> <span class="o">*</span><span class="n">this</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-99"></a><span class="p">}</span>
+<a name="listingscpp5ch1salesitemh-100"></a>
+<a name="listingscpp5ch1salesitemh-101"></a><span class="c1">// assumes that both objects refer to the same ISBN</span>
+<a name="listingscpp5ch1salesitemh-102"></a><span class="n">SalesItem</span> <span class="n">operator</span><span class="o">+</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingscpp5ch1salesitemh-103"></a>  <span class="n">SalesItem</span> <span class="n">ret</span><span class="p">(</span><span class="n">lhs</span><span class="p">);</span> <span class="c1">// copy (|lhs|) into a local object that we'll return</span>
+<a name="listingscpp5ch1salesitemh-104"></a>  <span class="n">ret</span> <span class="o">+=</span> <span class="n">rhs</span><span class="p">;</span>         <span class="c1">// add in the contents of (|rhs|)</span>
+<a name="listingscpp5ch1salesitemh-105"></a>  <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>         <span class="c1">// return (|ret|) by value</span>
+<a name="listingscpp5ch1salesitemh-106"></a><span class="p">}</span>
+<a name="listingscpp5ch1salesitemh-107"></a>
+<a name="listingscpp5ch1salesitemh-108"></a><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">operator</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">in</span><span class="p">,</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingscpp5ch1salesitemh-109"></a>  <span class="kt">double</span> <span class="n">price</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-110"></a>  <span class="n">in</span> <span class="o">&gt;&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">bookNo</span> <span class="o">&gt;&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">&gt;&gt;</span> <span class="n">price</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-111"></a>  <span class="c1">// check that the inputs succeeded</span>
+<a name="listingscpp5ch1salesitemh-112"></a>  <span class="k">if</span> <span class="p">(</span><span class="n">in</span><span class="p">)</span>
+<a name="listingscpp5ch1salesitemh-113"></a>    <span class="n">s</span><span class="p">.</span><span class="n">revenue</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">*</span> <span class="n">price</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-114"></a>  <span class="k">else</span>
+<a name="listingscpp5ch1salesitemh-115"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">SalesItem</span><span class="p">();</span> <span class="c1">// input failed: reset object to default state</span>
+<a name="listingscpp5ch1salesitemh-116"></a>  <span class="k">return</span> <span class="n">in</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-117"></a><span class="p">}</span>
+<a name="listingscpp5ch1salesitemh-118"></a>
+<a name="listingscpp5ch1salesitemh-119"></a><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingscpp5ch1salesitemh-120"></a>  <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">revenue</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span>
+<a name="listingscpp5ch1salesitemh-121"></a>      <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">avg_price</span><span class="p">();</span>
+<a name="listingscpp5ch1salesitemh-122"></a>  <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-123"></a><span class="p">}</span>
+<a name="listingscpp5ch1salesitemh-124"></a>
+<a name="listingscpp5ch1salesitemh-125"></a><span class="kt">double</span> <span class="n">SalesItem</span><span class="o">::</span><span class="n">avg_price</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+<a name="listingscpp5ch1salesitemh-126"></a>  <span class="k">if</span> <span class="p">(</span><span class="n">units_sold</span><span class="p">)</span>
+<a name="listingscpp5ch1salesitemh-127"></a>    <span class="k">return</span> <span class="n">revenue</span> <span class="o">/</span> <span class="n">units_sold</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-128"></a>  <span class="k">else</span>
+<a name="listingscpp5ch1salesitemh-129"></a>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="listingscpp5ch1salesitemh-130"></a><span class="p">}</span>
+<a name="listingscpp5ch1salesitemh-131"></a><span class="cp">#endif</span>
+</pre></td>
+</tr></table></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="must-ret-tof.cc">
+<meta name="viewport" content="width=device-width">
+<title>must-ret-tof.cc | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/listings/cpp5/ch6/must-ret-tof.cc.html">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><nav class="breadcrumbs"><ul class="breadcrumb">
+<li><a href="../../">listings</a></li>
+                <li><a href="../">cpp5</a></li>
+                <li><a href=".">ch6</a></li>
+                <li>must-ret-tof.cc</li>
+</ul></nav><h1>must-ret-tof.cc
+            <small><a href="must-ret-tof.cc">(源文件)</a></small>
+        </h1>
+    <table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#listingscpp5ch6must-ret-tofcc-1"> 1</a>
+<a href="#listingscpp5ch6must-ret-tofcc-2"> 2</a>
+<a href="#listingscpp5ch6must-ret-tofcc-3"> 3</a>
+<a href="#listingscpp5ch6must-ret-tofcc-4"> 4</a>
+<a href="#listingscpp5ch6must-ret-tofcc-5"> 5</a>
+<a href="#listingscpp5ch6must-ret-tofcc-6"> 6</a>
+<a href="#listingscpp5ch6must-ret-tofcc-7"> 7</a>
+<a href="#listingscpp5ch6must-ret-tofcc-8"> 8</a>
+<a href="#listingscpp5ch6must-ret-tofcc-9"> 9</a>
+<a href="#listingscpp5ch6must-ret-tofcc-10">10</a>
+<a href="#listingscpp5ch6must-ret-tofcc-11">11</a>
+<a href="#listingscpp5ch6must-ret-tofcc-12">12</a>
+<a href="#listingscpp5ch6must-ret-tofcc-13">13</a>
+<a href="#listingscpp5ch6must-ret-tofcc-14">14</a>
+<a href="#listingscpp5ch6must-ret-tofcc-15">15</a>
+<a href="#listingscpp5ch6must-ret-tofcc-16">16</a>
+<a href="#listingscpp5ch6must-ret-tofcc-17">17</a>
+<a href="#listingscpp5ch6must-ret-tofcc-18">18</a>
+<a href="#listingscpp5ch6must-ret-tofcc-19">19</a>
+<a href="#listingscpp5ch6must-ret-tofcc-20">20</a>
+<a href="#listingscpp5ch6must-ret-tofcc-21">21</a>
+<a href="#listingscpp5ch6must-ret-tofcc-22">22</a>
+<a href="#listingscpp5ch6must-ret-tofcc-23">23</a>
+<a href="#listingscpp5ch6must-ret-tofcc-24">24</a>
+<a href="#listingscpp5ch6must-ret-tofcc-25">25</a>
+<a href="#listingscpp5ch6must-ret-tofcc-26">26</a>
+<a href="#listingscpp5ch6must-ret-tofcc-27">27</a></pre></div></td>
+<td class="code"><pre class="code literal-block"><a name="listingscpp5ch6must-ret-tofcc-1"></a><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<a name="listingscpp5ch6must-ret-tofcc-2"></a><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<a name="listingscpp5ch6must-ret-tofcc-3"></a>
+<a name="listingscpp5ch6must-ret-tofcc-4"></a><span class="kt">bool</span> <span class="p">(</span><span class="o">*</span><span class="n">must_true</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">))(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingscpp5ch6must-ret-tofcc-5"></a>  <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingscpp5ch6must-ret-tofcc-6"></a>    <span class="k">return</span> <span class="p">[](</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>
+<a name="listingscpp5ch6must-ret-tofcc-7"></a>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<a name="listingscpp5ch6must-ret-tofcc-8"></a>    <span class="k">return</span> <span class="p">[](</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>
+<a name="listingscpp5ch6must-ret-tofcc-9"></a>  <span class="p">}</span>
+<a name="listingscpp5ch6must-ret-tofcc-10"></a><span class="p">}</span>
+<a name="listingscpp5ch6must-ret-tofcc-11"></a>
+<a name="listingscpp5ch6must-ret-tofcc-12"></a><span class="k">auto</span> <span class="n">must_false</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingscpp5ch6must-ret-tofcc-13"></a>  <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<a name="listingscpp5ch6must-ret-tofcc-14"></a>    <span class="k">return</span> <span class="p">[](</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>
+<a name="listingscpp5ch6must-ret-tofcc-15"></a>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<a name="listingscpp5ch6must-ret-tofcc-16"></a>    <span class="k">return</span> <span class="p">[](</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>
+<a name="listingscpp5ch6must-ret-tofcc-17"></a>  <span class="p">}</span>
+<a name="listingscpp5ch6must-ret-tofcc-18"></a><span class="p">}</span>
+<a name="listingscpp5ch6must-ret-tofcc-19"></a>
+<a name="listingscpp5ch6must-ret-tofcc-20"></a><span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+<a name="listingscpp5ch6must-ret-tofcc-21"></a>  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<a name="listingscpp5ch6must-ret-tofcc-22"></a>  <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<a name="listingscpp5ch6must-ret-tofcc-23"></a>  <span class="k">auto</span> <span class="n">ft</span> <span class="o">=</span> <span class="n">must_true</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<a name="listingscpp5ch6must-ret-tofcc-24"></a>  <span class="k">auto</span> <span class="n">ff</span> <span class="o">=</span> <span class="n">must_false</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<a name="listingscpp5ch6must-ret-tofcc-25"></a>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ft</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">ff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<a name="listingscpp5ch6must-ret-tofcc-26"></a>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="listingscpp5ch6must-ret-tofcc-27"></a><span class="p">}</span>
+</pre></td>
+</tr></table></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

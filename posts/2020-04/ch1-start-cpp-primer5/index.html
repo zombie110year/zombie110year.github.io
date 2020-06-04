@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="《C++ Primer 第五版》 第一章节读书笔记
+">
+<meta name="viewport" content="width=device-width">
+<title>第一章：开始 | C++ Primer 5 | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/posts/2020-04/ch1-start-cpp-primer5/">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+<meta name="author" content="Zombie110year">
+<meta property="og:site_name" content="ZomHub">
+<meta property="og:title" content="第一章：开始 | C++ Primer 5">
+<meta property="og:url" content="https://blog.zombie110year.top/posts/2020-04/ch1-start-cpp-primer5/">
+<meta property="og:description" content="《C++ Primer 第五版》 第一章节读书笔记
+">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-04-29T21:38:59+08:00">
+<meta property="article:tag" content="c++">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">第一章：开始 | C++ Primer 5</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Zombie110year
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-04-29T21:38:59+08:00" itemprop="datePublished" title="2020-04-29 21:38">2020-04-29 21:38</time></a>
+            </p>
+                    <p class="sourceline"><a href="index.rst" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<div class="contents topic" id="id1">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#main" id="id9">main 函数</a></p></li>
+<li><p><a class="reference internal" href="#iostream" id="id10">iostream</a></p></li>
+<li>
+<p><a class="reference internal" href="#id2" id="id11">控制流</a></p>
+<ul>
+<li><p><a class="reference internal" href="#while" id="id12">while</a></p></li>
+<li><p><a class="reference internal" href="#for" id="id13">for</a></p></li>
+</ul>
+</li>
+<li>
+<p><a class="reference internal" href="#cin" id="id14">cin 的布尔值</a></p>
+<ul>
+<li><p><a class="reference internal" href="#if" id="id15">if</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#salesitem" id="id16">类简介：SalesItem</a></p></li>
+<li>
+<p><a class="reference internal" href="#id3" id="id17">练习题</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id4" id="id18">练习 1.6</a></p></li>
+<li><p><a class="reference internal" href="#id5" id="id19">练习 1.20</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id20">练习 1.21</a></p></li>
+<li><p><a class="reference internal" href="#id7" id="id21">练习 1.22</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id8" id="id22">参考</a></p></li>
+</ul>
+</div>
+<!-- TEASER_END -->
+<div class="section" id="main">
+<h2><a class="toc-backref" href="#id9">main 函数</a></h2>
+<p>操作系统运行一个程序需要找到一个入口，<code>main</code> 函数就是 C++ 程序的入口。</p>
+<pre class="code cpp"><a name="rest_code_7b2eec47a1e748fbb00cb0bc9d3a83f1-1"></a><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+<a name="rest_code_7b2eec47a1e748fbb00cb0bc9d3a83f1-2"></a>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_7b2eec47a1e748fbb00cb0bc9d3a83f1-3"></a><span class="p">}</span>
+</pre>
+<dl class="field-list simple">
+<dt>param int argc</dt>
+<dd>
+<p>从命令行传入参数的数目；</p>
+</dd>
+<dt>param (char*)[] argv</dt>
+<dd>
+<p>从命令行传入的参数组成的数组，C-style 字符串；</p>
+</dd>
+<dt>return int</dt>
+<dd>
+<p>返回值作为程序的退出状态，约定 0 表示正常，其他值表示出现错误。</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="iostream">
+<h2><a class="toc-backref" href="#id10">iostream</a></h2>
+<p><code>iostream</code> 库提供了输入输出能力，包含两个类 <code>istream</code>, <code>ostream</code>。
+其中， <code>i</code> 表示 in，所以是读；<code>o</code> 表示 out, 是写。</p>
+<p>iostream 提供的读写功能以 <strong>流</strong> 的形式提供，「流」表示读写是顺序生成或消耗的。</p>
+<p>提供了四个标准读写对象：</p>
+<dl class="simple">
+<dt>cin</dt>
+<dd>
+<p>标准输入</p>
+</dd>
+<dt>cout</dt>
+<dd>
+<p>标准输出</p>
+</dd>
+<dt>cerr</dt>
+<dd>
+<p>标准错误输出</p>
+</dd>
+<dt>clog</dt>
+<dd>
+<p>标准日志输出</p>
+</dd>
+</dl>
+<p>从 C++ 程序到操作系统，c* 等标准输入输出可能会映射为不同的文件、缓冲区等，
+通常来说，默认配置下的程序，其标准输入输出都连接至控制台。</p>
+<p>c* 使用 <code>&lt;&lt;</code> 和 <code>&gt;&gt;</code> 两个运算符，前者表示将某个东西送入 c*，后者表示从 c* 抽出：</p>
+<pre class="code cpp"><a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-1"></a><span class="c1">// 导入符号，这样编译器才能在标准库中找到对应的对象</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-2"></a><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-3"></a><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 不需要命令行参数，可以省略掉 main 的形式参数</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-4"></a>    <span class="c1">// 标准库中的符号在 std 命名空间下，这里的声明让编译器知道后面的符号到 std:: 下去找</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-5"></a>    <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-6"></a>    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-7"></a>    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-8"></a>    <span class="c1">// 从 stdin 读取一个数到 a</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-9"></a>    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">;</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-10"></a>    <span class="c1">// 从 stdin 读取一个数到 b</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-11"></a>    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-12"></a>    <span class="c1">// 向 stdout 输出</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-13"></a>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s">" + "</span> <span class="o">&lt;&lt;</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="s">" = "</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-14"></a>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_8cb11ce61c194d01a2c7377998feb8a6-15"></a><span class="p">}</span>
+</pre>
+<p><code>endl</code> 是 <code>end line</code> 的缩写，其作用就是终止当前行并且刷新缓冲区，根据输入模式的不同，可能会插入换行符。</p>
+<p>测试 cout, cerr, clog 的关系：</p>
+<pre class="code cpp"><a name="rest_code_feb563f9cbb64fbd845c0ed3142263b6-1"></a><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<a name="rest_code_feb563f9cbb64fbd845c0ed3142263b6-2"></a><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<a name="rest_code_feb563f9cbb64fbd845c0ed3142263b6-3"></a>    <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<a name="rest_code_feb563f9cbb64fbd845c0ed3142263b6-4"></a>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"cout"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_feb563f9cbb64fbd845c0ed3142263b6-5"></a>    <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"cerr"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_feb563f9cbb64fbd845c0ed3142263b6-6"></a>    <span class="n">clog</span> <span class="o">&lt;&lt;</span> <span class="s">"clog"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_feb563f9cbb64fbd845c0ed3142263b6-7"></a><span class="p">}</span>
+</pre>
+<p>利用操作系统文件描述符重定向的功能，将输入划分到不同的文件:</p>
+<pre class="literal-block">./a.out 1&gt;cout.txt 2&gt;cerr.txt 3&gt;clog.txt</pre>
+<p>cout 的文件描述符是 1，cerr 和 clog 的文件描述符都是 2 。</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>形式参数和实际参数</p>
+<p>形式参数指在函数定义时写在后面的参数，其作用是表示一个符号、一个名字。
+实际参数则是传递给函数的实际的值。</p>
+</div>
+<p><code>::</code> 是作用域运算符，作用是解开一层命名空间。C++ 中的命名空间设定是为了避免名字冲突。
+如果没有命名空间则为了编译链接时，不将错误的代码链接到重复的符号上，就必须写很长的，不重复的名字。像 C 和 Object-C 一样。</p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id11">控制流</a></h2>
+<div class="section" id="while">
+<h3><a class="toc-backref" href="#id12">while</a></h3>
+<p>先判定，再执行。</p>
+<pre class="code cpp"><a name="rest_code_d5ec4ee617d643e79474ac9d20df5a68-1"></a><span class="k">while</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_d5ec4ee617d643e79474ac9d20df5a68-2"></a>    <span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<a name="rest_code_d5ec4ee617d643e79474ac9d20df5a68-3"></a><span class="p">}</span>
+</pre>
+</div>
+<div class="section" id="for">
+<h3><a class="toc-backref" href="#id13">for</a></h3>
+<pre class="code cpp"><a name="rest_code_d74737c7a240491fad5c7e6c764a202a-1"></a><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_d74737c7a240491fad5c7e6c764a202a-2"></a>    <span class="n">x</span> <span class="o">+=</span> <span class="n">i</span><span class="p">;</span>
+<a name="rest_code_d74737c7a240491fad5c7e6c764a202a-3"></a><span class="p">}</span>
+</pre>
+</div>
+</div>
+<div class="section" id="cin">
+<h2><a class="toc-backref" href="#id14">cin 的布尔值</a></h2>
+<pre class="code cpp"><a name="rest_code_05d595daae024c7d9382a584cc955c93-1"></a><span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_05d595daae024c7d9382a584cc955c93-2"></a><span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_05d595daae024c7d9382a584cc955c93-3"></a><span class="k">while</span><span class="p">(</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_05d595daae024c7d9382a584cc955c93-4"></a>    <span class="n">sum</span> <span class="o">+=</span> <span class="n">val</span><span class="p">;</span>
+<a name="rest_code_05d595daae024c7d9382a584cc955c93-5"></a><span class="p">}</span>
+<a name="rest_code_05d595daae024c7d9382a584cc955c93-6"></a><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"= "</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</pre>
+<p>cin 读取时会自动根据变量的类型解析输入，当能够成功解析时（在本例为字符串），其布尔值相当于 true；否则为 false。空白字符（空格、制表符、换行符等）将被忽略。</p>
+<p>因此上面这个程序在遇到非整数字面量形式的输入时，循环将会结束，输出结果。</p>
+<div class="section" id="if">
+<h3><a class="toc-backref" href="#id15">if</a></h3>
+<pre class="literal-block">if( cond ) {
+
+} else if ( cond ) {
+
+} else {
+
+}</pre>
+</div>
+</div>
+<div class="section" id="salesitem">
+<h2><a class="toc-backref" href="#id16">类简介：SalesItem</a></h2>
+<p>书店程序，SalesItem 代表一个出版物的销售情况。</p>
+<p>对于类，在设计时思考它有哪些性质，能执行哪些行为：</p>
+<dl class="simple">
+<dt>记录ISBN 书号</dt>
+<dd>
+<p>添加一个 isbn_id 的字段；</p>
+</dd>
+<dt>记录销售额、销量</dt>
+<dd>
+<p>添加对应字段来存储数据；</p>
+</dd>
+<dt>通过 iostream 读写</dt>
+<dd>
+<p>重载 <code>&lt;&lt;</code> 和 <code>&gt;&gt;</code> 运算符；</p>
+</dd>
+<dt>复制 SalesItem 实例</dt>
+<dd>
+<p>使用 <code>=</code> 赋值号；</p>
+</dd>
+<dt>合并两条销售记录</dt>
+<dd>
+<p>重载 <code>+</code> 和 <code>+=</code> 运算符；
+并且，需要保证只有相同的商品（ISBN相同）的销售记录可以合并。</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id17">练习题</a></h2>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id18">练习 1.6</a></h3>
+<p>下面这段程序不合法：</p>
+<pre class="code cpp"><a name="rest_code_7bca1bce4b5641b3b4df5543127dfcc6-1"></a><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello World"</span> <span class="o">&lt;&lt;</span> <span class="n">v1</span><span class="p">;</span>
+<a name="rest_code_7bca1bce4b5641b3b4df5543127dfcc6-2"></a>    <span class="o">&lt;&lt;</span> <span class="s">" and "</span> <span class="o">&lt;&lt;</span> <span class="n">v2</span><span class="p">;</span>
+<a name="rest_code_7bca1bce4b5641b3b4df5543127dfcc6-3"></a>    <span class="o">&lt;&lt;</span> <span class="s">" is "</span> <span class="o">&lt;&lt;</span> <span class="n">v1</span> <span class="o">+</span> <span class="n">v2</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">;</span>
+</pre>
+<p>因为分号结束语句，上面后两行的 <code>&lt;&lt;</code> 运算符没有操作数。</p>
+<p>更正：</p>
+<pre class="code diff"><a name="rest_code_aee5f005c7314b5caa507ade015a7af2-1"></a><span class="gd">- std::cout &lt;&lt; "Hello World" &lt;&lt; v1;</span>
+<a name="rest_code_aee5f005c7314b5caa507ade015a7af2-2"></a><span class="gi">+ std::cout &lt;&lt; "Hello World" &lt;&lt; v1</span>
+<a name="rest_code_aee5f005c7314b5caa507ade015a7af2-3"></a><span class="gd">-     &lt;&lt; " and " &lt;&lt; v2;</span>
+<a name="rest_code_aee5f005c7314b5caa507ade015a7af2-4"></a><span class="gi">+     &lt;&lt; " and " &lt;&lt; v2</span>
+</pre>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id19">练习 1.20</a></h3>
+<p><a class="reference external" href="../../../listings/cpp5/ch1/1-20.cc.html">cpp5/ch1/1-20.cc</a>  <a class="reference external" href="../../../listings/cpp5/ch1/1-20.cc">(源文件)</a></p>
+<pre class="code cpp"><a name="rest_code_a4cd5eddf59f42d3932496a88c70bfe1-1"></a><span class="cp">#include</span> <span class="cpf">"SalesItem.h"</span><span class="cp"></span>
+<a name="rest_code_a4cd5eddf59f42d3932496a88c70bfe1-2"></a>
+<a name="rest_code_a4cd5eddf59f42d3932496a88c70bfe1-3"></a><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<a name="rest_code_a4cd5eddf59f42d3932496a88c70bfe1-4"></a>  <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<a name="rest_code_a4cd5eddf59f42d3932496a88c70bfe1-5"></a>
+<a name="rest_code_a4cd5eddf59f42d3932496a88c70bfe1-6"></a>  <span class="n">SalesItem</span> <span class="n">si</span><span class="p">;</span>
+<a name="rest_code_a4cd5eddf59f42d3932496a88c70bfe1-7"></a>  <span class="k">while</span> <span class="p">(</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">si</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_a4cd5eddf59f42d3932496a88c70bfe1-8"></a>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">si</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_a4cd5eddf59f42d3932496a88c70bfe1-9"></a>  <span class="p">}</span>
+<a name="rest_code_a4cd5eddf59f42d3932496a88c70bfe1-10"></a>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_a4cd5eddf59f42d3932496a88c70bfe1-11"></a><span class="p">}</span>
+</pre>
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id20">练习 1.21</a></h3>
+<p><a class="reference external" href="../../../listings/cpp5/ch1/1-21.cc.html">cpp5/ch1/1-21.cc</a>  <a class="reference external" href="../../../listings/cpp5/ch1/1-21.cc">(源文件)</a></p>
+<pre class="code cpp"><a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-1"></a><span class="cp">#include</span> <span class="cpf">"SalesItem.h"</span><span class="cp"></span>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-2"></a>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-3"></a><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-4"></a>  <span class="n">SalesItem</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-5"></a>  <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">;</span>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-6"></a>  <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-7"></a>  <span class="k">if</span><span class="p">(</span> <span class="n">a</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">isbn</span><span class="p">())</span> <span class="p">{</span>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-8"></a>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-9"></a>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-10"></a>    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"期望相同的 ISBN: "</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">" != "</span> <span class="o">&lt;&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-11"></a>    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-12"></a>  <span class="p">}</span>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-13"></a>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_4d75a760ef8a4d498b171e9cfe021a4d-14"></a><span class="p">}</span>
+</pre>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id21">练习 1.22</a></h3>
+<p><a class="reference external" href="../../../listings/cpp5/ch1/1-22.cc.html">cpp5/ch1/1-22.cc</a>  <a class="reference external" href="../../../listings/cpp5/ch1/1-22.cc">(源文件)</a></p>
+<pre class="code cpp"><a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-1"></a><span class="cp">#include</span> <span class="cpf">"SalesItem.h"</span><span class="cp"></span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-2"></a>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-3"></a><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-4"></a>  <span class="n">SalesItem</span> <span class="n">sum</span><span class="p">;</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-5"></a>  <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">sum</span><span class="p">;</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-6"></a>  <span class="n">SalesItem</span> <span class="n">cur</span><span class="p">;</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-7"></a>  <span class="k">while</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-8"></a>    <span class="k">if</span> <span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">==</span> <span class="n">sum</span><span class="p">.</span><span class="n">isbn</span><span class="p">())</span> <span class="p">{</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-9"></a>      <span class="n">sum</span> <span class="o">+=</span> <span class="n">cur</span><span class="p">;</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-10"></a>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-11"></a>      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"期望相同的 ISBN："</span> <span class="o">&lt;&lt;</span> <span class="n">cur</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">" != "</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-12"></a>                <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-13"></a>      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-14"></a>    <span class="p">}</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-15"></a>  <span class="p">}</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-16"></a>  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-17"></a>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_0fcd6412d86547f2ac666e384b1c30c5-18"></a><span class="p">}</span>
+</pre>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id22">参考</a></h2>
+<p><a class="reference external" href="../../../listings/cpp5/ch1/SalesItem.h.html">cpp5/ch1/SalesItem.h</a>  <a class="reference external" href="../../../listings/cpp5/ch1/SalesItem.h">(源文件)</a></p>
+<pre class="code cpp"><a name="rest_code_c79f5154501e40179212d6a891d7e9d0-1"></a><span class="cm">/*</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-2"></a><span class="cm"> * This file contains code from "C++ Primer, Fifth Edition", by Stanley B.</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-3"></a><span class="cm"> * Lippman, Josee Lajoie, and Barbara E. Moo, and is covered under the</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-4"></a><span class="cm"> * copyright and warranty notices given in that book:</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-5"></a><span class="cm"> *</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-6"></a><span class="cm"> * "Copyright (c) 2013 by Objectwrite, Inc., Josee Lajoie, and Barbara E. Moo."</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-7"></a><span class="cm"> *</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-8"></a><span class="cm"> *</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-9"></a><span class="cm"> * "The authors and publisher have taken care in the preparation of this book,</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-10"></a><span class="cm"> * but make no expressed or implied warranty of any kind and assume no</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-11"></a><span class="cm"> * responsibility for errors or omissions. No liability is assumed for</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-12"></a><span class="cm"> * incidental or consequential damages in connection with or arising out of the</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-13"></a><span class="cm"> * use of the information or programs contained herein."</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-14"></a><span class="cm"> *</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-15"></a><span class="cm"> * Permission is granted for this code to be used for educational purposes in</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-16"></a><span class="cm"> * association with the book, given proper citation if and when posted or</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-17"></a><span class="cm"> * reproduced.Any commercial use of this code requires the explicit written</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-18"></a><span class="cm"> * permission of the publisher, Addison-Wesley Professional, a division of</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-19"></a><span class="cm"> * Pearson Education, Inc. Send your request for permission, stating clearly</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-20"></a><span class="cm"> * what code you would like to use, and in what specific way, to the following</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-21"></a><span class="cm"> * address:</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-22"></a><span class="cm"> *</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-23"></a><span class="cm"> *     Pearson Education, Inc.</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-24"></a><span class="cm"> *     Rights and Permissions Department</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-25"></a><span class="cm"> *     One Lake Street</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-26"></a><span class="cm"> *     Upper Saddle River, NJ  07458</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-27"></a><span class="cm"> *     Fax: (201) 236-3290</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-28"></a><span class="cm"> */</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-29"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-30"></a><span class="cm">/* This file defines the SalesItem class used in chapter 1.</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-31"></a><span class="cm"> * The code used in this file will be explained in</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-32"></a><span class="cm"> * Chapter 7 (Classes) and Chapter 14 (Overloaded Operators)</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-33"></a><span class="cm"> * Readers shouldn't try to understand the code in this file</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-34"></a><span class="cm"> * until they have read those chapters.</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-35"></a><span class="cm"> */</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-36"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-37"></a><span class="cp">#ifndef SALESITEM_H</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-38"></a><span class="c1">// we're here only if SALESITEM_H has not yet been defined</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-39"></a><span class="cp">#define SALESITEM_H</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-40"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-41"></a><span class="c1">// Definition of SalesItem class and related functions goes here</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-42"></a><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-43"></a><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-44"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-45"></a><span class="k">class</span> <span class="nc">SalesItem</span> <span class="p">{</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-46"></a>  <span class="c1">// these declarations are explained section 7.2.1, p. 270</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-47"></a>  <span class="c1">// and in chapter 14, pages 557, 558, 561</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-48"></a>  <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="p">,</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">);</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-49"></a>  <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">);</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-50"></a>  <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">);</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-51"></a>  <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">);</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-52"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-53"></a><span class="k">public</span><span class="o">:</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-54"></a>  <span class="c1">// constructors are explained in section 7.1.4, pages 262 - 265</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-55"></a>  <span class="c1">// default constructor needed to initialize members of built-in type</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-56"></a>  <span class="n">SalesItem</span><span class="p">()</span> <span class="o">:</span> <span class="n">units_sold</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span> <span class="p">{}</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-57"></a>  <span class="n">SalesItem</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">book</span><span class="p">)</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-58"></a>      <span class="o">:</span> <span class="n">bookNo</span><span class="p">(</span><span class="n">book</span><span class="p">),</span> <span class="n">units_sold</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">revenue</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span> <span class="p">{}</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-59"></a>  <span class="n">SalesItem</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">is</span><span class="p">)</span> <span class="p">{</span> <span class="n">is</span> <span class="o">&gt;&gt;</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span> <span class="p">}</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-60"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-61"></a><span class="k">public</span><span class="o">:</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-62"></a>  <span class="c1">// operations on SalesItem objects</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-63"></a>  <span class="c1">// member binary operator: left-hand operand bound to implicit this pointer</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-64"></a>  <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">+=</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">);</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-65"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-66"></a>  <span class="c1">// operations on SalesItem objects</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-67"></a>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">isbn</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">bookNo</span><span class="p">;</span> <span class="p">}</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-68"></a>  <span class="kt">double</span> <span class="n">avg_price</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-69"></a>  <span class="c1">// private members as before</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-70"></a><span class="k">private</span><span class="o">:</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-71"></a>  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">bookNo</span><span class="p">;</span> <span class="c1">// implicitly initialized to the empty string</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-72"></a>  <span class="kt">unsigned</span> <span class="n">units_sold</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-73"></a>  <span class="kt">double</span> <span class="n">revenue</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-74"></a><span class="p">};</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-75"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-76"></a><span class="c1">// used in chapter 10</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-77"></a><span class="kr">inline</span> <span class="kt">bool</span> <span class="nf">compareIsbn</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-78"></a>  <span class="k">return</span> <span class="n">lhs</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">isbn</span><span class="p">();</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-79"></a><span class="p">}</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-80"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-81"></a><span class="c1">// nonmember binary operator: must declare a parameter for each operand</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-82"></a><span class="n">SalesItem</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="p">);</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-83"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-84"></a><span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-85"></a>  <span class="c1">// must be made a friend of SalesItem</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-86"></a>  <span class="k">return</span> <span class="n">lhs</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">&amp;&amp;</span> <span class="n">lhs</span><span class="p">.</span><span class="n">revenue</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">revenue</span> <span class="o">&amp;&amp;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-87"></a>         <span class="n">lhs</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">isbn</span><span class="p">();</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-88"></a><span class="p">}</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-89"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-90"></a><span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-91"></a>  <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">lhs</span> <span class="o">==</span> <span class="n">rhs</span><span class="p">);</span> <span class="c1">// != defined in terms of operator==</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-92"></a><span class="p">}</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-93"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-94"></a><span class="c1">// assumes that both objects refer to the same ISBN</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-95"></a><span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">SalesItem</span><span class="o">::</span><span class="k">operator</span><span class="o">+=</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-96"></a>  <span class="n">units_sold</span> <span class="o">+=</span> <span class="n">rhs</span><span class="p">.</span><span class="n">units_sold</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-97"></a>  <span class="n">revenue</span> <span class="o">+=</span> <span class="n">rhs</span><span class="p">.</span><span class="n">revenue</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-98"></a>  <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-99"></a><span class="p">}</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-100"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-101"></a><span class="c1">// assumes that both objects refer to the same ISBN</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-102"></a><span class="n">SalesItem</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">lhs</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-103"></a>  <span class="n">SalesItem</span> <span class="n">ret</span><span class="p">(</span><span class="n">lhs</span><span class="p">);</span> <span class="c1">// copy (|lhs|) into a local object that we'll return</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-104"></a>  <span class="n">ret</span> <span class="o">+=</span> <span class="n">rhs</span><span class="p">;</span>         <span class="c1">// add in the contents of (|rhs|)</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-105"></a>  <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>         <span class="c1">// return (|ret|) by value</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-106"></a><span class="p">}</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-107"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-108"></a><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">in</span><span class="p">,</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-109"></a>  <span class="kt">double</span> <span class="n">price</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-110"></a>  <span class="n">in</span> <span class="o">&gt;&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">bookNo</span> <span class="o">&gt;&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">&gt;&gt;</span> <span class="n">price</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-111"></a>  <span class="c1">// check that the inputs succeeded</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-112"></a>  <span class="k">if</span> <span class="p">(</span><span class="n">in</span><span class="p">)</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-113"></a>    <span class="n">s</span><span class="p">.</span><span class="n">revenue</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">*</span> <span class="n">price</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-114"></a>  <span class="k">else</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-115"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">SalesItem</span><span class="p">();</span> <span class="c1">// input failed: reset object to default state</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-116"></a>  <span class="k">return</span> <span class="n">in</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-117"></a><span class="p">}</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-118"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-119"></a><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span> <span class="o">&amp;</span><span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">SalesItem</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-120"></a>  <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">isbn</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">units_sold</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">revenue</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-121"></a>      <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">avg_price</span><span class="p">();</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-122"></a>  <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-123"></a><span class="p">}</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-124"></a>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-125"></a><span class="kt">double</span> <span class="n">SalesItem</span><span class="o">::</span><span class="n">avg_price</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-126"></a>  <span class="k">if</span> <span class="p">(</span><span class="n">units_sold</span><span class="p">)</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-127"></a>    <span class="k">return</span> <span class="n">revenue</span> <span class="o">/</span> <span class="n">units_sold</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-128"></a>  <span class="k">else</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-129"></a>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-130"></a><span class="p">}</span>
+<a name="rest_code_c79f5154501e40179212d6a891d7e9d0-131"></a><span class="cp">#endif</span>
+</pre>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../../categories/c%2B%2B/" rel="tag">c++</a></li>
+        </ul></nav></aside><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="autoRenderKatex();"></script><script>
+        function autoRenderKatex() {
+            renderMathInElement(document.body,
+                {
+                    
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                }
+            );
+        }
+        </script></article></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

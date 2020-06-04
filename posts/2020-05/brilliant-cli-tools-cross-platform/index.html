@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="在 Unix，Windows NT 系统上通用的命令行程序。">
+<meta name="viewport" content="width=device-width">
+<title>优秀的跨平台命令行工具 | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+<meta name="author" content="Zombie110year">
+<link rel="prev" href="../add-cli-args-tab-completion-pwsh/" title="向 PowerShell 添加命令行工具的参数自动补全" type="text/html">
+<link rel="next" href="../aria2-rpc-webdav-on-vps/" title="在 VPS 上配置 Aria2 RPC 服务并将文件同步至坚果云 webdav" type="text/html">
+<meta property="og:site_name" content="ZomHub">
+<meta property="og:title" content="优秀的跨平台命令行工具">
+<meta property="og:url" content="https://blog.zombie110year.top/posts/2020-05/brilliant-cli-tools-cross-platform/">
+<meta property="og:description" content="在 Unix，Windows NT 系统上通用的命令行程序。">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-05-14T17:17:43+08:00">
+<meta property="article:tag" content="cli">
+<meta property="article:tag" content="unix">
+<meta property="article:tag" content="windows">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">优秀的跨平台命令行工具</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Zombie110year
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-05-14T17:17:43+08:00" itemprop="datePublished" title="2020-05-14 17:17">2020-05-14 17:17</time></a>
+            </p>
+                    <p class="sourceline"><a href="index.rst" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<div class="contents topic" id="id1">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li>
+<p><a class="reference internal" href="#nushell" id="id18">NuShell</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id3" id="id19">NuShell 哲学</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id20">数据类型</a></p></li>
+<li><p><a class="reference internal" href="#id7" id="id21">加载数据</a></p></li>
+<li><p><a class="reference internal" href="#id9" id="id22">管道</a></p></li>
+<li><p><a class="reference internal" href="#id10" id="id23">内置命令与外部程序冲突</a></p></li>
+<li><p><a class="reference internal" href="#id11" id="id24">环境变量</a></p></li>
+<li><p><a class="reference internal" href="#id12" id="id25">二维表操作</a></p></li>
+</ul>
+</li>
+<li>
+<p><a class="reference internal" href="#starship" id="id26">starship</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id15" id="id27">个人配置</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id17" id="id28">参考链接</a></p></li>
+</ul>
+</div>
+<!-- TEASER_END -->
+<div class="section" id="nushell">
+<h2><a class="toc-backref" href="#id18">NuShell</a></h2>
+<p>NuShell <a class="footnote-reference brackets" href="#site-nushell" id="id2">1</a> 是使用 Rust 语言编写的跨 Unix, Windows, macOS 系统的现代 Shell 程序，目前在 GitHub 上有 7k 星。
+NuShell 的首个 Commit 在 2019 年提交，且截至 2020 年 5 月 14 日仍在活跃更新，目前的最新版本为 0.14.0 。</p>
+<p>在 Windows 上，可以使用 scoop 方便地安装 NuShell：</p>
+<pre class="code powershell"><a name="rest_code_22b605d4339141c1ab6f6cd37fcda9a0-1"></a><span class="n">scoop</span> <span class="n">install</span> <span class="n">nu</span>
+</pre>
+<p>可以在内部调用 <code class="docutils literal">help</code> 命令查询内置的帮助文档。</p>
+<p>NuShell 的特色在于结构化数据以及类似 SQL 的二维表操作，
+在处理大量结构化数据时具有一定优势，几乎相当于一个针对本地文件、数据的 SQL 解析器。</p>
+<p>不过其缺少流程控制语句的特点，让它难以胜任逻辑化的系统管理工作。</p>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id19">NuShell 哲学</a></h3>
+<p>NuShell 不像传统的 Unix Shell，它从 PowerShell 汲取灵感，将每个命令产生的结果视作具有结构的对象，而不是传统的原始字节。但和 PowerShell 相比，它的速度要快得多。</p>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id20">数据类型</a></h3>
+<p>NuShell 具有以下几种数据类型：</p>
+<div class="section" id="id5">
+<h4>简单数据</h4>
+<dl>
+<dt>整数（Integers）</dt>
+<dd>
+<p>字面量满足正则表达式 <cite>d+</cite> 形式。</p>
+</dd>
+<dt>实数（Decimals）</dt>
+<dd>
+<p>字面量满足 <cite>d+.d+</cite> 形式。</p>
+</dd>
+<dt>字符串（Strings）</dt>
+<dd>
+<p>在 NuShell 中，字符串都是 UTF8 编码的。</p>
+</dd>
+<dt>行（Lines）</dt>
+<dd>
+<p>行是由 <abbr>OS（Operation System）</abbr> 默认换行符结尾的字符串。</p>
+</dd>
+<dt>列路径（Column Paths）</dt>
+<dd>
+<p>用来表达从一个表到子表、列、行直到单元格的路径:</p>
+<pre class="literal-block">sys | get host.sessions</pre>
+<p>上面例子中的 <code class="docutils literal">host.sessions</code> 就是一个列路径的实例。</p>
+</dd>
+<dt>模式（Patterns）</dt>
+<dd>
+<p>通常也叫做通配符模式。可以使用 <code class="docutils literal">*</code> 和 <code class="docutils literal">?</code> 通配符。</p>
+</dd>
+<dt>布尔数（Booleans）</dt>
+<dd>
+<p><code class="docutils literal">$true</code> 与 <code class="docutils literal">$false</code>。</p>
+</dd>
+<dt>时刻（Dates）</dt>
+<dd>
+<p>默认使用 UTC 时区。</p>
+</dd>
+<dt>时间（Durations）</dt>
+<dd>
+<p>用来表示一段持续的时间，例如 <code class="docutils literal">1s</code> 代表一秒。字面量为 数字+后缀单位 的形式。单位有：</p>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead><tr>
+<th class="head"><p>单位</p></th>
+<th class="head"><p>含义</p></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><p>s</p></td>
+<td><p>秒</p></td>
+</tr>
+<tr>
+<td><p>m</p></td>
+<td><p>分</p></td>
+</tr>
+<tr>
+<td><p>h</p></td>
+<td><p>时</p></td>
+</tr>
+<tr>
+<td><p>d</p></td>
+<td><p>日</p></td>
+</tr>
+<tr>
+<td><p>w</p></td>
+<td><p>周</p></td>
+</tr>
+<tr>
+<td><p>M</p></td>
+<td><p>月</p></td>
+</tr>
+<tr>
+<td><p>y</p></td>
+<td><p>年</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>范围（Ranges）</dt>
+<dd>
+<p>类似于 Rust 中的范围，但是个闭区间，且从 0 开始:</p>
+<pre class="literal-block">ls | range 0..1
+# 取流的前 2 项</pre>
+</dd>
+<dt>路径（Paths）</dt>
+<dd>
+<p>这里的路径指文件系统路径，表示法和 OS 有关:</p>
+<pre class="literal-block">C:\Program Files
+/usr/bin</pre>
+</dd>
+<dt>文件尺寸（Bytes）</dt>
+<dd>
+<p>特指文件有多大，后缀的单位可以是 b, kb, mb, gb 等。</p>
+</dd>
+<dt>二进制数据（Binary Data）</dt>
+<dd>
+<p>现在这个类型才表示二进制的数据，如一段原始字节。</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id6">
+<h4>结构化数据</h4>
+<dl>
+<dt>二维表（Rows）</dt>
+<dd>
+<p>一组拥有多个字段的数据组成的二维表。</p>
+</dd>
+<dt>列表（Lists）</dt>
+<dd>
+<p>一列数据，不在乎其字段是否相同，如果有不同的字段，会影响它们的打印样式。
+如果要从字面量来构造列表，可以使用 <code class="docutils literal">[]</code> 做界定符，空格 `` `` 做分隔符:</p>
+<pre class="literal-block">echo [α β θ]</pre>
+</dd>
+<dt>块（Blocks）</dt>
+<dd>
+<p>用来表示一段 NuShell 的代码块。</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id21">加载数据</a></h3>
+<p>NuShell 使用 <code class="docutils literal">open</code> 命令来从文件系统加载数据。特别的是， open 会自动识别一些存储数据的文件格式的后缀名，然后以结构化数据的方式加载它们，例如:</p>
+<pre class="literal-block">open data.json
+open data.yaml
+open data.toml
+open data.xml
+open data.csv
+open data.ini</pre>
+<p>等。</p>
+<p>对于太长的文本文件，如果没有使用管道传输数据而是直接打印到终端的话，则会自动打开一个分页器，可以通过 ESC 退出。
+不过对于存在中文的文本文件，其换行时会出现一些偏差：每一个全角字符都会导致下一行多显示一个前缀的空格 <a class="footnote-reference brackets" href="#issue-nushell-1784" id="id8">2</a> 。</p>
+<p>open 也可以附加参数 <code class="docutils literal"><span class="pre">--raw</span></code> 来以原始模式读取一个文件。</p>
+<p>fetch 命令则可以读取网络数据:</p>
+<pre class="literal-block">fetch https://cn.bing.com/search?q=nushell</pre>
+</div>
+<div class="section" id="id9">
+<h3><a class="toc-backref" href="#id22">管道</a></h3>
+<p>与 NuShell 的管道相互配合的命令可以有以下三种类别：</p>
+<ul class="simple">
+<li><p>处理一个流（例如 ls）</p></li>
+<li><p>过滤一个流（例如 where）</p></li>
+<li><p>消费管道的输出（例如 autoview）</p></li>
+</ul>
+<p>在每个命令的结束，除非显式调用其他消费命令，否则 autoview 都将被自动调用。</p>
+<p>在一个流中传递的数据是结构化的，每个对象都有不同的字段，在使用 where 过滤时，可以通过布尔表达式进行运算:</p>
+<pre class="literal-block">ls | where type == 'Dir'
+# 筛选出当前目录下的所有子目录</pre>
+<p>常用的对管道进行处理的命令有：</p>
+<dl>
+<dt>where</dt>
+<dd>
+<p>通过一个布尔表达式对管道内容进行筛选。</p>
+</dd>
+<dt>sort-by</dt>
+<dd>
+<p>以某个字段为依据进行排序。</p>
+</dd>
+<dt>get</dt>
+<dd>
+<p>获取管道内容的某个字段，如果该字段有嵌套的子字段，那么可以用 <code class="docutils literal">.</code> 进行访问:</p>
+<pre class="literal-block">sys | get host.name</pre>
+</dd>
+<dt>save</dt>
+<dd>
+<p>将管道内容保存到文件。</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id10">
+<h3><a class="toc-backref" href="#id23">内置命令与外部程序冲突</a></h3>
+<p>因为 NuShell 拥有众多内置命令，如果有与外部命令命名冲突的，可以在命令前添加脱字符 <code class="docutils literal">^</code> 来调用外部程序:</p>
+<pre class="literal-block">^echo Hello World</pre>
+</div>
+<div class="section" id="id11">
+<h3><a class="toc-backref" href="#id24">环境变量</a></h3>
+<p>NuShell 创建的环境变量都会保存在 <code class="docutils literal">$nu.env</code> 对象的对应命令字段下。</p>
+<p>对于单个临时变量，可以使用 Bash 语法:</p>
+<pre class="literal-block">FOO=bar echo $nu.env.FOO</pre>
+<p>也可以使用 with-env 命令:</p>
+<pre class="literal-block">with-env [FOO bar] { echo $nu.env.FOO }</pre>
+</div>
+<div class="section" id="id12">
+<h3><a class="toc-backref" href="#id25">二维表操作</a></h3>
+<p>见官方文档 <a class="reference external" href="https://www.nushell.sh/book/en/working_with_tables.html">https://www.nushell.sh/book/en/working_with_tables.html</a></p>
+</div>
+</div>
+<div class="section" id="starship">
+<h2><a class="toc-backref" href="#id26">starship</a></h2>
+<p>StarShip <a class="footnote-reference brackets" href="#site-starship" id="id13">3</a> 是一个命令提示符增强工具，其着眼于</p>
+<dl class="simple">
+<dt>兼容</dt>
+<dd>
+<p>支持 Unix、Windows、macOS 上的 Bash、Fish、Zsh、PowerShell 以及 Ion 等 OS 和 Shell 程序。</p>
+</dd>
+<dt>速度</dt>
+<dd>
+<p>使用 Rust 编写，确保速度与内存安全。</p>
+</dd>
+<dt>扩展</dt>
+<dd>
+<p>拥有极强的可扩展性。</p>
+</dd>
+</dl>
+<p>由于 StarShip 使用 Powerline 字体进行美化，请在安装前确保设备上已经安装 Powerline 字体 <a class="footnote-reference brackets" href="#site-powerline-font" id="id14">4</a> 并在终端程序中启用。</p>
+<p>在 Windows 上，通过 scoop 安装：</p>
+<blockquote>
+<p>scoop install starship</p>
+</blockquote>
+<p>在 PowerShell 的配置文件中写入：</p>
+<pre class="code powershell"><a name="rest_code_ab5ae4340b17440b91e7ff514496ce8c-1"></a><span class="nb">Invoke-Expression</span> <span class="p">(&amp;</span><span class="n">starship</span> <span class="n">init</span> <span class="n">powershell</span><span class="p">)</span>
+</pre>
+<div class="section" id="id15">
+<h3><a class="toc-backref" href="#id27">个人配置</a></h3>
+<p>详细的配置手册可以阅读其文档，有中文版本 <a class="footnote-reference brackets" href="#doc-starship" id="id16">5</a> 。
+个人的 starship 配置文件位于 <code class="docutils literal"><span class="pre">~/.config/starship.toml</span></code>。</p>
+<pre class="code toml"><a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-1"></a><span class="n">prompt_order</span> <span class="o">=</span> <span class="p">[</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-2"></a>    <span class="s">"python"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-3"></a>    <span class="s">"rust"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-4"></a>    <span class="s">"username"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-5"></a>    <span class="s">"hostname"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-6"></a>    <span class="s">"directory"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-7"></a>    <span class="s">"git_branch"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-8"></a>    <span class="s">"git_commit"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-9"></a>    <span class="s">"git_state"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-10"></a>    <span class="s">"git_status"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-11"></a>    <span class="s">"jobs"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-12"></a>    <span class="s">"time"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-13"></a>    <span class="s">"cmd_duration"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-14"></a>    <span class="s">"line_break"</span><span class="p">,</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-15"></a>    <span class="s">"character"</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-16"></a><span class="p">]</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-17"></a>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-18"></a><span class="k">[character]</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-19"></a><span class="n">use_symbol_for_status</span> <span class="o">=</span> <span class="kc">true</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-20"></a>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-21"></a><span class="k">[directory]</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-22"></a><span class="n">prefix</span> <span class="o">=</span> <span class="s">":"</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-23"></a>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-24"></a><span class="k">[git_branch]</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-25"></a><span class="n">symbol</span> <span class="o">=</span> <span class="s">"|"</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-26"></a>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-27"></a><span class="k">[time]</span>
+<a name="rest_code_08a4906bb3d14b27b2ecb06beef04515-28"></a><span class="n">disabled</span> <span class="o">=</span> <span class="kc">false</span>
+</pre>
+</div>
+</div>
+<div class="section" id="id17">
+<h2><a class="toc-backref" href="#id28">参考链接</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="site-nushell"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://github.com/nushell/nushell">https://github.com/nushell/nushell</a></p>
+</dd>
+<dt class="label" id="issue-nushell-1784"><span class="brackets"><a class="fn-backref" href="#id8">2</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://github.com/nushell/nushell/issues/1784">https://github.com/nushell/nushell/issues/1784</a></p>
+</dd>
+<dt class="label" id="site-starship"><span class="brackets"><a class="fn-backref" href="#id13">3</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://starship.rs/zh-CN/">https://starship.rs/zh-CN/</a></p>
+</dd>
+<dt class="label" id="site-powerline-font"><span class="brackets"><a class="fn-backref" href="#id14">4</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://github.com/powerline/fonts">https://github.com/powerline/fonts</a></p>
+</dd>
+<dt class="label" id="doc-starship"><span class="brackets"><a class="fn-backref" href="#id16">5</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://starship.rs/zh-CN/config/">https://starship.rs/zh-CN/config/</a></p>
+</dd>
+</dl>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../../categories/cli/" rel="tag">cli</a></li>
+            <li><a class="tag p-category" href="../../../categories/unix/" rel="tag">unix</a></li>
+            <li><a class="tag p-category" href="../../../categories/windows/" rel="tag">windows</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../add-cli-args-tab-completion-pwsh/" rel="prev" title="向 PowerShell 添加命令行工具的参数自动补全">上一篇文章</a>
+            </li>
+            <li class="next">
+                <a href="../aria2-rpc-webdav-on-vps/" rel="next" title="在 VPS 上配置 Aria2 RPC 服务并将文件同步至坚果云 webdav">下一篇文章</a>
+            </li>
+        </ul></nav></aside><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="autoRenderKatex();"></script><script>
+        function autoRenderKatex() {
+            renderMathInElement(document.body,
+                {
+                    
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                }
+            );
+        }
+        </script></article></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

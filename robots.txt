@@ -1,0 +1,4 @@
+Sitemap: https://blog.zombie110year.top/sitemapindex.xml
+
+User-Agent: *
+Host: blog.zombie110year.top

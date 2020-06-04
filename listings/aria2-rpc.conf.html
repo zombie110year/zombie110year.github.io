@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="aria2-rpc.conf">
+<meta name="viewport" content="width=device-width">
+<title>aria2-rpc.conf | ZomHub</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/listings/aria2-rpc.conf.html">
+<link rel="icon" href="../favicon.ico" sizes="256x256">
+<link rel="icon" href="../favicon.png" sizes="512x512">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../archive.html">归档</a></li>
+                <li><a href="../categories/">标签</a></li>
+                <li><a href="../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><nav class="breadcrumbs"><ul class="breadcrumb">
+<li><a href=".">listings</a></li>
+                <li>aria2-rpc.conf</li>
+</ul></nav><h1>aria2-rpc.conf
+            <small><a href="aria2-rpc.conf">(源文件)</a></small>
+        </h1>
+    <table class="codetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre><a href="#listingsaria2-rpcconf-1">  1</a>
+<a href="#listingsaria2-rpcconf-2">  2</a>
+<a href="#listingsaria2-rpcconf-3">  3</a>
+<a href="#listingsaria2-rpcconf-4">  4</a>
+<a href="#listingsaria2-rpcconf-5">  5</a>
+<a href="#listingsaria2-rpcconf-6">  6</a>
+<a href="#listingsaria2-rpcconf-7">  7</a>
+<a href="#listingsaria2-rpcconf-8">  8</a>
+<a href="#listingsaria2-rpcconf-9">  9</a>
+<a href="#listingsaria2-rpcconf-10"> 10</a>
+<a href="#listingsaria2-rpcconf-11"> 11</a>
+<a href="#listingsaria2-rpcconf-12"> 12</a>
+<a href="#listingsaria2-rpcconf-13"> 13</a>
+<a href="#listingsaria2-rpcconf-14"> 14</a>
+<a href="#listingsaria2-rpcconf-15"> 15</a>
+<a href="#listingsaria2-rpcconf-16"> 16</a>
+<a href="#listingsaria2-rpcconf-17"> 17</a>
+<a href="#listingsaria2-rpcconf-18"> 18</a>
+<a href="#listingsaria2-rpcconf-19"> 19</a>
+<a href="#listingsaria2-rpcconf-20"> 20</a>
+<a href="#listingsaria2-rpcconf-21"> 21</a>
+<a href="#listingsaria2-rpcconf-22"> 22</a>
+<a href="#listingsaria2-rpcconf-23"> 23</a>
+<a href="#listingsaria2-rpcconf-24"> 24</a>
+<a href="#listingsaria2-rpcconf-25"> 25</a>
+<a href="#listingsaria2-rpcconf-26"> 26</a>
+<a href="#listingsaria2-rpcconf-27"> 27</a>
+<a href="#listingsaria2-rpcconf-28"> 28</a>
+<a href="#listingsaria2-rpcconf-29"> 29</a>
+<a href="#listingsaria2-rpcconf-30"> 30</a>
+<a href="#listingsaria2-rpcconf-31"> 31</a>
+<a href="#listingsaria2-rpcconf-32"> 32</a>
+<a href="#listingsaria2-rpcconf-33"> 33</a>
+<a href="#listingsaria2-rpcconf-34"> 34</a>
+<a href="#listingsaria2-rpcconf-35"> 35</a>
+<a href="#listingsaria2-rpcconf-36"> 36</a>
+<a href="#listingsaria2-rpcconf-37"> 37</a>
+<a href="#listingsaria2-rpcconf-38"> 38</a>
+<a href="#listingsaria2-rpcconf-39"> 39</a>
+<a href="#listingsaria2-rpcconf-40"> 40</a>
+<a href="#listingsaria2-rpcconf-41"> 41</a>
+<a href="#listingsaria2-rpcconf-42"> 42</a>
+<a href="#listingsaria2-rpcconf-43"> 43</a>
+<a href="#listingsaria2-rpcconf-44"> 44</a>
+<a href="#listingsaria2-rpcconf-45"> 45</a>
+<a href="#listingsaria2-rpcconf-46"> 46</a>
+<a href="#listingsaria2-rpcconf-47"> 47</a>
+<a href="#listingsaria2-rpcconf-48"> 48</a>
+<a href="#listingsaria2-rpcconf-49"> 49</a>
+<a href="#listingsaria2-rpcconf-50"> 50</a>
+<a href="#listingsaria2-rpcconf-51"> 51</a>
+<a href="#listingsaria2-rpcconf-52"> 52</a>
+<a href="#listingsaria2-rpcconf-53"> 53</a>
+<a href="#listingsaria2-rpcconf-54"> 54</a>
+<a href="#listingsaria2-rpcconf-55"> 55</a>
+<a href="#listingsaria2-rpcconf-56"> 56</a>
+<a href="#listingsaria2-rpcconf-57"> 57</a>
+<a href="#listingsaria2-rpcconf-58"> 58</a>
+<a href="#listingsaria2-rpcconf-59"> 59</a>
+<a href="#listingsaria2-rpcconf-60"> 60</a>
+<a href="#listingsaria2-rpcconf-61"> 61</a>
+<a href="#listingsaria2-rpcconf-62"> 62</a>
+<a href="#listingsaria2-rpcconf-63"> 63</a>
+<a href="#listingsaria2-rpcconf-64"> 64</a>
+<a href="#listingsaria2-rpcconf-65"> 65</a>
+<a href="#listingsaria2-rpcconf-66"> 66</a>
+<a href="#listingsaria2-rpcconf-67"> 67</a>
+<a href="#listingsaria2-rpcconf-68"> 68</a>
+<a href="#listingsaria2-rpcconf-69"> 69</a>
+<a href="#listingsaria2-rpcconf-70"> 70</a>
+<a href="#listingsaria2-rpcconf-71"> 71</a>
+<a href="#listingsaria2-rpcconf-72"> 72</a>
+<a href="#listingsaria2-rpcconf-73"> 73</a>
+<a href="#listingsaria2-rpcconf-74"> 74</a>
+<a href="#listingsaria2-rpcconf-75"> 75</a>
+<a href="#listingsaria2-rpcconf-76"> 76</a>
+<a href="#listingsaria2-rpcconf-77"> 77</a>
+<a href="#listingsaria2-rpcconf-78"> 78</a>
+<a href="#listingsaria2-rpcconf-79"> 79</a>
+<a href="#listingsaria2-rpcconf-80"> 80</a>
+<a href="#listingsaria2-rpcconf-81"> 81</a>
+<a href="#listingsaria2-rpcconf-82"> 82</a>
+<a href="#listingsaria2-rpcconf-83"> 83</a>
+<a href="#listingsaria2-rpcconf-84"> 84</a>
+<a href="#listingsaria2-rpcconf-85"> 85</a>
+<a href="#listingsaria2-rpcconf-86"> 86</a>
+<a href="#listingsaria2-rpcconf-87"> 87</a>
+<a href="#listingsaria2-rpcconf-88"> 88</a>
+<a href="#listingsaria2-rpcconf-89"> 89</a>
+<a href="#listingsaria2-rpcconf-90"> 90</a>
+<a href="#listingsaria2-rpcconf-91"> 91</a>
+<a href="#listingsaria2-rpcconf-92"> 92</a>
+<a href="#listingsaria2-rpcconf-93"> 93</a>
+<a href="#listingsaria2-rpcconf-94"> 94</a>
+<a href="#listingsaria2-rpcconf-95"> 95</a>
+<a href="#listingsaria2-rpcconf-96"> 96</a>
+<a href="#listingsaria2-rpcconf-97"> 97</a>
+<a href="#listingsaria2-rpcconf-98"> 98</a>
+<a href="#listingsaria2-rpcconf-99"> 99</a>
+<a href="#listingsaria2-rpcconf-100">100</a>
+<a href="#listingsaria2-rpcconf-101">101</a>
+<a href="#listingsaria2-rpcconf-102">102</a>
+<a href="#listingsaria2-rpcconf-103">103</a>
+<a href="#listingsaria2-rpcconf-104">104</a>
+<a href="#listingsaria2-rpcconf-105">105</a>
+<a href="#listingsaria2-rpcconf-106">106</a>
+<a href="#listingsaria2-rpcconf-107">107</a>
+<a href="#listingsaria2-rpcconf-108">108</a>
+<a href="#listingsaria2-rpcconf-109">109</a>
+<a href="#listingsaria2-rpcconf-110">110</a>
+<a href="#listingsaria2-rpcconf-111">111</a>
+<a href="#listingsaria2-rpcconf-112">112</a>
+<a href="#listingsaria2-rpcconf-113">113</a>
+<a href="#listingsaria2-rpcconf-114">114</a>
+<a href="#listingsaria2-rpcconf-115">115</a>
+<a href="#listingsaria2-rpcconf-116">116</a>
+<a href="#listingsaria2-rpcconf-117">117</a>
+<a href="#listingsaria2-rpcconf-118">118</a>
+<a href="#listingsaria2-rpcconf-119">119</a>
+<a href="#listingsaria2-rpcconf-120">120</a>
+<a href="#listingsaria2-rpcconf-121">121</a>
+<a href="#listingsaria2-rpcconf-122">122</a>
+<a href="#listingsaria2-rpcconf-123">123</a>
+<a href="#listingsaria2-rpcconf-124">124</a>
+<a href="#listingsaria2-rpcconf-125">125</a>
+<a href="#listingsaria2-rpcconf-126">126</a>
+<a href="#listingsaria2-rpcconf-127">127</a>
+<a href="#listingsaria2-rpcconf-128">128</a>
+<a href="#listingsaria2-rpcconf-129">129</a>
+<a href="#listingsaria2-rpcconf-130">130</a>
+<a href="#listingsaria2-rpcconf-131">131</a>
+<a href="#listingsaria2-rpcconf-132">132</a>
+<a href="#listingsaria2-rpcconf-133">133</a>
+<a href="#listingsaria2-rpcconf-134">134</a>
+<a href="#listingsaria2-rpcconf-135">135</a>
+<a href="#listingsaria2-rpcconf-136">136</a>
+<a href="#listingsaria2-rpcconf-137">137</a>
+<a href="#listingsaria2-rpcconf-138">138</a>
+<a href="#listingsaria2-rpcconf-139">139</a>
+<a href="#listingsaria2-rpcconf-140">140</a>
+<a href="#listingsaria2-rpcconf-141">141</a>
+<a href="#listingsaria2-rpcconf-142">142</a>
+<a href="#listingsaria2-rpcconf-143">143</a>
+<a href="#listingsaria2-rpcconf-144">144</a></pre></div></td>
+<td class="code"><pre class="code literal-block"><a name="listingsaria2-rpcconf-1"></a><span class="o">################################</span> <span class="n">Aria2</span> <span class="err">配置文件</span> <span class="o">################################</span>
+<a name="listingsaria2-rpcconf-2"></a><span class="o">#</span>       <span class="err">需要保存为</span> <span class="o">~/</span><span class="p">.</span><span class="n">aria2</span><span class="o">/</span><span class="n">aria2</span><span class="p">.</span><span class="n">conf</span>                                         <span class="o">#</span>
+<a name="listingsaria2-rpcconf-3"></a><span class="o">#</span>       <span class="err">或者在运行时通过</span> <span class="c1">--conf-path 选项指定                                  #</span>
+<a name="listingsaria2-rpcconf-4"></a><span class="o">################################################################################</span>
+<a name="listingsaria2-rpcconf-5"></a>
+<a name="listingsaria2-rpcconf-6"></a><span class="o">##############################</span> <span class="n">RPC</span> <span class="err">以及安全性设置</span> <span class="o">##############################</span>
+<a name="listingsaria2-rpcconf-7"></a><span class="o">#</span> <span class="err">启用</span> <span class="n">RPC</span> <span class="err">服务</span>
+<a name="listingsaria2-rpcconf-8"></a><span class="n">enable</span><span class="o">-</span><span class="n">rpc</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-9"></a><span class="o">#</span> <span class="err">允许接受所有来源的</span> <span class="n">RPC</span> <span class="err">请求</span>
+<a name="listingsaria2-rpcconf-10"></a><span class="n">rpc</span><span class="o">-</span><span class="n">allow</span><span class="o">-</span><span class="n">origin</span><span class="o">-</span><span class="k">all</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-11"></a><span class="o">#</span> <span class="err">接受非本地请求</span>
+<a name="listingsaria2-rpcconf-12"></a><span class="n">rpc</span><span class="o">-</span><span class="k">listen</span><span class="o">-</span><span class="k">all</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-13"></a><span class="o">#</span> <span class="n">RPC</span> <span class="err">服务所绑定的端口</span>
+<a name="listingsaria2-rpcconf-14"></a><span class="n">rpc</span><span class="o">-</span><span class="k">listen</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="mi">6800</span>
+<a name="listingsaria2-rpcconf-15"></a><span class="o">#</span> <span class="err">不保存通过</span> <span class="n">RPC</span> <span class="err">上传的种子</span><span class="o">/</span><span class="err">元数据文件</span>
+<a name="listingsaria2-rpcconf-16"></a><span class="n">rpc</span><span class="o">-</span><span class="n">save</span><span class="o">-</span><span class="n">upload</span><span class="o">-</span><span class="n">metadata</span><span class="o">=</span><span class="k">false</span>
+<a name="listingsaria2-rpcconf-17"></a><span class="o">#</span> <span class="n">rpc</span> <span class="err">密钥（旧的</span> <span class="n">rpc</span><span class="o">-</span><span class="k">user</span><span class="p">,</span><span class="n">passwd</span> <span class="err">已被废弃）</span>
+<a name="listingsaria2-rpcconf-18"></a><span class="o">#</span> <span class="err">在客户端需要附带此密钥才接受请求</span>
+<a name="listingsaria2-rpcconf-19"></a><span class="o">#</span><span class="n">rpc</span><span class="o">-</span><span class="n">secret</span><span class="o">=</span>
+<a name="listingsaria2-rpcconf-20"></a>
+<a name="listingsaria2-rpcconf-21"></a><span class="o">#####################################</span> <span class="err">速度</span> <span class="o">#####################################</span>
+<a name="listingsaria2-rpcconf-22"></a><span class="o">#</span> <span class="err">最大并发下载量</span>
+<a name="listingsaria2-rpcconf-23"></a><span class="k">max</span><span class="o">-</span><span class="n">concurrent</span><span class="o">-</span><span class="n">downloads</span><span class="o">=</span><span class="mi">5</span>
+<a name="listingsaria2-rpcconf-24"></a><span class="o">#</span> <span class="err">一次下载任务最多向服务器同时建立的连接数</span>
+<a name="listingsaria2-rpcconf-25"></a><span class="k">max</span><span class="o">-</span><span class="k">connection</span><span class="o">-</span><span class="n">per</span><span class="o">-</span><span class="n">server</span><span class="o">=</span><span class="mi">5</span>
+<a name="listingsaria2-rpcconf-26"></a><span class="o">#</span> <span class="err">最小文件分片大小</span><span class="p">,</span> <span class="err">下载线程数上限取决于能分出多少片</span><span class="p">,</span> <span class="err">对于小文件重要</span>
+<a name="listingsaria2-rpcconf-27"></a><span class="k">min</span><span class="o">-</span><span class="n">split</span><span class="o">-</span><span class="k">size</span><span class="o">=</span><span class="mi">2</span><span class="n">M</span>
+<a name="listingsaria2-rpcconf-28"></a><span class="o">#</span> <span class="err">单文件最大线程数</span>
+<a name="listingsaria2-rpcconf-29"></a><span class="n">split</span><span class="o">=</span><span class="mi">4</span>
+<a name="listingsaria2-rpcconf-30"></a><span class="o">#</span> <span class="err">全局下载速度限制，</span><span class="mi">0</span> <span class="err">表示不限制</span>
+<a name="listingsaria2-rpcconf-31"></a><span class="k">max</span><span class="o">-</span><span class="n">overall</span><span class="o">-</span><span class="n">download</span><span class="o">-</span><span class="k">limit</span><span class="o">=</span><span class="mi">0</span>
+<a name="listingsaria2-rpcconf-32"></a><span class="o">#</span> <span class="err">单文件下载速度限制</span>
+<a name="listingsaria2-rpcconf-33"></a><span class="k">max</span><span class="o">-</span><span class="n">download</span><span class="o">-</span><span class="k">limit</span><span class="o">=</span><span class="mi">0</span>
+<a name="listingsaria2-rpcconf-34"></a><span class="o">#</span> <span class="err">上传速度限制</span>
+<a name="listingsaria2-rpcconf-35"></a><span class="k">max</span><span class="o">-</span><span class="n">overall</span><span class="o">-</span><span class="n">upload</span><span class="o">-</span><span class="k">limit</span><span class="o">=</span><span class="mi">0</span>
+<a name="listingsaria2-rpcconf-36"></a><span class="o">#</span> <span class="err">单文件上传速度限制</span>
+<a name="listingsaria2-rpcconf-37"></a><span class="k">max</span><span class="o">-</span><span class="n">upload</span><span class="o">-</span><span class="k">limit</span><span class="o">=</span><span class="mi">0</span>
+<a name="listingsaria2-rpcconf-38"></a><span class="o">#</span> <span class="err">断开速度过慢的连接</span>
+<a name="listingsaria2-rpcconf-39"></a><span class="n">lowest</span><span class="o">-</span><span class="n">speed</span><span class="o">-</span><span class="k">limit</span><span class="o">=</span><span class="mi">0</span>
+<a name="listingsaria2-rpcconf-40"></a>
+<a name="listingsaria2-rpcconf-41"></a><span class="o">#################################</span> <span class="err">进度保存相关</span> <span class="o">#################################</span>
+<a name="listingsaria2-rpcconf-42"></a><span class="k">input</span><span class="o">-</span><span class="n">file</span><span class="o">=/</span><span class="k">data</span><span class="o">/</span><span class="k">cache</span><span class="o">/</span><span class="k">session</span><span class="p">.</span><span class="n">txt</span>
+<a name="listingsaria2-rpcconf-43"></a><span class="n">save</span><span class="o">-</span><span class="k">session</span><span class="o">=/</span><span class="k">data</span><span class="o">/</span><span class="k">cache</span><span class="o">/</span><span class="k">session</span><span class="p">.</span><span class="n">txt</span>
+<a name="listingsaria2-rpcconf-44"></a><span class="o">#</span> <span class="err">定时保存会话的时间间隔（秒），需要</span><span class="mi">1</span><span class="p">.</span><span class="mi">16</span><span class="p">.</span><span class="mi">1</span><span class="err">之后的</span><span class="n">release版</span>
+<a name="listingsaria2-rpcconf-45"></a><span class="n">save</span><span class="o">-</span><span class="k">session</span><span class="o">-</span><span class="nb">interval</span><span class="o">=</span><span class="mi">60</span>
+<a name="listingsaria2-rpcconf-46"></a><span class="o">#</span> <span class="err">自动保存</span> <span class="p">.</span><span class="n">aria2</span> <span class="err">控制文件的时间间隔（秒）</span>
+<a name="listingsaria2-rpcconf-47"></a><span class="o">#</span> <span class="err">设为</span> <span class="mi">0</span> <span class="err">则不会保存</span>
+<a name="listingsaria2-rpcconf-48"></a><span class="o">#</span><span class="n">auto</span><span class="o">-</span><span class="n">save</span><span class="o">-</span><span class="nb">interval</span><span class="o">=</span>
+<a name="listingsaria2-rpcconf-49"></a><span class="o">#</span> <span class="err">当启动</span> <span class="n">aria2</span> <span class="err">时，是否从上次保存的会话继续下载</span>
+<a name="listingsaria2-rpcconf-50"></a><span class="k">continue</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-51"></a>
+<a name="listingsaria2-rpcconf-52"></a><span class="o">###################################</span> <span class="err">本地文件</span> <span class="o">###################################</span>
+<a name="listingsaria2-rpcconf-53"></a><span class="o">#</span> <span class="err">下载文件保存路径</span><span class="p">,</span> <span class="err">默认为当前启动位置</span>
+<a name="listingsaria2-rpcconf-54"></a><span class="n">dir</span><span class="o">=/</span><span class="k">data</span><span class="o">/</span><span class="n">download</span>
+<a name="listingsaria2-rpcconf-55"></a><span class="o">#</span> <span class="err">磁盘缓存，需要</span> <span class="mi">1</span><span class="p">.</span><span class="mi">16</span> <span class="err">以上版本</span>
+<a name="listingsaria2-rpcconf-56"></a><span class="o">#</span> <span class="err">其作用是减少磁盘</span> <span class="n">IO</span> <span class="err">频率</span>
+<a name="listingsaria2-rpcconf-57"></a><span class="n">disk</span><span class="o">-</span><span class="k">cache</span><span class="o">=</span><span class="mi">64</span><span class="n">M</span>
+<a name="listingsaria2-rpcconf-58"></a><span class="o">#</span> <span class="err">启用</span> <span class="n">mmap</span> <span class="err">，需要</span> <span class="mi">1</span><span class="p">.</span><span class="mi">15</span> <span class="err">以上版本</span>
+<a name="listingsaria2-rpcconf-59"></a><span class="n">enable</span><span class="o">-</span><span class="n">mmap</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-60"></a><span class="o">#</span> <span class="err">文件预分配</span><span class="p">,</span> <span class="err">能有效降低文件碎片</span><span class="p">,</span> <span class="err">提高磁盘性能</span><span class="p">.</span> <span class="err">缺点是预分配时间较长</span>
+<a name="listingsaria2-rpcconf-61"></a><span class="o">#</span> <span class="k">none</span>      <span class="err">不会进行预分配</span>
+<a name="listingsaria2-rpcconf-62"></a><span class="o">#</span> <span class="n">prealloc</span>  <span class="err">在下载前预分配</span>
+<a name="listingsaria2-rpcconf-63"></a><span class="o">#</span> <span class="n">falloc</span>    <span class="err">在下载前预分配，但不会阻塞；需要文件系统支持</span> <span class="n">posix_fallocate</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="err">函数</span>
+<a name="listingsaria2-rpcconf-64"></a><span class="o">#</span>           <span class="err">目前</span> <span class="n">ext4</span><span class="p">(</span><span class="n">extended</span><span class="p">)</span> <span class="n">btrfs</span> <span class="n">xfs</span> <span class="n">ntfs</span><span class="p">(</span><span class="n">mingw</span> <span class="n">built</span><span class="p">)</span> <span class="err">支持</span>
+<a name="listingsaria2-rpcconf-65"></a><span class="o">#</span> <span class="n">trunc</span>     <span class="err">让操作系统将对应文件截断至指定大小，但这是仅仅是修改文件系统元数据，</span>
+<a name="listingsaria2-rpcconf-66"></a><span class="o">#</span>           <span class="err">而无法避免磁盘碎片</span>
+<a name="listingsaria2-rpcconf-67"></a><span class="o">#</span> <span class="err">所需时间</span> <span class="k">none</span> <span class="o">&lt;</span> <span class="n">trunc</span> <span class="o">&lt;</span> <span class="n">falloc</span> <span class="o">&lt;&lt;</span> <span class="n">prealloc</span>
+<a name="listingsaria2-rpcconf-68"></a><span class="n">file</span><span class="o">-</span><span class="n">allocation</span><span class="o">=</span><span class="n">falloc</span>
+<a name="listingsaria2-rpcconf-69"></a>
+<a name="listingsaria2-rpcconf-70"></a><span class="o">###################################</span> <span class="n">HTTP设置</span> <span class="o">###################################</span>
+<a name="listingsaria2-rpcconf-71"></a><span class="o">#</span> <span class="err">通过</span> <span class="n">HTTP</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="err">下载时的</span> <span class="n">referer</span> <span class="err">头字段的设置</span>
+<a name="listingsaria2-rpcconf-72"></a><span class="o">#</span> <span class="o">*</span>     <span class="err">将下载地址作为</span> <span class="n">referer</span> <span class="err">头</span>
+<a name="listingsaria2-rpcconf-73"></a><span class="n">referer</span><span class="o">=*</span>
+<a name="listingsaria2-rpcconf-74"></a><span class="o">#</span> <span class="err">加载</span> <span class="n">cookies</span><span class="err">，支持以下三种格式：</span>
+<a name="listingsaria2-rpcconf-75"></a><span class="o">#</span> <span class="o">-</span> <span class="n">Firefox3</span> <span class="n">format</span> <span class="p">(</span><span class="n">SQLite3</span><span class="p">)</span>
+<a name="listingsaria2-rpcconf-76"></a><span class="o">#</span> <span class="o">-</span> <span class="n">Chromium</span><span class="o">/</span><span class="n">Google</span> <span class="n">Chrome</span> <span class="p">(</span><span class="n">SQLite3</span><span class="p">)</span>
+<a name="listingsaria2-rpcconf-77"></a><span class="o">#</span> <span class="o">-</span> <span class="n">Mozilla</span><span class="o">/</span><span class="n">Firefox</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">.</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">Netscape</span>
+<a name="listingsaria2-rpcconf-78"></a><span class="o">#</span> <span class="err">通常将此字段设置为浏览器所使用的</span> <span class="n">cookie</span> <span class="err">数据库文件</span>
+<a name="listingsaria2-rpcconf-79"></a><span class="o">#</span> <span class="err">需要</span> <span class="n">aria2</span> <span class="err">在编译时链接了</span> <span class="n">sqlite3</span> <span class="err">库</span>
+<a name="listingsaria2-rpcconf-80"></a><span class="o">#</span><span class="k">load</span><span class="o">-</span><span class="n">cookies</span><span class="o">=~/</span><span class="p">.</span><span class="n">aria2</span><span class="o">/</span><span class="n">cookies</span><span class="p">.</span><span class="n">sqlite</span>
+<a name="listingsaria2-rpcconf-81"></a><span class="o">#</span> <span class="err">用户身份，通常设置为浏览器使用的</span> <span class="k">User</span><span class="o">-</span><span class="n">Agent</span><span class="err">，以下载某些只允许浏览下载的网站</span>
+<a name="listingsaria2-rpcconf-82"></a><span class="o">#</span> <span class="err">可以在</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">fengzhizi715</span><span class="o">/</span><span class="k">user</span><span class="o">-</span><span class="n">agent</span><span class="o">-</span><span class="n">list</span> <span class="err">获取各浏览器使用的</span> <span class="n">UA</span>
+<a name="listingsaria2-rpcconf-83"></a><span class="k">user</span><span class="o">-</span><span class="n">agent</span><span class="o">=</span><span class="s1">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'</span>
+<a name="listingsaria2-rpcconf-84"></a>
+<a name="listingsaria2-rpcconf-85"></a><span class="o">####################################</span> <span class="n">BT相关</span> <span class="o">####################################</span>
+<a name="listingsaria2-rpcconf-86"></a><span class="o">#</span> <span class="err">不将仅做种的任务计入总任务数限制</span>
+<a name="listingsaria2-rpcconf-87"></a><span class="n">bt</span><span class="o">-</span><span class="n">detach</span><span class="o">-</span><span class="n">seed</span><span class="o">-</span><span class="k">only</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-88"></a><span class="o">#</span> <span class="err">启用本地节点查找</span>
+<a name="listingsaria2-rpcconf-89"></a><span class="n">bt</span><span class="o">-</span><span class="n">enable</span><span class="o">-</span><span class="n">lpd</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-90"></a><span class="o">#</span> <span class="err">强制加密</span><span class="p">,</span> <span class="err">拒绝旧</span> <span class="n">BT</span> <span class="err">协议握手，防迅雷必备</span>
+<a name="listingsaria2-rpcconf-91"></a><span class="n">bt</span><span class="o">-</span><span class="n">require</span><span class="o">-</span><span class="n">crypto</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-92"></a><span class="o">#</span> <span class="err">在下载磁力链接时，先检查本地元数据缓存，如果不存在再向</span> <span class="n">DHT</span> <span class="err">请求</span>
+<a name="listingsaria2-rpcconf-93"></a><span class="n">bt</span><span class="o">-</span><span class="k">load</span><span class="o">-</span><span class="n">saved</span><span class="o">-</span><span class="n">metadata</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-94"></a><span class="o">#</span> <span class="err">单种子最大连接数</span>
+<a name="listingsaria2-rpcconf-95"></a><span class="n">bt</span><span class="o">-</span><span class="k">max</span><span class="o">-</span><span class="n">peers</span><span class="o">=</span><span class="mi">0</span>
+<a name="listingsaria2-rpcconf-96"></a><span class="o">#</span> <span class="err">通过磁力链接下载时，将元数据保存为</span> <span class="n">torrent</span> <span class="err">文件</span>
+<a name="listingsaria2-rpcconf-97"></a><span class="n">bt</span><span class="o">-</span><span class="n">save</span><span class="o">-</span><span class="n">metadata</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-98"></a><span class="o">#</span> <span class="err">添加额外的</span><span class="n">tracker</span>
+<a name="listingsaria2-rpcconf-99"></a><span class="o">#</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">trackerslist</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">all_aria2</span><span class="p">.</span><span class="n">txt</span> <span class="err">提供了大量可用</span> <span class="n">tracker</span> <span class="err">地址</span>
+<a name="listingsaria2-rpcconf-100"></a><span class="o">#</span><span class="n">bt</span><span class="o">-</span><span class="n">tracker</span><span class="o">=&lt;</span><span class="n">uris</span><span class="o">&gt;</span>
+<a name="listingsaria2-rpcconf-101"></a><span class="o">#</span> <span class="err">启用</span> <span class="n">DHT</span> <span class="err">网络</span>
+<a name="listingsaria2-rpcconf-102"></a><span class="n">enable</span><span class="o">-</span><span class="n">dht</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-103"></a><span class="n">enable</span><span class="o">-</span><span class="n">dht6</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-104"></a><span class="o">#</span> <span class="n">dht</span> <span class="err">数据文件保存地址</span>
+<a name="listingsaria2-rpcconf-105"></a><span class="n">dht</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="k">data</span><span class="o">/</span><span class="k">cache</span><span class="o">/</span><span class="n">dht</span><span class="p">.</span><span class="n">dat</span>
+<a name="listingsaria2-rpcconf-106"></a><span class="n">dht</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">path6</span><span class="o">=/</span><span class="k">data</span><span class="o">/</span><span class="k">cache</span><span class="o">/</span><span class="n">dht6</span><span class="p">.</span><span class="n">dat</span>
+<a name="listingsaria2-rpcconf-107"></a><span class="o">#</span> <span class="err">当下载的文件是一个种子</span><span class="p">(</span><span class="err">以</span><span class="p">.</span><span class="n">torrent结尾</span><span class="p">)</span><span class="err">时</span><span class="p">,</span> <span class="err">自动下载</span><span class="n">BT</span>
+<a name="listingsaria2-rpcconf-108"></a><span class="n">follow</span><span class="o">-</span><span class="n">torrent</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-109"></a><span class="o">#</span> <span class="n">BT监听端口</span><span class="p">,</span> <span class="err">当端口屏蔽时修改</span>
+<a name="listingsaria2-rpcconf-110"></a><span class="o">#</span><span class="k">listen</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="mi">6881</span><span class="o">-</span><span class="mi">6999</span>
+<a name="listingsaria2-rpcconf-111"></a><span class="o">#</span> <span class="err">设置全局最大</span> <span class="n">BT</span> <span class="err">上传速度</span>
+<a name="listingsaria2-rpcconf-112"></a><span class="k">max</span><span class="o">-</span><span class="n">overall</span><span class="o">-</span><span class="n">upload</span><span class="o">-</span><span class="k">limit</span><span class="o">=</span><span class="mi">4</span><span class="n">M</span>
+<a name="listingsaria2-rpcconf-113"></a><span class="o">#</span> <span class="n">BT</span> <span class="err">下载中，该端点名称前缀</span>
+<a name="listingsaria2-rpcconf-114"></a><span class="n">peer</span><span class="o">-</span><span class="n">id</span><span class="o">-</span><span class="k">prefix</span><span class="o">=</span><span class="n">A2</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">35</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span>
+<a name="listingsaria2-rpcconf-115"></a><span class="n">peer</span><span class="o">-</span><span class="n">agent</span><span class="o">=</span><span class="n">aria2</span><span class="o">/</span><span class="mi">1</span><span class="p">.</span><span class="mi">35</span><span class="p">.</span><span class="mi">0</span>
+<a name="listingsaria2-rpcconf-116"></a><span class="o">#</span> <span class="err">分享率，当上传达到此比率则停止做种</span>
+<a name="listingsaria2-rpcconf-117"></a><span class="n">seed</span><span class="o">-</span><span class="n">ratio</span><span class="o">=</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span>
+<a name="listingsaria2-rpcconf-118"></a><span class="o">#</span> <span class="err">即便任务已完成或被移除，也保存</span> <span class="p">.</span><span class="n">aria2</span> <span class="err">控制文件，这对识别下载完成的种子很有帮助</span>
+<a name="listingsaria2-rpcconf-119"></a><span class="o">#</span> <span class="err">默认情况下，控制文件将在下载完成后删除</span>
+<a name="listingsaria2-rpcconf-120"></a><span class="k">force</span><span class="o">-</span><span class="n">save</span><span class="o">=</span><span class="k">false</span>
+<a name="listingsaria2-rpcconf-121"></a><span class="o">#</span> <span class="err">对于继续种子下载，通过检验和而非控制文件方式获取下载状态</span>
+<a name="listingsaria2-rpcconf-122"></a><span class="k">check</span><span class="o">-</span><span class="n">integrity</span><span class="o">=</span><span class="k">true</span>
+<a name="listingsaria2-rpcconf-123"></a>
+<a name="listingsaria2-rpcconf-124"></a><span class="o">###################################</span> <span class="err">事件钩子</span> <span class="o">###################################</span>
+<a name="listingsaria2-rpcconf-125"></a><span class="o">#</span>       <span class="err">事件钩子的参数都是一个指向</span> <span class="n">Bash</span> <span class="err">或批处理脚本文件的路径</span>                 <span class="o">#</span>
+<a name="listingsaria2-rpcconf-126"></a><span class="o">#</span>       <span class="err">当事件发生时，该脚本被调用并按顺序传入三个参数</span>                         <span class="o">#</span>
+<a name="listingsaria2-rpcconf-127"></a><span class="o">#</span>                                                                              <span class="o">#</span>
+<a name="listingsaria2-rpcconf-128"></a><span class="o">#</span>       <span class="o">-</span>   <span class="n">GID</span>                                                                <span class="o">#</span>
+<a name="listingsaria2-rpcconf-129"></a><span class="o">#</span>       <span class="o">-</span>   <span class="err">文件数目</span>                                                           <span class="o">#</span>
+<a name="listingsaria2-rpcconf-130"></a><span class="o">#</span>       <span class="o">-</span>   <span class="err">文件路径，如果有多个文件，则只会传递第一个，</span>                       <span class="o">#</span>
+<a name="listingsaria2-rpcconf-131"></a><span class="o">#</span>           <span class="err">要获取更多文件路径，需要</span> <span class="n">RPC</span>                                       <span class="o">#</span>
+<a name="listingsaria2-rpcconf-132"></a><span class="o">################################################################################</span>
+<a name="listingsaria2-rpcconf-133"></a><span class="o">#</span> <span class="err">在</span> <span class="n">BT</span> <span class="err">下载完整（</span><span class="n">Hash</span> <span class="err">检查通过）后运行</span>
+<a name="listingsaria2-rpcconf-134"></a><span class="o">#</span><span class="k">on</span><span class="o">-</span><span class="n">bt</span><span class="o">-</span><span class="n">download</span><span class="o">-</span><span class="n">complete</span><span class="o">=/</span><span class="k">data</span><span class="o">/</span><span class="n">script</span><span class="o">/</span><span class="k">none</span><span class="p">.</span><span class="n">sh</span>
+<a name="listingsaria2-rpcconf-135"></a><span class="o">#</span> <span class="err">在</span> <span class="n">HTTP</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="err">和</span> <span class="n">FTP</span> <span class="err">下载完成后运行</span>
+<a name="listingsaria2-rpcconf-136"></a><span class="o">#</span><span class="k">on</span><span class="o">-</span><span class="n">download</span><span class="o">-</span><span class="n">complete</span><span class="o">=/</span><span class="k">data</span><span class="o">/</span><span class="n">script</span><span class="o">/</span><span class="k">none</span><span class="p">.</span><span class="n">sh</span>
+<a name="listingsaria2-rpcconf-137"></a><span class="o">#</span> <span class="err">下载任务因错误而终止</span>
+<a name="listingsaria2-rpcconf-138"></a><span class="o">#</span><span class="k">on</span><span class="o">-</span><span class="n">download</span><span class="o">-</span><span class="n">error</span><span class="o">=/</span><span class="k">data</span><span class="o">/</span><span class="n">script</span><span class="o">/</span><span class="k">none</span><span class="p">.</span><span class="n">sh</span>
+<a name="listingsaria2-rpcconf-139"></a><span class="o">#</span> <span class="err">下载任务被主动暂停</span>
+<a name="listingsaria2-rpcconf-140"></a><span class="o">#</span><span class="k">on</span><span class="o">-</span><span class="n">download</span><span class="o">-</span><span class="n">pause</span><span class="o">=/</span><span class="k">data</span><span class="o">/</span><span class="n">script</span><span class="o">/</span><span class="k">none</span><span class="p">.</span><span class="n">sh</span>
+<a name="listingsaria2-rpcconf-141"></a><span class="o">#</span> <span class="err">下载任务开始前</span>
+<a name="listingsaria2-rpcconf-142"></a><span class="o">#</span><span class="k">on</span><span class="o">-</span><span class="n">download</span><span class="o">-</span><span class="k">start</span><span class="o">=/</span><span class="k">data</span><span class="o">/</span><span class="n">script</span><span class="o">/</span><span class="k">none</span><span class="p">.</span><span class="n">sh</span>
+<a name="listingsaria2-rpcconf-143"></a><span class="o">#</span> <span class="err">下载任务结束后，可以作为</span> <span class="n">complete</span> <span class="err">和</span> <span class="n">error</span> <span class="err">两个事件的</span> <span class="n">fallback</span>
+<a name="listingsaria2-rpcconf-144"></a><span class="o">#</span><span class="k">on</span><span class="o">-</span><span class="n">download</span><span class="o">-</span><span class="n">stop</span><span class="o">=/</span><span class="k">data</span><span class="o">/</span><span class="n">script</span><span class="o">/</span><span class="k">none</span><span class="p">.</span><span class="n">sh</span>
+</pre></td>
+</tr></table></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

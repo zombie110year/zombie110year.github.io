@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZomHub (关于文章 acl)</title><link>https://blog.zombie110year.top/</link><description></description><atom:link href="https://blog.zombie110year.top/categories/acl.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2020 &lt;a href="mailto:zombie110year@outlook.com"&gt;Zombie110year&lt;/a&gt; CC BY-NC-SA 4.0</copyright><lastBuildDate>Thu, 04 Jun 2020 16:05:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Windows 文件访问权限重置</title><link>https://blog.zombie110year.top/posts/2020-05/windows-acl-reset/</link><dc:creator>Zombie110year</dc:creator><description>&lt;div&gt;&lt;p&gt;当重装系统后，即便名称和邮箱完全相同，新创建账户的 GUID 也与之前的账户不一样，因此，硬盘上的文件的 「所有者」将会成为一个已经不存在的用户。而在读写时，会遇到 PermissionError。
+因此，需要将文件的所有者修改为新的账户，如果通过图形界面来修改，则非常的麻烦。Windows 提供了名为 &lt;code class="docutils literal"&gt;icacls&lt;/code&gt; 的命令行程序用来管理 ACL 表，这个程序使用 DOS 风格的命令行参数。
+递归地重置一批文件的 ACL 可使用命令:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;icacls * /reset /T /C&lt;/pre&gt;
+&lt;dl class="simple"&gt;
+&lt;dt&gt;&lt;code class="docutils literal"&gt;*&lt;/code&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;p&gt;路径通配符&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;&lt;code class="docutils literal"&gt;/reset&lt;/code&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;p&gt;重置指令&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;&lt;code class="docutils literal"&gt;/T&lt;/code&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;p&gt;递归选项&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;&lt;code class="docutils literal"&gt;/C&lt;/code&gt;&lt;/dt&gt;
+&lt;dd&gt;&lt;p&gt;遇到错误也继续&lt;/p&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;&lt;/div&gt;</description><category>acl</category><category>windows</category><guid>https://blog.zombie110year.top/posts/2020-05/windows-acl-reset/</guid><pubDate>Mon, 18 May 2020 23:53:20 GMT</pubDate></item></channel></rss>

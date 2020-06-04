@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ZomHub (关于文章 tampermonkey)</title><link>https://blog.zombie110year.top/</link><description></description><atom:link href="https://blog.zombie110year.top/categories/tampermonkey.xml" rel="self" type="application/rss+xml"></atom:link><language>zh_cn</language><copyright>Contents © 2020 &lt;a href="mailto:zombie110year@outlook.com"&gt;Zombie110year&lt;/a&gt; CC BY-NC-SA 4.0</copyright><lastBuildDate>Thu, 04 Jun 2020 16:05:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>TamperMonkey 脚本开发教程</title><link>https://blog.zombie110year.top/posts/2020-05/tampermonkey-development-tutorial/</link><dc:creator>Zombie110year</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;abbr&gt;TM（TamperMonkey）&lt;/abbr&gt; 用户脚本，用来增强网页功能。
+现在网络上很多关于安装、使用的教程，但却没有开发教程，有点令人失望。&lt;/p&gt;
+&lt;div class="contents topic" id="id1"&gt;
+&lt;p class="topic-title"&gt;目录&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/tampermonkey-development-tutorial/#tm" id="id8"&gt;TM 的文件头&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/tampermonkey-development-tutorial/#tm-api" id="id9"&gt;TM API&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/tampermonkey-development-tutorial/#id5" id="id10"&gt;开发技巧&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/tampermonkey-development-tutorial/#debugger" id="id11"&gt;使用 debugger 语句显式调用调试器&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/tampermonkey-development-tutorial/#katex" id="id12"&gt;实例1：利用 KaTeX 渲染网页上的公式&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://blog.zombie110year.top/posts/2020-05/tampermonkey-development-tutorial/#id7" id="id13"&gt;参考链接&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href="https://blog.zombie110year.top/posts/2020-05/tampermonkey-development-tutorial/"&gt;阅读更多…&lt;/a&gt; (剩余阅读时间 1 分钟)&lt;/p&gt;&lt;/div&gt;</description><category>browser</category><category>javascript</category><category>tampermonkey</category><guid>https://blog.zombie110year.top/posts/2020-05/tampermonkey-development-tutorial/</guid><pubDate>Sun, 03 May 2020 01:08:32 GMT</pubDate></item></channel></rss>

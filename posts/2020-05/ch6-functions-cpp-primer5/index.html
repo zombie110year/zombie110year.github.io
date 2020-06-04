@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>第六章：函数 | C++ Primer 5 | ZomHub</title>
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="zh_cn" href="../../../rss.xml">
+<link rel="canonical" href="https://blog.zombie110year.top/posts/2020-05/ch6-functions-cpp-primer5/">
+<link rel="icon" href="../../../favicon.ico" sizes="256x256">
+<link rel="icon" href="../../../favicon.png" sizes="512x512">
+<meta name="author" content="Zombie110year">
+<meta property="og:site_name" content="ZomHub">
+<meta property="og:title" content="第六章：函数 | C++ Primer 5">
+<meta property="og:url" content="https://blog.zombie110year.top/posts/2020-05/ch6-functions-cpp-primer5/">
+<meta property="og:description" content="目录
+
+局部静态变量
+引用传参
+const 形参
+数组形参
+返回值
+函数重载
+
+实参类型转换
+
+
+默认参数
+函数指针
+
+
+
+
+局部静态变量
+cpp5/ch6/local-static.cc  (源文件)
+#include &lt;iostream&gt;
+int counter() {
+    static int ctr = 0;
+    return ++ctr;
+}
+int main() {
+    f">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-05-09T16:05:07+08:00">
+<meta property="article:tag" content="c++">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+</head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">跳到主内容</a>
+    <div id="container">
+            <header id="header"><h1 id="brand"><a href="https://blog.zombie110year.top/" title="ZomHub" rel="home">
+
+        <span id="blog-title">ZomHub</span>
+    </a></h1>
+
+        
+            <nav id="menu"><ul>
+<li><a href="../../../archive.html">归档</a></li>
+                <li><a href="../../../categories/">标签</a></li>
+                <li><a href="../../../rss.xml">订阅</a></li>
+
+    
+    
+    
+    </ul></nav></header><main id="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">第六章：函数 | C++ Primer 5</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard p-author h-card"><span class="byline-name fn p-name" itemprop="author">
+                    Zombie110year
+            </span></p>
+            <p class="dateline">
+            <a href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-05-09T16:05:07+08:00" itemprop="datePublished" title="2020-05-09 16:05">2020-05-09 16:05</time></a>
+            </p>
+                    <p class="sourceline"><a href="index.rst" class="sourcelink">源文件</a></p>
+
+        </div>
+        
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<div class="contents topic" id="id1">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#id2" id="id10">局部静态变量</a></p></li>
+<li><p><a class="reference internal" href="#id3" id="id11">引用传参</a></p></li>
+<li><p><a class="reference internal" href="#const" id="id12">const 形参</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id13">数组形参</a></p></li>
+<li><p><a class="reference internal" href="#id5" id="id14">返回值</a></p></li>
+<li>
+<p><a class="reference internal" href="#id6" id="id15">函数重载</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id7" id="id16">实参类型转换</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id8" id="id17">默认参数</a></p></li>
+<li><p><a class="reference internal" href="#id9" id="id18">函数指针</a></p></li>
+</ul>
+</div>
+<!-- TEASER_END -->
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id10">局部静态变量</a></h2>
+<p><a class="reference external" href="../../../listings/cpp5/ch6/local-static.cc.html">cpp5/ch6/local-static.cc</a>  <a class="reference external" href="../../../listings/cpp5/ch6/local-static.cc">(源文件)</a></p>
+<pre class="code cpp"><a name="rest_code_c972c1e7569841debb77a2375dd2b412-1"></a><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<a name="rest_code_c972c1e7569841debb77a2375dd2b412-2"></a><span class="kt">int</span> <span class="nf">counter</span><span class="p">()</span> <span class="p">{</span>
+<a name="rest_code_c972c1e7569841debb77a2375dd2b412-3"></a>    <span class="k">static</span> <span class="kt">int</span> <span class="n">ctr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_c972c1e7569841debb77a2375dd2b412-4"></a>    <span class="k">return</span> <span class="o">++</span><span class="n">ctr</span><span class="p">;</span>
+<a name="rest_code_c972c1e7569841debb77a2375dd2b412-5"></a><span class="p">}</span>
+<a name="rest_code_c972c1e7569841debb77a2375dd2b412-6"></a><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<a name="rest_code_c972c1e7569841debb77a2375dd2b412-7"></a>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_c972c1e7569841debb77a2375dd2b412-8"></a>        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">counter</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">", "</span><span class="p">;</span>
+<a name="rest_code_c972c1e7569841debb77a2375dd2b412-9"></a>    <span class="p">}</span>
+<a name="rest_code_c972c1e7569841debb77a2375dd2b412-10"></a>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_c972c1e7569841debb77a2375dd2b412-11"></a>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_c972c1e7569841debb77a2375dd2b412-12"></a><span class="p">}</span>
+</pre>
+<p><code class="docutils literal">ctr</code> 只会初始化一次，且其生命周期贯穿从开始调用到整个程序结束。</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id11">引用传参</a></h2>
+<p>默认的传参行为是拷贝，而当形式参数为引用时，则不会发生拷贝：</p>
+<pre class="code cpp"><a name="rest_code_4859d8a4e6d94165941380d83664f395-1"></a><span class="kt">void</span> <span class="nf">reset0</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-2"></a>    <span class="c1">// n 是一个被复制的新值</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-3"></a>    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-4"></a><span class="p">}</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-5"></a><span class="kt">void</span> <span class="nf">reset1</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-6"></a>    <span class="c1">// n 是一个指向一个 int 的指针</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-7"></a>    <span class="o">*</span><span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-8"></a><span class="p">}</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-9"></a><span class="kt">void</span> <span class="nf">reset2</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-10"></a>    <span class="c1">// n 是一个引用</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-11"></a>    <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-12"></a><span class="p">}</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-13"></a><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-14"></a>    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-15"></a>    <span class="n">reset0</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-16"></a>    <span class="c1">// x == 3</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-17"></a>    <span class="n">reset1</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-18"></a>    <span class="c1">// x == 1</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-19"></a>    <span class="n">reset2</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-20"></a>    <span class="c1">// x == 2</span>
+<a name="rest_code_4859d8a4e6d94165941380d83664f395-21"></a><span class="p">}</span>
+</pre>
+<p>在旧的 C/C++ 编程风格中，可能会要求使用引用或指针参数使函数能够「返回」多个值：</p>
+<pre class="code cpp"><a name="rest_code_420670b03b0743fcad85667e9cf496b9-1"></a><span class="kt">int</span> <span class="nf">do_sth</span><span class="p">(</span><span class="kt">int</span> <span class="n">arg0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">arg1</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">ret1</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">ret2</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_420670b03b0743fcad85667e9cf496b9-2"></a>    <span class="k">if</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_420670b03b0743fcad85667e9cf496b9-3"></a>        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_420670b03b0743fcad85667e9cf496b9-4"></a>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<a name="rest_code_420670b03b0743fcad85667e9cf496b9-5"></a>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<a name="rest_code_420670b03b0743fcad85667e9cf496b9-6"></a>    <span class="p">}</span>
+<a name="rest_code_420670b03b0743fcad85667e9cf496b9-7"></a><span class="p">}</span>
+</pre>
+<p>这种用例下，返回值通常代表函数的执行状态，例如在 C 代码中，大量使用 -1 作为发生错误时的返回值，而真正的返回值则通过指针或引用赋值给外界的变量，
+C 语言 Socket 编程中可以看到大量的例子。
+在 C 语言中，由于语言本身的限制而不得不使用此种编程风格，但在 C++ 中，
+错误处理应当使用 try-catch，而多返回值完全可以使用标准库的 <code class="docutils literal">tuple</code> 类：</p>
+<p><a class="reference external" href="../../../listings/cpp5/ch6/multi-retval.cc.html">cpp5/ch6/multi-retval.cc</a>  <a class="reference external" href="../../../listings/cpp5/ch6/multi-retval.cc">(源文件)</a></p>
+<pre class="code cpp"><a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-1"></a><span class="c1">//! clang++ -Wall -std=c++17 multi-retval.cc</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-2"></a><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-3"></a><span class="cp">#include</span> <span class="cpf">&lt;stdexcept&gt;</span><span class="cp"></span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-4"></a><span class="cp">#include</span> <span class="cpf">&lt;tuple&gt;</span><span class="cp"></span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-5"></a><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-6"></a><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-7"></a>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-8"></a><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">gcd_lcm</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-9"></a>  <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span> <span class="o">||</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-10"></a>    <span class="k">throw</span> <span class="n">logic_error</span><span class="p">(</span><span class="s">"这还用问我？"</span><span class="p">);</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-11"></a>  <span class="p">}</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-12"></a>  <span class="c1">// 确保 x &gt; y</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-13"></a>  <span class="c1">// 解包语法：C++ 17</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-14"></a>  <span class="k">auto</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span> <span class="o">?</span> <span class="n">make_tuple</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">make_tuple</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-15"></a>  <span class="c1">// 辗转相除法</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-16"></a>  <span class="k">while</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">y</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-17"></a>    <span class="k">auto</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span><span class="p">;</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-18"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-19"></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-20"></a>  <span class="p">}</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-21"></a>  <span class="k">return</span> <span class="n">make_tuple</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">/</span> <span class="n">y</span><span class="p">);</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-22"></a><span class="p">}</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-23"></a>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-24"></a><span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-25"></a>  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-26"></a>  <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-27"></a>  <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-28"></a>  <span class="k">auto</span> <span class="p">[</span><span class="n">max_factor</span><span class="p">,</span> <span class="n">min_prod</span><span class="p">]</span> <span class="o">=</span> <span class="n">gcd_lcm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-29"></a>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">max_factor</span> <span class="o">&lt;&lt;</span> <span class="s">", "</span> <span class="o">&lt;&lt;</span> <span class="n">min_prod</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-30"></a>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_faed03d69beb4b9eb23e7fbd928bdc15-31"></a><span class="p">}</span>
+</pre>
+</div>
+<div class="section" id="const">
+<h2><a class="toc-backref" href="#id12">const 形参</a></h2>
+<p>在形式参数上用 const 修饰，将在函数作用域中禁止对该参数的修改，无论传递的实参是普通变量还是常量。</p>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id13">数组形参</a></h2>
+<p>在形参表中可以声明数组：</p>
+<pre class="code cpp"><a name="rest_code_a47ac42f03e642208f80ed45b0914524-1"></a><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span><span class="p">[]</span> <span class="n">arr</span><span class="p">);</span>
+<a name="rest_code_a47ac42f03e642208f80ed45b0914524-2"></a><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">arr</span><span class="p">);</span>
+<a name="rest_code_a47ac42f03e642208f80ed45b0914524-3"></a><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="n">arr</span><span class="p">);</span>
+</pre>
+<p>以上三种定义是等价的：</p>
+<ul class="simple">
+<li><p>数组类型将被转化为指针</p></li>
+<li><p>指定数组的长度只有参考意义，实际调用时可以接受任何长度的数组</p></li>
+</ul>
+<p>传递数组跳不开处理范围，通常有三种标识范围的风格：</p>
+<pre class="code cpp"><a name="rest_code_cccc2aca53334bdd8266959735e6a213-1"></a><span class="c1">// 1. 在数据中标识末尾，例如 C 字符串</span>
+<a name="rest_code_cccc2aca53334bdd8266959735e6a213-2"></a><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="n">str</span><span class="p">[])</span> <span class="p">{</span>
+<a name="rest_code_cccc2aca53334bdd8266959735e6a213-3"></a>    <span class="k">if</span> <span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_cccc2aca53334bdd8266959735e6a213-4"></a>        <span class="k">while</span><span class="p">(</span><span class="o">*</span><span class="n">str</span> <span class="o">!=</span> <span class="sc">'\0'</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_cccc2aca53334bdd8266959735e6a213-5"></a>            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">str</span><span class="o">++</span><span class="p">;</span>
+<a name="rest_code_cccc2aca53334bdd8266959735e6a213-6"></a>        <span class="p">}</span>
+<a name="rest_code_cccc2aca53334bdd8266959735e6a213-7"></a>    <span class="p">}</span>
+<a name="rest_code_cccc2aca53334bdd8266959735e6a213-8"></a><span class="p">}</span>
+</pre>
+<pre class="code cpp"><a name="rest_code_e220cb59b0c442418310f0d7dee3309f-1"></a><span class="c1">// 2. 使用 C++ 迭代器规范，所有 STL 容器都支持</span>
+<a name="rest_code_e220cb59b0c442418310f0d7dee3309f-2"></a><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">begin</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_e220cb59b0c442418310f0d7dee3309f-3"></a>    <span class="k">while</span><span class="p">(</span><span class="n">begin</span> <span class="o">!=</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_e220cb59b0c442418310f0d7dee3309f-4"></a>        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">begin</span><span class="o">++</span><span class="p">;</span>
+<a name="rest_code_e220cb59b0c442418310f0d7dee3309f-5"></a>    <span class="p">}</span>
+<a name="rest_code_e220cb59b0c442418310f0d7dee3309f-6"></a><span class="p">}</span>
+</pre>
+<pre class="code cpp"><a name="rest_code_9071b758bf5e4492b25fd9cc2edc5fdf-1"></a><span class="c1">// 3. 显式指定长度，如果想要 FFI 通用性就选这个</span>
+<a name="rest_code_9071b758bf5e4492b25fd9cc2edc5fdf-2"></a><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="n">str</span><span class="p">[],</span> <span class="kt">size_t</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_9071b758bf5e4492b25fd9cc2edc5fdf-3"></a>    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_9071b758bf5e4492b25fd9cc2edc5fdf-4"></a>        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<a name="rest_code_9071b758bf5e4492b25fd9cc2edc5fdf-5"></a>    <span class="p">}</span>
+<a name="rest_code_9071b758bf5e4492b25fd9cc2edc5fdf-6"></a><span class="p">}</span>
+</pre>
+<p>注意，如果声明数组形式的变量，方括号要放在标识符后面，而不是紧跟着类型定义。</p>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id14">返回值</a></h2>
+<p>引用返回左值：</p>
+<p><a class="reference external" href="../../../listings/cpp5/ch6/ret-reference-1.cc.html">cpp5/ch6/ret-reference-1.cc</a>  <a class="reference external" href="../../../listings/cpp5/ch6/ret-reference-1.cc">(源文件)</a></p>
+<pre class="code cpp"><a name="rest_code_6044845586604c1981daef316f07e81f-1"></a><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<a name="rest_code_6044845586604c1981daef316f07e81f-2"></a><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<a name="rest_code_6044845586604c1981daef316f07e81f-3"></a>
+<a name="rest_code_6044845586604c1981daef316f07e81f-4"></a><span class="kt">int</span> <span class="o">&amp;</span><span class="n">get_item</span><span class="p">(</span><span class="kt">int</span> <span class="n">arr</span><span class="p">[],</span> <span class="kt">size_t</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">arr</span><span class="p">[</span><span class="n">index</span><span class="p">];</span> <span class="p">}</span>
+<a name="rest_code_6044845586604c1981daef316f07e81f-5"></a>
+<a name="rest_code_6044845586604c1981daef316f07e81f-6"></a><span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+<a name="rest_code_6044845586604c1981daef316f07e81f-7"></a>  <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">};</span>
+<a name="rest_code_6044845586604c1981daef316f07e81f-8"></a>  <span class="k">auto</span> <span class="o">&amp;</span><span class="n">x</span> <span class="o">=</span> <span class="n">get_item</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<a name="rest_code_6044845586604c1981daef316f07e81f-9"></a>  <span class="n">x</span> <span class="o">=</span> <span class="mi">999</span><span class="p">;</span>
+<a name="rest_code_6044845586604c1981daef316f07e81f-10"></a>  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_6044845586604c1981daef316f07e81f-11"></a>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_6044845586604c1981daef316f07e81f-12"></a>  <span class="p">}</span>
+<a name="rest_code_6044845586604c1981daef316f07e81f-13"></a><span class="p">}</span>
+</pre>
+<p>C++ 提供了标注返回类型的新方法：</p>
+<dl>
+<dt>尾置返回类型</dt>
+<dd><pre class="code cpp"><a name="rest_code_07f68834b25f430990e888ddebbc500b-1"></a><span class="k">auto</span> <span class="nf">fn</span><span class="p">(</span><span class="cm">/* parameters */</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="cm">/* return type */</span><span class="p">;</span>
+</pre></dd>
+<dt>decltype</dt>
+<dd>
+<p>用于已知返回值的可选范围时，例如返回一个定义过的对象的指针：</p>
+<pre class="code cpp"><a name="rest_code_bd19a17d4a6f41b39b3fd5d60a7116ca-1"></a><span class="kt">int</span> <span class="n">A</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">};</span>
+<a name="rest_code_bd19a17d4a6f41b39b3fd5d60a7116ca-2"></a>
+<a name="rest_code_bd19a17d4a6f41b39b3fd5d60a7116ca-3"></a><span class="k">decltype</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">*</span><span class="n">fn</span><span class="p">(</span><span class="cm">/* param */</span><span class="p">);</span>
+</pre>
+</dd>
+</dl>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id15">函数重载</a></h2>
+<p>C++ 编译器用来确定函数的因素除了函数名之外，还有各个参数的类型。
+对于同名的函数，如果声明了不同类型的形式参数，那么将编译生成不同的函数，
+这种行为叫「函数重载」：</p>
+<p><a class="reference external" href="../../../listings/cpp5/ch6/function-overload.cc.html">cpp5/ch6/function-overload.cc</a>  <a class="reference external" href="../../../listings/cpp5/ch6/function-overload.cc">(源文件)</a></p>
+<pre class="code cpp"><a name="rest_code_455e3e720b374c81a72733a523198cce-1"></a><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-2"></a><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-3"></a><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-4"></a><span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">arr</span><span class="p">[],</span> <span class="kt">size_t</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-5"></a>  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-6"></a>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">", "</span><span class="p">;</span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-7"></a>  <span class="p">}</span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-8"></a>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-9"></a><span class="p">}</span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-10"></a><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-11"></a>  <span class="n">print</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-12"></a>  <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-13"></a>  <span class="n">print</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<a name="rest_code_455e3e720b374c81a72733a523198cce-14"></a><span class="p">}</span>
+</pre>
+<dl>
+<dt>形参的名字与重载无关</dt>
+<dd>
+<p>重载只与形参的类型有关，如果类型相同，只有名字相同，那么将报错「重复定义」。</p>
+</dd>
+<dt>顶层或底层 const</dt>
+<dd>
+<p>重载会忽略顶层常量（修饰在后）而考虑底层常量（修饰在前）。</p>
+<pre class="code cpp"><a name="rest_code_924e1f6909ac40b9b1c01471f618f3ea-1"></a><span class="c1">// 两者等价</span>
+<a name="rest_code_924e1f6909ac40b9b1c01471f618f3ea-2"></a><span class="c1">// const 修饰的是指针，指针本身不可变</span>
+<a name="rest_code_924e1f6909ac40b9b1c01471f618f3ea-3"></a><span class="kt">int</span> <span class="nf">fn</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="k">const</span><span class="p">);</span>
+<a name="rest_code_924e1f6909ac40b9b1c01471f618f3ea-4"></a><span class="kt">int</span> <span class="nf">fn</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">);</span>
+<a name="rest_code_924e1f6909ac40b9b1c01471f618f3ea-5"></a>
+<a name="rest_code_924e1f6909ac40b9b1c01471f618f3ea-6"></a><span class="c1">// 两者不同</span>
+<a name="rest_code_924e1f6909ac40b9b1c01471f618f3ea-7"></a><span class="c1">// const 修饰的是指针指向的对象，指针本身可变，但对象不可变</span>
+<a name="rest_code_924e1f6909ac40b9b1c01471f618f3ea-8"></a><span class="kt">int</span> <span class="nf">fn</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span><span class="o">*</span><span class="p">);</span>
+<a name="rest_code_924e1f6909ac40b9b1c01471f618f3ea-9"></a><span class="kt">int</span> <span class="nf">fn</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">);</span>
+</pre>
+<p>原因是传参时指针本身就是副本，无论是否 const 都不会影响到主调函数方的变量，
+因此编译期会忽略这种 const。</p>
+</dd>
+</dl>
+<p>当调用一个存在重载的函数时，将发生以下步骤：</p>
+<dl class="simple">
+<dt>函数匹配（重载确定）</dt>
+<dd>
+<p>编译期检查是否存在与实际参数向匹配的重载函数。
+如果存在且唯一，那么生成相关代码，否则：</p>
+</dd>
+<dt>无匹配</dt>
+<dd>
+<p>找不到匹配的重载函数，编译终止。</p>
+</dd>
+<dt>二义性</dt>
+<dd>
+<p>存在多个可匹配的重载函数，编译终止。</p>
+</dd>
+</dl>
+<p>在编译重载函数时，函数名的实际符号将被扩展为类似:</p>
+<pre class="literal-block">name@type1@const_type2 ...</pre>
+<p>样式的新符号，这也是重载的本质，这个过程通常称为 mangle，属于 <abbr>ABI（Application Binary Interface）</abbr> 的一部分。
+不同的编译器实现使用不同的重载样式，MSVC 和 GCC 的行为就不一致，所以双方编译的程序不可互相链接。</p>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id16">实参类型转换</a></h3>
+<p>转换存在优先级：</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>精确匹配：</dt>
+<dd><ul class="simple">
+<li><p>实参类型和形参类型相同；</p></li>
+<li><p>数组转指针；</p></li>
+<li><p>增减 const；</p></li>
+</ul></dd>
+</dl></li>
+<li><p>const_cast 转换；</p></li>
+<li><p>类型提升；</p></li>
+<li><p>算术类型转换或指针转换；</p></li>
+<li><p>类类型转换。</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id17">默认参数</a></h2>
+<pre class="code cpp"><a name="rest_code_2cec2f722a4849bb9a04ff9c61496b70-1"></a><span class="kt">void</span> <span class="nf">hello</span><span class="p">(</span><span class="n">string</span> <span class="n">name</span><span class="p">,</span> <span class="n">string</span> <span class="n">greed</span> <span class="o">=</span> <span class="s">"Hello"</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_2cec2f722a4849bb9a04ff9c61496b70-2"></a>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">greed</span> <span class="o">&lt;&lt;</span> <span class="s">", "</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_2cec2f722a4849bb9a04ff9c61496b70-3"></a><span class="p">}</span>
+</pre>
+<ul class="simple">
+<li><p>在形参定义时使用 <code class="docutils literal">= val</code> 可以设定默认实参，当调用函数时没有在对应位置处传入实参，则将隐式传入默认实参。</p></li>
+<li><p>如果要为参数设置默认值，则它后面的参数也必须有默认值。</p></li>
+<li><p>默认实参要么是编译期就能确定的常量、字面量，要么就必须拥有大于函数的作用域。</p></li>
+<li><p>当使用变量作为默认实参时，变量的解析发生在调用时。</p></li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id18">函数指针</a></h2>
+<p>一个函数的声明:</p>
+<pre class="literal-block">bool cmp(const int&amp;, const int&amp;);</pre>
+<p>对应的函数指针声明:</p>
+<pre class="literal-block">bool (*cmp_ptr)(const int&amp;, const int&amp;);</pre>
+<p>该函数的类型表示:</p>
+<pre class="literal-block">bool(const int&amp;, const int&amp;)
+
+using F = bool(const int&amp;, const int&amp;);
+using FP = bool(*)(const int&amp;, const int&amp;);</pre>
+<p>对于返回函数指针的函数定义，需要显式声明返回值为指针类型:</p>
+<pre class="literal-block">FP fn();
+F *fn();
+
+// 错误，不会自动转换类型
+F fn() {
+    // ...
+}
+FP x = fn();</pre>
+<p>如果不使用别名，而是直接定义函数指针返回值的话，建议使用尾缀方式:</p>
+<pre class="literal-block">auto f(int a, int b) -&gt; bool(*)(const int&amp;, const int&amp;) {
+    // ...
+}</pre>
+<p>否则，要阅读起来就太费劲了:</p>
+<pre class="literal-block">bool (*f(int a, int b))(const int&amp;, const int&amp;) {
+    // ...
+}</pre>
+<p><a class="reference external" href="../../../listings/cpp5/ch6/must-ret-tof.cc.html">cpp5/ch6/must-ret-tof.cc</a>  <a class="reference external" href="../../../listings/cpp5/ch6/must-ret-tof.cc">(源文件)</a></p>
+<pre class="code cpp"><a name="rest_code_14b654af9c1c489da6cea0fb113b1655-1"></a><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-2"></a><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-3"></a>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-4"></a><span class="kt">bool</span> <span class="p">(</span><span class="o">*</span><span class="n">must_true</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">))(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-5"></a>  <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-6"></a>    <span class="k">return</span> <span class="p">[](</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-7"></a>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-8"></a>    <span class="k">return</span> <span class="p">[](</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-9"></a>  <span class="p">}</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-10"></a><span class="p">}</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-11"></a>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-12"></a><span class="k">auto</span> <span class="n">must_false</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-13"></a>  <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-14"></a>    <span class="k">return</span> <span class="p">[](</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-15"></a>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-16"></a>    <span class="k">return</span> <span class="p">[](</span><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-17"></a>  <span class="p">}</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-18"></a><span class="p">}</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-19"></a>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-20"></a><span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-21"></a>  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-22"></a>  <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-23"></a>  <span class="k">auto</span> <span class="n">ft</span> <span class="o">=</span> <span class="n">must_true</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-24"></a>  <span class="k">auto</span> <span class="n">ff</span> <span class="o">=</span> <span class="n">must_false</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-25"></a>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ft</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">ff</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-26"></a>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<a name="rest_code_14b654af9c1c489da6cea0fb113b1655-27"></a><span class="p">}</span>
+</pre>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../../categories/c%2B%2B/" rel="tag">c++</a></li>
+        </ul></nav></aside><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="autoRenderKatex();"></script><script>
+        function autoRenderKatex() {
+            renderMathInElement(document.body,
+                {
+                    
+delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "\\[", right: "\\]", display: true},
+    {left: "\\begin{equation*}", right: "\\end{equation*}", display: true},
+    {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+    {left: "$", right: "$", display: false},
+    {left: "\\(", right: "\\)", display: false}
+]
+
+                }
+            );
+        }
+        </script></article></main><footer id="footer"><p>Contents © 2020 <a href="mailto:zombie110year@outlook.com">Zombie110year</a> - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a> CC BY-NC-SA 4.0</p>
+            
+        </footer>
+</div>
+
+                <script src="../../../assets/js/all-nocdn.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>
